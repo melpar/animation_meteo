@@ -42,9 +42,11 @@ public class QuickStart {
     MapContext map = new DefaultMapContext();
     map.setTitle("Quickstart");
     map.addLayer(featureSource, null);
+    
+    
 
     // // Now display the map
-    // JMapFrame.showMap(map);
+    //JMapFrame.showMap(map);
     // Frame frame = JMapFrame.getFrames()[0];
     // MenuBar menu = new MenuBar();
     // Menu me = new Menu("test");
@@ -65,6 +67,18 @@ public class QuickStart {
     System.out.println(frame.getMapPane());
     System.out.println(frame.getMapPane().getComponentCount());
     JMenuBar menuBar = new JMenuBar();
+    
+    
+    //ajout des fonctionnaliter supplementaire
+    SetFrame modifFrame = new SetFrame(frame,map);
+    
+ // ajout boutton menu
+    /*JMenu test = new JMenu();
+    test.setText("test");
+    menuBar.add(test);*/ 
+
+    
+    
     frame.setJMenuBar(menuBar);
     JMenu menu = new JMenu("Raster");
     menuBar.add(menu);
