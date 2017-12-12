@@ -14,6 +14,6 @@ public class FabriqueDonnee {
   }
   
   private double calculvitesse(double u,double v) {
-    return Math.atan2((int)v,(int)u);
+    return Math.atan2(v,u);
   }
 }
