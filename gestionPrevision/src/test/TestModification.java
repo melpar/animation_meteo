@@ -59,7 +59,7 @@ public class TestModification {
   
   @Test
   public void testModifierVent() {    
-    this.listePrevisionTest.ajouterPrevision(this.dateTest);
+    this.listePrevisionTest.ajouterPrevision(this.dateTest); 
     System.out.println(this.listePrevisionTest.getListePrevision().get(0).getListeDonneVent());
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 0,(int) 0);
