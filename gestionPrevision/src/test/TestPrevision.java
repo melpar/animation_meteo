@@ -10,6 +10,7 @@ import org.junit.Test;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
+import previsionVents.ZonePrevision;
 
 public class TestPrevision {
   
@@ -43,15 +44,22 @@ public class TestPrevision {
   }
   
   @Test
+  public void testZonePrevision() {
+     ZonePrevision zone=this.listePrevisionTest.getZonePrevision();
+     assertTrue(zone.getLongitudeHautGauche()==0.0);
+     assertTrue(zone.getLatitudeHautGauche()==10.0);
+  }
+  
+  @Test
   public void testAjouterVent() {    
     this.listePrevisionTest.ajouterPrevision(this.dateTest);
-    System.out.println(this.listePrevisionTest.getListePrevision().get(0).getListeDonneVent());
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50, (int)3,(int) 4);
-    DonneeVent vent=this.listePrevisionTest.getListePrevision().get(0).getDonneeVent(3, 4);
-    System.out.println(vent.getOrientationVent());
-    assertTrue(vent.getOrientationVent()==50.9901951359);
-
+    DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+    DonneeVent vent= donnee[3][4];
+    assertTrue(vent.getOrientationVent()-50<1);
   }
+  
+  
   
 
 }

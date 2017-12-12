@@ -10,6 +10,8 @@ import org.junit.Test;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
+import previsionVents.ZonePrevision;
+import visiteur.VisiteurCoefficient;
 
 public class TestModification {
   
@@ -23,7 +25,6 @@ public class TestModification {
   public void initialisation() {
     this.dateTest= new Date();
     this.listePrevisionTest=new ListePrevision(0.0,10.0,15.50,20.50,10,10);
-    this.listeModificationTest=new ListePrevision(2.0,12.0,5.0,5.0,10,10);
     this.dateTest=new Date();
   }
 
@@ -54,6 +55,23 @@ public class TestModification {
     System.out.println(vent.getOrientationVent());
     assertTrue(vent.getOrientationVent()-50<1);
 
+  }
+  
+  @Test
+  public void testModifierVent() {    
+    this.listePrevisionTest.ajouterPrevision(this.dateTest);
+    System.out.println(this.listePrevisionTest.getListePrevision().get(0).getListeDonneVent());
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);
+    DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+    DonneeVent vent= donnee[3][4];
+    System.out.println(vent.getVitesseVent());
+    assertTrue(vent.getVitesseVent()-50<1);
+    
+    
+    ZonePrevision zonePrevisionTest=new ZonePrevision(2.0,12.0,5.0,5.0,10,10);
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, 0.5);
+    listePrevisionTest.applique(modifier);
+    System.out.println(vent.getVitesseVent());
   }
   
 
