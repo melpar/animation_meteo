@@ -27,7 +27,7 @@ public class AffichageModification extends JFrame {
   JTextField valeurseuil = new JTextField();
 
   // création des boutons
-  JRadioButton linéaire = new JRadioButton("Linéaire ");
+  JRadioButton lineaire = new JRadioButton("Lineaire ");
   JRadioButton progressif = new JRadioButton("Progressif");
   JRadioButton coefficient = new JRadioButton("Coefficient");
 
@@ -70,11 +70,11 @@ public class AffichageModification extends JFrame {
     niveau.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
     duree.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
 
-    group.add(linéaire);
+    group.add(lineaire);
     group.add(progressif);
     group.add(coefficient);
 
-    choixModification.add(linéaire, modification);
+    choixModification.add(lineaire, modification);
     modification.gridy = 1;
     choixModification.add(progressif, modification);
     modification.gridy = 2;
