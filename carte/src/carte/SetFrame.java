@@ -46,26 +46,6 @@ public class SetFrame {
   }
 
   /**
-   * definir l'action du boutton editer
-   * 
-   * @author thomas
-   *
-   */
-  class ActionEditer implements ActionListener {
-    int nbTest;
-
-    ActionEditer() {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println("editer");
-
-    }
-  }
-
-  /**
    * ajouter un boutton add en listener
    */
   void addbouttonReculer() {
@@ -89,7 +69,7 @@ public class SetFrame {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      System.out.println("editer");
+      System.out.println("reculer");
 
     }
   }
@@ -99,53 +79,8 @@ public class SetFrame {
    */
   void addbouttonAvancer() {
     JButton boutonEditer = new JButton(">");
-    boutonEditer.addActionListener(new ActionReculer());
+    boutonEditer.addActionListener(new ActionAvancer());
     frame.getToolBar().add(boutonEditer);
-  }
-
-  /**
-   * definir l'action du boutton editer
-   * 
-   * @author thomas
-   *
-   */
-  class ActionAvancer implements ActionListener {
-    int nbTest;
-
-    ActionAvancer() {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println("editer");
-
-    }
-  }
-
-  /**
-   * definir l'action du boutton add
-   * 
-   * @author thomas
-   *
-   */
-  class ActionAdd implements ActionListener {
-    int nbTest;
-
-    ActionAdd() {
-
-      nbTest = 0;
-      System.out.println("init " + nbTest);
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      // TODO Auto-generated method stub
-      nbTest += 10;
-      System.out.println("dessin " + nbTest);
-      Dessiner dessiner1 = new Dessiner(map, nbTest);
-    }
   }
 
   /**

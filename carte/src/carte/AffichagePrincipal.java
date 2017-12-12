@@ -87,7 +87,7 @@ public class AffichagePrincipal {
     AffichagePrincipal aff = new AffichagePrincipal();
     aff.afficherFenetrePrincipale();
     Date d = new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh");
+    SimpleDateFormat sdf = new SimpleDateFormat("   dd/MM/yyyy hh   ");
     String dateValue = sdf.format(d);
     aff.setLabelDate(dateValue);
   }

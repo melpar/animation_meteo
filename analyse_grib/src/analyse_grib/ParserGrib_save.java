@@ -2,8 +2,6 @@ package analyse_grib;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.sourceforge.jgrib.GribFile;
 import net.sourceforge.jgrib.GribRecord;
@@ -11,13 +9,19 @@ import net.sourceforge.jgrib.GribRecordGDS;
 import net.sourceforge.jgrib.NoValidGribException;
 import net.sourceforge.jgrib.NotSupportedException;
 
-public class ParserGrib {
+public class ParserGrib_save {
 
-  public List<Vent> parserGrib() {
-    List<Vent> ret = new ArrayList<>();
+  public static void main(String[] args) {
+    ParserGrib_save parser = new ParserGrib_save();
+    parser.parserGrib();
+  }
+
+  public void parserGrib() {
     try {
+      // GribFile grb = new GribFile("NorthEurope.grb");
       GribFile grb = new GribFile("gascogne.grb");
 
+      // GribFile grb = new GribFile("mailVent2.grb");
       GribRecordGDS r2 = grb.getGrids()[0];
 
       GribRecord ventU = grb.getRecord(1);
@@ -31,18 +35,23 @@ public class ParserGrib {
         for (int j = 0; j < nby; j++) {
           // affichage des la donnee (i,j)
           try {
-            double vitesse = Math.sqrt((ventU.getValue(i, j) * ventU.getValue(i, j))
-                + (ventV.getValue(i, j) * ventV.getValue(i, j)));
-
-            double direction = Math.atan2(ventU.getValue(i, j), ventV.getValue(i, j));
-
-            Vent v = new Vent(i, j, vitesse, direction);
-            ret.add(v);
+            // System.out.println(ventV.getValue(i, j) + " " + ventV.getUnit());
+            System.out.println("Vitesse en (" + i + "," + j + ")"
+                + Math.sqrt((ventU.getValue(i, j) * ventU.getValue(i, j))
+                    + (ventV.getValue(i, j) * ventV.getValue(i, j))));
+            System.out.println("Direction en (" + i + "," + j + ")"
+                + Math.atan2(ventU.getValue(i, j), ventV.getValue(i, j)));
           } catch (NoValidGribException e) {
             e.printStackTrace();
           }
         }
+        System.out.println();
       }
+      // System.out.println(ventD.getUnit());
+      // affichage de l'unite des donnees
+      System.out.println(ventV.getUnit());
+      // description de la donnee
+      System.out.println(ventU.getPDS());
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
@@ -51,15 +60,6 @@ public class ParserGrib {
       e.printStackTrace();
     } catch (NoValidGribException e) {
       e.printStackTrace();
-    }
-    return ret;
-  }
-
-  public static void main(String[] args) {
-    ParserGrib parser = new ParserGrib();
-    List<Vent> liste = parser.parserGrib();
-    for (Vent v : liste) {
-      System.out.println("vit " + v.getVitesse() + " dir " + v.getDirection());
     }
   }
 }
