@@ -12,7 +12,11 @@ import javax.mail.internet.MimeMessage;
 
 public class Mailer {
 
-  public static void send(String from, String password, String to, String sub, String msg) {
+  private static final String from = "animation.meteo@gmail.com";
+  private static final String password = "animationmeteo";
+  private static final String to = "query@saildocs.com";
+
+  public static void send(String msg) {
     // Get properties object
     Properties props = new Properties();
     props.put("mail.smtp.host", "smtp.gmail.com");
@@ -30,7 +34,7 @@ public class Mailer {
     try {
       MimeMessage message = new MimeMessage(session);
       message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-      message.setSubject(sub);
+      message.setSubject("");
       message.setText(msg);
       // send message
       Transport.send(message);
@@ -43,8 +47,7 @@ public class Mailer {
 
   public static void main(String[] args) {
     // from,password,to,subject,message
-    Mailer.send("animation.meteo@gmail.com", "animationmeteo", "query@saildocs.com", "",
-        "send gfs:40N,60N,140W,120W|2,2|24,48,72|WIND");
+    Mailer.send("send gfs:40N,60N,140W,120W|2,2|24,48,72|WIND");
     // change from, password and to
   }
 }
