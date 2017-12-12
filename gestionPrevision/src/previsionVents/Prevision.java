@@ -2,8 +2,11 @@ package previsionVents;
 
 import java.util.Date;
 
+import visiteur.ElementVisitable;
+import visiteur.Visiteur;
 
-public class Prevision {
+
+public class Prevision implements ElementVisitable{
   
   private Date datePrevision;
   private DonneeVent[][] listeDonneVent;
@@ -39,6 +42,12 @@ public class Prevision {
     return this.listeDonneVent[positionX][positionX];
     
   }
+
+@Override
+public void applique(Visiteur visiteur) {
+	visiteur.agitSur(this);
+	
+}
 
    
 }

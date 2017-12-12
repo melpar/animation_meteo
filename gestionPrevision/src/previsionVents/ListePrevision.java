@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ListePrevision {
+import visiteur.ElementVisitable;
+import visiteur.Visiteur;
+
+public class ListePrevision implements ElementVisitable {
   private List<Prevision> listePrevision;
   private ZonePrevision zonePrevision;
   
@@ -48,5 +51,10 @@ public class ListePrevision {
   public int getNombrePrevision() {
     return this.listePrevision.size();
   }
+
+@Override
+public void applique(Visiteur visiteur) {
+	visiteur.agitSur(this);
+}
 
 }

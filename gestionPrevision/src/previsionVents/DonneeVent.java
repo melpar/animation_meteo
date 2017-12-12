@@ -1,6 +1,9 @@
 package previsionVents;
 
-public class DonneeVent {
+import visiteur.ElementVisitable;
+import visiteur.Visiteur;
+
+public class DonneeVent implements ElementVisitable{
   
   private double vitesseVent;
   private double orientationVent;
@@ -29,7 +32,13 @@ public class DonneeVent {
 
   public void setOrientationVent(double orientationVent) {
     this.orientationVent = orientationVent;
-  }  
+  }
+
+@Override
+public void applique(Visiteur visiteur) {
+	visiteur.agitSur(this);
+	
+}  
   
 
 }
