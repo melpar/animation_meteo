@@ -25,7 +25,8 @@ public class Dessiner {
 
   MapContext map;
   final SimpleFeatureType TYPE;
-
+  private static final int coefficient = 10000;
+  private static final int taille = 25;
   int testDecalage;
 
   /**
@@ -109,12 +110,28 @@ public class Dessiner {
     double latEnd2 = 75000.0;
     double lonEnd2 = 25000.0;
 
-    double z = Math.sin(infos.getDirection());
-    double v = Math.coordinates[0] = new Coordinate(x + 0, y + 0);
-    coordinates[1] = new Coordinate(x + lonStart, y + latStart);
-    coordinates[2] = new Coordinate(x + lonEnd, y + latEnd);
-    coordinates[3] = new Coordinate(x + lonStart, y + latStart);
-    coordinates[4] = new Coordinate(x + lonEnd2, y + latEnd2);
+    double z = Math.sin(infos.getDirection()) * taille * coefficient;
+    double w = Math.cos(infos.getDirection()) * taille * coefficient;
+    double coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille * coefficient * 1
+        / 4;
+    double coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille * coefficient * 1
+        / 4;
+    double coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille * coefficient * 1
+        / 4;
+    double coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille * coefficient * 1
+        / 4;
+    coordinates[0] = new Coordinate(x, y);
+    coordinates[1] = new Coordinate(x + w, y + z);
+    if (infos.getDirection() > Math.PI || infos.getDirection() == 0) {
+      coordinates[2] = new Coordinate(x + w + coeff1x, y + z - coeff1y);
+
+    } else {
+      coordinates[2] = new Coordinate(x + w - coeff1x, y + z - coeff1y);
+
+    }
+
+    coordinates[3] = new Coordinate(x + w, y + z);
+    coordinates[4] = new Coordinate(x + w - coeff2x, y + z + coeff2y);
 
     LineString line = gFac.createLineString(coordinates);
     System.out.println(line);

@@ -81,6 +81,7 @@ public class AffichagePrincipal {
           InformationsVents v = new InformationsVents();
           v.setPositionX(i);
           v.setPositionY(i);
+          v.setDirection(Math.PI / 4);
           vents.add(v);
         }
 
