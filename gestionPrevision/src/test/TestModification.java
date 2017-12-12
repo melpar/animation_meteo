@@ -49,7 +49,7 @@ public class TestModification {
     this.listePrevisionTest.ajouterPrevision(this.dateTest);
     System.out.println(this.listePrevisionTest.getListePrevision().get(0).getListeDonneVent());
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50, 3, 4);
-    DonneeVent vent=this.listePrevisionTest.getListePrevision().get(0).getDonneVent(3, 4);
+    DonneeVent vent=this.listePrevisionTest.getListePrevision().get(0).getDonneeVent(3, 4);
     System.out.println(vent.getOrientationVent());
     System.out.println(vent.getVitesseVent());
     assertTrue(vent.getOrientationVent()==50.9901951359);
