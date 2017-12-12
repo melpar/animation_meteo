@@ -36,6 +36,13 @@ public class ListePrevision {
     }
     return -1;
   }
-  
+
+  public List<Prevision> getListePrevision() {
+    return listePrevision;
+  }
+
+  public ZonePrevision getZonePrevision() {
+    return zonePrevision;
+  } 
 
 }

@@ -35,5 +35,33 @@ public class ZonePrevision {
     return  this.longitudeHautGauche+(this.pasY*postionY);
   }
 
+  public double getLongitudeHautGauche() {
+    return longitudeHautGauche;
+  }
+
+  public double getLatitudeHautGauche() {
+    return latitudeHautGauche;
+  }
+
+  public double getPasX() {
+    return pasX;
+  }
+
+  public double getPasY() {
+    return pasY;
+  }
+
+  public int getNombreX() {
+    return nombreX;
+  }
+
+  public int getNombreY() {
+    return nombreY;
+  }
+  
+  
+  
+  
+
   
 }
