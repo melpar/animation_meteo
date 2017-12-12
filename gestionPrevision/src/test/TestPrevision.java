@@ -26,11 +26,29 @@ public class TestPrevision {
   @Test
   public void testInitialisation() {
     assertTrue(this.listePrevisionTest!=null);
-    assertTrue(this.previsionTest.size()==0);
+    assertTrue(this.listePrevisionTest.getZonePrevision()!=null);
+    assertTrue(this.listePrevisionTest.getListePrevision()!=null);
   }
   
-  public void testAjouter() {
-    
+  @Test
+  public void testAjouterPrevision() {
+    assertTrue(this.listePrevisionTest.getNombrePrevision()==0);
+    this.listePrevisionTest.ajouterPrevision(new Date());
+    this.listePrevisionTest.ajouterPrevision(new Date());
+    this.listePrevisionTest.ajouterPrevision(new Date());
+    assertTrue(this.listePrevisionTest.getListePrevision().get(0).getDatePrevision()!=null);
+    assertTrue(this.listePrevisionTest.getNombrePrevision()==3);   
   }
+  
+  /*@Test
+  public void testAjouterVent() {
+    assertTrue(this.listePrevisionTest.getNombrePrevision()==0);
+    this.listePrevisionTest.ajouterPrevision(new Date());
+    this.listePrevisionTest.ajouterPrevision(new Date());
+    this.listePrevisionTest.ajouterPrevision(new Date());
+    assertTrue(this.listePrevisionTest.getListePrevision().get(0).getDatePrevision()!=null);
+    assertTrue(this.listePrevisionTest.getNombrePrevision()==3);   
+  }*/
+  
 
 }

@@ -13,8 +13,8 @@ public class ListePrevision {
     this.zonePrevision=new ZonePrevision(lattidude,longitude, pasX,pasY,nombreX,nombreY);
   }
   
-  public void ajouterPrevision(Date datePrevision,int positionX, int positionY) {
-    this.listePrevision.add(new Prevision(datePrevision, positionX,positionY));
+  public void ajouterPrevision(Date datePrevision) {
+    this.listePrevision.add(new Prevision(datePrevision, this.zonePrevision.getNombreX(),this.zonePrevision.getNombreY()));
   }
   
   public Boolean ajouterDonneeVent(Date datePrevision,double u, double v, double latitude ,double longitude) {
@@ -44,5 +44,9 @@ public class ListePrevision {
   public ZonePrevision getZonePrevision() {
     return zonePrevision;
   } 
+  
+  public int getNombrePrevision() {
+    return this.listePrevision.size();
+  }
 
 }
