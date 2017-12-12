@@ -16,7 +16,7 @@ public class Prevision implements ElementVisitable{
     this.datePrevision = datePrevision;
     this.listeDonneVent = new DonneeVent[nombreX][nombreY];    
     for(int posX=0;posX<this.listeDonneVent.length;posX++) {
-      for(int posY=0;posY<this.listeDonneVent[0].length;posX++) {
+      for(int posY=0;posY<this.listeDonneVent[0].length;posY++) {
         this.listeDonneVent[posX][posY] = new DonneeVent();
       }
     }
