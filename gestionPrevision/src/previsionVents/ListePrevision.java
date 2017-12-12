@@ -11,9 +11,9 @@ public class ListePrevision implements ElementVisitable {
   private List<Prevision> listePrevision;
   private ZonePrevision zonePrevision;
   
-  public ListePrevision(double lattidude, double longitude,double pasX,double pasY,int nombreX,int nombreY) {
+  public ListePrevision(double latitude, double longitude,double pasX,double pasY,int nombreX,int nombreY) {
     this.listePrevision=new ArrayList<Prevision>();
-    this.zonePrevision=new ZonePrevision(lattidude,longitude, pasX,pasY,nombreX,nombreY);
+    this.zonePrevision=new ZonePrevision(latitude,longitude, pasX,pasY,nombreX,nombreY);
   }
   
   public void ajouterPrevision(Date datePrevision) {
