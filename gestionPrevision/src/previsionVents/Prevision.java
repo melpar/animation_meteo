@@ -41,13 +41,17 @@ public class Prevision implements ElementVisitable{
     
     return this.listeDonneVent[positionX][positionX];
     
+  }  
+
+  public DonneeVent[][] getListeDonneVent() {
+    return listeDonneVent;
   }
 
-@Override
-public void applique(Visiteur visiteur) {
-	visiteur.agitSur(this);
+  @Override
+  public void applique(Visiteur visiteur) {
+    visiteur.agitSur(this);
 	
-}
+  }
 
    
 }
