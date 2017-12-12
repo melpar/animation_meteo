@@ -46,8 +46,8 @@ public class TestPrevision {
   public void testAjouterVent() {    
     this.listePrevisionTest.ajouterPrevision(this.dateTest);
     System.out.println(this.listePrevisionTest.getListePrevision().get(0).getListeDonneVent());
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50, 3, 4);
-    DonneeVent vent=this.listePrevisionTest.getListePrevision().get(0).getDonneVent(3, 4);
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50, (int)3,(int) 4);
+    DonneeVent vent=this.listePrevisionTest.getListePrevision().get(0).getDonneeVent(3, 4);
     System.out.println(vent.getOrientationVent());
     assertTrue(vent.getOrientationVent()==50.9901951359);
 

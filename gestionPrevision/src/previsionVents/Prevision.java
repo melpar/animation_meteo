@@ -31,7 +31,7 @@ public class Prevision implements ElementVisitable{
     return datePrevision;
   }
   
-  public DonneeVent getDonneVent(int positionX, int positionY) {
+  public DonneeVent getDonneeVent(int positionX, int positionY) {
     if((positionX>this.listeDonneVent.length-1)|| (positionY>this.listeDonneVent[0].length-1)){
       return null;
     }
