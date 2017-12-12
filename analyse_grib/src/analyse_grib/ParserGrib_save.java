@@ -51,7 +51,7 @@ public class ParserGrib_save {
       // affichage de l'unite des donnees
       System.out.println(ventV.getUnit());
       // description de la donnee
-      System.out.println(ventU.getPDS());
+      System.out.println(ventV.getPDS());
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {

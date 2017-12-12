@@ -3,14 +3,14 @@ package analyse_grib;
 public class Vent {
   private int latitude;
   private int longitude;
-  private double vitesse;
-  private double direction;
+  private double vecteurU;
+  private double vecteurV;
 
-  public Vent(int la, int lo, double vi, double di) {
+  public Vent(int la, int lo, double u, double v) {
     this.latitude = la;
     this.longitude = lo;
-    this.vitesse = vi;
-    this.direction = di;
+    this.vecteurU = u;
+    this.vecteurV = v;
   }
 
   public int getLatitude() {
@@ -29,19 +29,20 @@ public class Vent {
     this.longitude = longitude;
   }
 
-  public double getVitesse() {
-    return vitesse;
+  public double getVecteurV() {
+    return vecteurV;
   }
 
-  public void setVitesse(double vitesse) {
-    this.vitesse = vitesse;
+  public void setVecteurV(double vecteurV) {
+    this.vecteurV = vecteurV;
   }
 
-  public double getDirection() {
-    return direction;
+  public double getVecteurU() {
+    return vecteurU;
   }
 
-  public void setDirection(double direction) {
-    this.direction = direction;
+  public void setVecteurU(double vecteurU) {
+    this.vecteurU = vecteurU;
   }
+
 }

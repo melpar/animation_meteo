@@ -1,7 +1,5 @@
 package analyse_grib;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +7,13 @@ import net.sourceforge.jgrib.GribFile;
 import net.sourceforge.jgrib.GribRecord;
 import net.sourceforge.jgrib.GribRecordGDS;
 import net.sourceforge.jgrib.NoValidGribException;
-import net.sourceforge.jgrib.NotSupportedException;
 
 public class ParserGrib {
 
-  public List<Vent> parserGrib() {
+  public List<Vent> parserGrib(String nameFile) {
     List<Vent> ret = new ArrayList<>();
     try {
-      GribFile grb = new GribFile("gascogne.grb");
+      GribFile grb = new GribFile(nameFile);
 
       GribRecordGDS r2 = grb.getGrids()[0];
 
@@ -31,35 +28,64 @@ public class ParserGrib {
         for (int j = 0; j < nby; j++) {
           // affichage des la donnee (i,j)
           try {
-            double vitesse = Math.sqrt((ventU.getValue(i, j) * ventU.getValue(i, j))
-                + (ventV.getValue(i, j) * ventV.getValue(i, j)));
-
-            double direction = Math.atan2(ventU.getValue(i, j), ventV.getValue(i, j));
-
-            Vent v = new Vent(i, j, vitesse, direction);
+            Vent v = new Vent(i, j, ventU.getValue(i, j), ventV.getValue(i, j));
             ret.add(v);
           } catch (NoValidGribException e) {
             e.printStackTrace();
           }
         }
       }
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (NotSupportedException e) {
-      e.printStackTrace();
-    } catch (NoValidGribException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
     return ret;
   }
 
+  public InformationsGrille getInformationsGrille(String nameFile) {
+    InformationsGrille informations = new InformationsGrille();
+
+    try {
+      GribFile grb = new GribFile(nameFile);
+
+      GribRecordGDS r2 = grb.getGrids()[0];
+
+      informations.setLattidude(r2.getGridLat2());
+      informations.setLongitude(r2.getGridLon2());
+      informations.setNombreX(r2.getGridNX());
+      informations.setNombreY(r2.getGridNY());
+      informations.setPasX(r2.getGridDX());
+      informations.setPasY(r2.getGridDY());
+
+      GribRecord ventU = grb.getRecord(1);
+      informations.setDatePrevision(ventU.getTime().getTime());
+      GribRecord ventV = grb.getRecord(2);
+
+      // GribRecord ventD = grb.getRecord(4);
+      int nbx = r2.getGridNX();
+      int nby = r2.getGridNY();
+
+      for (int i = 0; i < nbx; i++) {
+        for (int j = 0; j < nby; j++) {
+          // affichage des la donnee (i,j)
+          try {
+            Vent v = new Vent(i, j, ventU.getValue(i, j), ventV.getValue(i, j));
+            informations.addVent(v);
+          } catch (NoValidGribException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return informations;
+  }
+
   public static void main(String[] args) {
     ParserGrib parser = new ParserGrib();
-    List<Vent> liste = parser.parserGrib();
-    for (Vent v : liste) {
-      System.out.println("vit " + v.getVitesse() + " dir " + v.getDirection());
+    InformationsGrille infos = parser.getInformationsGrille("H:\\gascogne.grb");
+    for (Vent v : infos.getVents()) {
+      System.out.println("vit " + v.getVecteurU() + " dir " + v.getVecteurU());
     }
   }
 }
