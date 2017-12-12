@@ -28,8 +28,7 @@ public class VisiteurCoefficient implements Visiteur {
 	 */
 	
 	void calculCoefficient(DonneeVent vent) {
-		vent.setVitesseVent(
-				vent.getVitesseVent() * (1 + coefficient));
+		vent.setVitesseVent(vent.getVitesseVent() * (1 + coefficient));
 	}
 	
 	/**
@@ -38,10 +37,14 @@ public class VisiteurCoefficient implements Visiteur {
 	 */
 	
 	void zoneModifier(Prevision prevision) {
-		for(double positionX = zoneModifier.getLatitudeHautGauche();positionX<zoneModifier.getNombreX()*zoneModifier.getPasX();positionX+=zoneModifier.getPasX()) {
-			for(double positionY = zoneModifier.getLongitudeHautGauche();positionX<zoneModifier.getNombreY()*zoneModifier.getPasY();positionX+=zoneModifier.getPasY()) {
-				DonneeVent vent = prevision.getDonneeVent((int) ((positionX-zonePrevision.getLatitudeHautGauche())/zonePrevision.getPasX()),
-						(int)((positionY-zonePrevision.getLatitudeHautGauche())/zonePrevision.getPasY()));
+		
+		double limiteX = zoneModifier.getNombreX()*zoneModifier.getPasX();
+		double limiteY = zoneModifier.getNombreY()*zoneModifier.getPasY();
+		for(double positionX = zoneModifier.getLatitudeHautGauche();positionX<limiteX;positionX+=zoneModifier.getPasX()) {
+			for(double positionY = zoneModifier.getLongitudeHautGauche();positionY<limiteY;positionY+=zoneModifier.getPasY()) {
+				int matriceX = (int)((positionX-zonePrevision.getLatitudeHautGauche())/zonePrevision.getPasX());
+				int matriceY = (int)((positionY-zonePrevision.getLongitudeHautGauche())/zonePrevision.getPasY());
+				DonneeVent vent = prevision.getDonneeVent(matriceX,matriceY);
 				if(vent!=null) {
 					vent.applique(this);
 				}
@@ -66,6 +69,8 @@ public class VisiteurCoefficient implements Visiteur {
 	
 	@Override
 	public void agitSur(DonneeVent element) {
+		//System.out.println("j'arrive");
+		//System.out.println(element.getVitesseVent());
 		calculCoefficient(element);
 	}
 	

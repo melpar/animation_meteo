@@ -62,16 +62,19 @@ public class TestModification {
     this.listePrevisionTest.ajouterPrevision(this.dateTest);
     System.out.println(this.listePrevisionTest.getListePrevision().get(0).getListeDonneVent());
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 0,(int) 0);
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 9,(int) 9);
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     DonneeVent vent= donnee[3][4];
-    System.out.println(vent.getVitesseVent());
-    assertTrue(vent.getVitesseVent()-50<1);
+    //System.out.println(vent.getVitesseVent());
+    double ancienneValeur = vent.getVitesseVent();
     
-    
-    ZonePrevision zonePrevisionTest=new ZonePrevision(2.0,12.0,5.0,5.0,10,10);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, 0.5);
+    //ZonePrevision zonePrevisionTest=new ZonePrevision(1.0,11.0,7.75,10.25,20,20);
+    ZonePrevision zonePrevisionTest=new ZonePrevision(0.0,10.0,15.50,20.50,10,10);
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
     listePrevisionTest.applique(modifier);
-    System.out.println(vent.getVitesseVent());
+    assertTrue(vent.getVitesseVent()==ancienneValeur/2);
+    //System.out.println(vent.getVitesseVent());
   }
   
 

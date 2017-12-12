@@ -39,7 +39,7 @@ public class Prevision implements ElementVisitable{
       return null;
     }
     
-    return this.listeDonneVent[positionX][positionX];
+    return this.listeDonneVent[positionX][positionY];
     
   }  
 
