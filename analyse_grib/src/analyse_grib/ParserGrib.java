@@ -62,8 +62,9 @@ public class ParserGrib {
 
       // GribRecord ventD = grb.getRecord(4);
       int nbx = r2.getGridNX();
+      System.out.println(nbx);
       int nby = r2.getGridNY();
-
+      System.out.println(nby);
       for (int i = 0; i < nbx; i++) {
         for (int j = 0; j < nby; j++) {
           // affichage des la donnee (i,j)
@@ -84,8 +85,8 @@ public class ParserGrib {
   public static void main(String[] args) {
     ParserGrib parser = new ParserGrib();
     InformationsGrille infos = parser.getInformationsGrille("H:\\gascogne.grb");
-    for (Vent v : infos.getVents()) {
-      System.out.println("vit " + v.getVecteurU() + " dir " + v.getVecteurU());
-    }
+    // for (Vent v : infos.getVents()) {
+    // System.out.println("vit " + v.getVecteurU() + " dir " + v.getVecteurU());
+    // }
   }
 }

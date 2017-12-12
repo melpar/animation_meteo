@@ -11,11 +11,11 @@ import org.geotools.map.MapContext;
  * @author thomas
  *
  */
-class ActionAjout implements ActionListener {
+class ActionDessiner implements ActionListener {
   int nb;
   MapContext map;
 
-  ActionAjout(MapContext map) {
+  ActionDessiner(MapContext map) {
     this.map = map;
     nb = 0;
     System.out.println("init " + nb);

@@ -3,7 +3,9 @@ package carte;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -69,6 +71,22 @@ public class AffichagePrincipal {
       }
     });
 
+    menuFichier.add(new SafeAction("Afficher") {
+      public void action(ActionEvent e) throws Throwable {
+        System.out.println("afficher");
+        Dessiner dessiner = new Dessiner(map, 10);
+        List<InformationsVents> vents = new ArrayList<>();
+
+        for (int i = 0; i < 10000000; i += 100000) {
+          InformationsVents v = new InformationsVents();
+          v.setPositionX(i);
+          v.setPositionY(i);
+          vents.add(v);
+        }
+
+        dessiner.ajouterCalque(vents);
+      }
+    });
     JMenu menuModification = new JMenu("Edition");
     menuBar.add(menuModification);
     JMenu menuConfiguration = new JMenu("Configuration");
