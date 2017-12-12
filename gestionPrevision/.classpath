@@ -3,6 +3,10 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+<<<<<<< Upstream, based on origin/master
 	<classpathentry kind="lib" path="H:/meteo/grib.jar"/>
+=======
+	<classpathentry kind="lib" path="H:/meteo/test.jar"/>
+>>>>>>> 4191403 tout
 	<classpathentry kind="output" path="bin"/>
 </classpath>
