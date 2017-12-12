@@ -40,7 +40,7 @@ public class VisiteurCoefficient implements Visiteur {
 	void zoneModifier(Prevision prevision) {
 		for(double positionX = zoneModifier.getLatitudeHautGauche();positionX<zoneModifier.getNombreX()*zoneModifier.getPasX();positionX+=zoneModifier.getPasX()) {
 			for(double positionY = zoneModifier.getLongitudeHautGauche();positionX<zoneModifier.getNombreY()*zoneModifier.getPasY();positionX+=zoneModifier.getPasY()) {
-				DonneeVent vent = prevision.getDonneVent((int) ((positionX-zonePrevision.getLatitudeHautGauche())/zonePrevision.getPasX()),
+				DonneeVent vent = prevision.getDonneeVent((int) ((positionX-zonePrevision.getLatitudeHautGauche())/zonePrevision.getPasX()),
 						(int)((positionY-zonePrevision.getLatitudeHautGauche())/zonePrevision.getPasY()));
 				if(vent!=null) {
 					vent.applique(this);
