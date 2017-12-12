@@ -3,9 +3,9 @@ package previsionVents;
 public class FabriqueDonnee { 
   
   
-  public DonneeVent creeDonneeVent(double vX,double vY) {  
-    double orientation =this.calculOrientation(vX,vY);
-    double vitesse =this.calculvitesse(vX, vY);    
+  public DonneeVent creeDonneeVent(double u,double v) {  
+    double orientation =this.calculOrientation(u,v);
+    double vitesse =this.calculvitesse(u, v);    
     return new DonneeVent(vitesse, orientation);   
   }
   
@@ -14,6 +14,6 @@ public class FabriqueDonnee {
   }
   
   private double calculvitesse(double u,double v) {
-    return Math.atan2(v,u);
+    return Math.atan2(u,v);
   }
 }
