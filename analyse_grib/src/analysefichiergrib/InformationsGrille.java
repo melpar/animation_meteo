@@ -50,7 +50,7 @@ public class InformationsGrille {
   }
 
   public void setPasX(double pasX) {
-    this.pasX = pasX;
+    this.pasX = Math.abs(pasX);
   }
 
   public double getPasY() {
@@ -58,7 +58,7 @@ public class InformationsGrille {
   }
 
   public void setPasY(double pasY) {
-    this.pasY = pasY;
+    this.pasY = Math.abs(pasY);
   }
 
   public int getNombreX() {

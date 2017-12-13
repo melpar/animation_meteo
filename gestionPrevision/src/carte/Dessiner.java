@@ -26,7 +26,7 @@ public class Dessiner {
   MapContext map;
   final SimpleFeatureType TYPE;
   private static final int coefficient = 120000;
-  private static final double taille = 100;
+  private static final double taille = 1;
   private int indice;
 
   public Dessiner(MapContext map) {
