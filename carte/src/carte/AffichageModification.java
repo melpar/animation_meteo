@@ -9,22 +9,31 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 public class AffichageModification extends JFrame {
 
   JPanel general = new JPanel();
+  
   JPanel choixModification = new JPanel();
   JPanel parametreContraste = new JPanel();
-  JPanel parametreContrastel3 = new JPanel();
   JPanel niveau = new JPanel();
   JPanel duree = new JPanel();
 
   JTextField valeurseuil = new JTextField();
+  
+  Double max = 100.00;
+  SpinnerNumberModel model = new SpinnerNumberModel(0,0,100,1);
+  JSpinner coeffisientspin = new JSpinner(model);
 
   // création des boutons
   JRadioButton lineaire = new JRadioButton("Lineaire ");
@@ -37,10 +46,21 @@ public class AffichageModification extends JFrame {
   JLabel titrecontraste = new JLabel("Paramétre du contraste :");
   JLabel soustitreseuil = new JLabel("Seuil");
   JLabel soustitrevaleurseuil = new JLabel("Valeur du seuil");
+  JLabel uniteseuil = new JLabel("Entrée une vitesse");
 
   JLabel niveautext = new JLabel("Niveau");
   JLabel coefficienttext = new JLabel("% de coefficient");
   JLabel maxcoef = new JLabel("Maximum : 100 %");
+  
+  JLabel plagehoraire = new JLabel("Plage horaire");
+  JLabel textduree = new JLabel("Durée de la modification");
+  JLabel maxduree= new JLabel("Maximum : 24 h");
+  
+  Integer[] tab = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
+  JComboBox<Integer> dureeliste = new JComboBox<Integer>(tab);
+  
+  JButton annuler = new JButton("Annuler");
+  JButton Appliquer = new JButton("Appliquer");
 
   public AffichageModification() {
 
@@ -57,14 +77,15 @@ public class AffichageModification extends JFrame {
     general.setLayout(new GridLayout(4, 1));
     choixModification.setLayout(new GridBagLayout());
     parametreContraste.setLayout(new GridBagLayout());
-    parametreContrastel3.setLayout(new GridBagLayout());
+    niveau.setLayout(new GridBagLayout());
+    duree.setLayout(new GridBagLayout());
 
     GridBagConstraints modification = new GridBagConstraints();
-    modification.fill = GridBagConstraints.BOTH;
-    modification.ipady = GridBagConstraints.WEST;
+    modification.fill = GridBagConstraints.HORIZONTAL;
     modification.insets = new Insets(5, 30, 5, 5);
     modification.weightx = 1;
     modification.weighty = 3;
+    modification.anchor = GridBagConstraints.LINE_START;
 
     parametreContraste.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
     niveau.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
@@ -80,6 +101,7 @@ public class AffichageModification extends JFrame {
     modification.gridy = 2;
     choixModification.add(coefficient, modification);
     modification.gridy = 0;
+    
     parametreContraste.add(titrecontraste, modification);
     modification.gridy = 1;
     modification.insets = new Insets(5, 10, 5, 5);
@@ -88,8 +110,41 @@ public class AffichageModification extends JFrame {
     modification.gridy = 2;
     parametreContraste.add(soustitrevaleurseuil, modification);
     modification.gridx = 1;
-    modification.insets = new Insets(5, 5, 5, 40);
+    modification.insets = new Insets(5, 30, 5, 5);
     parametreContraste.add(valeurseuil, modification);
+    modification.gridx=2;
+    parametreContraste.add(uniteseuil,modification);
+    modification.insets = new Insets(5, 10, 5, 0);
+    modification.gridx = 0;
+    modification.gridy = 0;
+    
+    niveau.add(niveautext,modification);    
+    modification.gridy = 1;
+    modification.insets = new Insets(5, 30, 5, 0);
+    niveau.add(coefficienttext,modification);
+    modification.gridx = 1;
+    niveau.add(coeffisientspin,modification);
+    modification.gridx =2;
+   
+    niveau.add(maxcoef,modification);
+    
+    modification.gridx=0;
+    modification.gridy = 0;
+    modification.insets = new Insets(5, 10, 5, 0);
+    duree.add(plagehoraire,modification);
+    modification.gridy=1;
+    modification.insets = new Insets(5, 30, 5, 0);
+    duree.add(textduree,modification);
+    modification.gridx = 2;
+    duree.add(dureeliste,modification);
+    modification.gridx = 3;
+    duree.add(maxduree,modification);
+    
+    modification.gridy=2;
+    modification.gridx = 2;
+    duree.add(annuler,modification);
+    modification.gridx = 3;
+    duree.add(Appliquer,modification);
 
     general.add(choixModification);
     general.add(parametreContraste);
