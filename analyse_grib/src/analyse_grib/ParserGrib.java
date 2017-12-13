@@ -49,8 +49,8 @@ public class ParserGrib {
 
       GribRecordGDS r2 = grb.getGrids()[0];
 
-      informations.setLattidude(r2.getGridLat2());
-      informations.setLongitude(r2.getGridLon2());
+      informations.setLattidude(r2.getGridLat1());
+      informations.setLongitude(r2.getGridLon1());
       informations.setNombreX(r2.getGridNX());
       informations.setNombreY(r2.getGridNY());
       informations.setPasX(r2.getGridDX());
