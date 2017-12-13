@@ -36,8 +36,8 @@ public class TestPrevision {
   @Test
   public void testInitialisationDonnee() {
     assertTrue(this.donneeTest!=null);
-    assertTrue(this.donneeTest.getOrientationVent()-50<1);
-    assertTrue(this.donneeTest.getVitesseVent()>0);    
+    assertTrue(this.donneeTest.getOrientationVent()<1);
+    assertTrue(this.donneeTest.getVitesseVent()-183<1);    
   }
   
   @Test
@@ -54,12 +54,12 @@ public class TestPrevision {
   }
   
   @Test
-  public void testajouterPrevision() {
+  public void testAjouterPrevision() {
     assertTrue(this.previsionTest.getDonneeVent(3, 4).getOrientationVent()==0);
     assertTrue(this.previsionTest.getDonneeVent(3, 4).getVitesseVent()==0);
     this.previsionTest.ajouterDonneeVent(10, 50, 3, 4);
-    assertTrue(this.previsionTest.getDonneeVent(3, 4).getOrientationVent()-50<1);
-    assertTrue(this.previsionTest.getDonneeVent(3, 4).getVitesseVent()>0);
+    assertTrue(this.previsionTest.getDonneeVent(3, 4).getOrientationVent()<1);
+    assertTrue(this.previsionTest.getDonneeVent(3, 4).getVitesseVent()-183<1);
   }
 
   @Test
@@ -70,7 +70,7 @@ public class TestPrevision {
   }
   
   @Test
-  public void testAjouterPrevision() {
+  public void testAjouterPrevisionListePrevision() {
     assertTrue(this.listePrevisionTest.getNombrePrevision()==0);
     this.listePrevisionTest.ajouterPrevision(new Date());
     this.listePrevisionTest.ajouterPrevision(new Date());
@@ -84,6 +84,10 @@ public class TestPrevision {
      ZonePrevision zone=this.listePrevisionTest.getZonePrevision();
      assertTrue(zone.getLongitudeHautGauche()==0.0);
      assertTrue(zone.getLatitudeHautGauche()==10.0);
+     assertTrue(zone.getNombreX()==10);
+     assertTrue(zone.getNombreY()==10);
+     assertTrue(zone.getPasX()==15.50);
+     assertTrue(zone.getPasY()==20.50);
   }
   
   @Test
