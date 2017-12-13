@@ -26,7 +26,7 @@ public class Dessiner {
   MapContext map;
   final SimpleFeatureType TYPE;
   private static final int coefficient = 120000;
-  private static final double taille = 0.6;
+  private static final double taille = 100;
   private int indice;
 
   public Dessiner(MapContext map) {
@@ -95,8 +95,8 @@ public class Dessiner {
     GeometryFactory gFac = JTSFactoryFinder.getGeometryFactory(JTSFactoryFinder.EMPTY_HINTS);
     Coordinate[] coordinates = new Coordinate[5];
 
-    double x = infos.getPositionX() * coefficient - 45 * coefficient;
-    double y = infos.getPositionY() * coefficient + 55 * coefficient;
+    double x = infos.getPositionX() * coefficient;
+    double y = infos.getPositionY() * coefficient;
     System.out.println("x :" + x + " y :" + y);
     double z = Math.sin(infos.getDirection()) * taille * coefficient;
     double w = Math.cos(infos.getDirection()) * taille * coefficient;

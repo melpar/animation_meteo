@@ -29,7 +29,11 @@ public class AfficherFleches extends SafeAction {
       for (int i = 0; i < prev.getListeDonneVent().length; i += 20) {
         for (int j = 0; j < prev.getListeDonneVent()[i].length; j += 20) {
           System.out.println("action");
-          ZonePrevision zone = new ZonePrevision(i, j, 20, 20, 1, 1);
+          ZonePrevision zone = new ZonePrevision(
+              previsions.getZonePrevision().getLatitudePosition(i),
+              previsions.getZonePrevision().getLongitudePosition(j),
+              20 * previsions.getZonePrevision().getPasX(),
+              20 * previsions.getZonePrevision().getPasX(), 1, 1);
           VisiteurMoyenne visiteur = new VisiteurMoyenne(zone);
           previsions.applique(visiteur);
           InformationsVents v = new InformationsVents();
