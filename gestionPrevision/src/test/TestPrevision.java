@@ -94,8 +94,8 @@ public class TestPrevision {
     DonneeVent vent= donnee[3][4];
     System.out.println(vent.getVitesseVent());
     System.out.println(vent.getOrientationVent());
-    assertTrue(vent.getOrientationVent()-50<1);
-    assertTrue(vent.getVitesseVent()>0);
+    assertTrue(vent.getOrientationVent()<1);
+    assertTrue(vent.getVitesseVent()-183<1);
     
   }
   

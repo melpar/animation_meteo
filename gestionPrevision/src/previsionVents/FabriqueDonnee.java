@@ -10,7 +10,7 @@ public class FabriqueDonnee {
   }
   
   private double calculOrientation(double u,double v) {
-    return Math.atan2(u,v);
+    return  Math.atan2(u,v);
   }
   
   private double calculvitesse(double u,double v) {   
