@@ -18,13 +18,13 @@ public class RecuperationDonneesGrib {
     System.out.println("longitude : "+zone.getLongitudeHautGauche());
     System.out.println("latitude : "+zone.getLatitudeHautGauche());
     
-   /* for (int i = 0; i < donnee.length; i++) {
+   for (int i = 0; i < donnee.length; i++) {
       for (int y = 0; y < donnee[0].length; y++) {
         System.out.println("coordonee : (" + i + " " + y + ")(lat: "+zone.getLatitudePosition(i)+"\tlong: "+zone.getLongitudePosition(y));
         System.out.print("Orientation :" + donnee[i][y].getOrientationVent());
         System.out.println("\tVitesse :" + donnee[i][y].getVitesseVent());
       }
-    }*/
+    }
   }
 
   public ListePrevision getListePrevision() {
