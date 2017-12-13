@@ -18,19 +18,19 @@ import org.geotools.swing.locale.LocaleUtils;
 import org.geotools.swing.tool.ZoomInTool;
 
 public class Zoom extends ZoomInTool {
-  /** Tool name */
+  /** Tool name. */
   public static final String TOOL_NAME = LocaleUtils.getValue("CursorTool", "ZoomIn");
 
-  /** Tool tip text */
+  /** Tool tip text. */
   public static final String TOOL_TIP = LocaleUtils.getValue("CursorTool", "ZoomInTooltip");
 
-  /** Cursor */
+  /** Cursor. */
   public static final String CURSOR_IMAGE = "/org/geotools/swing/icons/mActionZoomIn.png";
 
-  /** Cursor hotspot coordinates */
+  /** Cursor hotspot coordinates. */
   public static final Point CURSOR_HOTSPOT = new Point(14, 9);
 
-  /** Icon for the control */
+  /** Icon for the control. */
   public static final String ICON_IMAGE = "/org/geotools/swing/icons/mActionZoomIn.png";
 
   private Cursor cursor;
@@ -41,7 +41,7 @@ public class Zoom extends ZoomInTool {
   private Dessiner dessiner;
 
   /**
-   * Constructor
+   * Constructor.
    */
   public Zoom(Dessiner dessiner) {
     Toolkit tk = Toolkit.getDefaultToolkit();
@@ -55,7 +55,7 @@ public class Zoom extends ZoomInTool {
 
   /**
    * Zoom in by the currently set increment, with the map centred at the location
-   * (in world coords) of the mouse click
+   * (in world coords) of the mouse click.
    * 
    * @param e
    *          map mapPane mouse event
@@ -79,7 +79,7 @@ public class Zoom extends ZoomInTool {
 
   /**
    * Records the map position of the mouse event in case this button press is the
-   * beginning of a mouse drag
+   * beginning of a mouse drag.
    *
    * @param ev
    *          the mouse event
@@ -91,7 +91,7 @@ public class Zoom extends ZoomInTool {
   }
 
   /**
-   * Records that the mouse is being dragged
+   * Records that the mouse is being dragged.
    *
    * @param ev
    *          the mouse event
@@ -132,7 +132,7 @@ public class Zoom extends ZoomInTool {
   }
 
   /**
-   * Get the mouse cursor for this tool
+   * Get the mouse cursor for this tool.
    */
   @Override
   public Cursor getCursor() {
@@ -141,7 +141,7 @@ public class Zoom extends ZoomInTool {
 
   /**
    * Returns true to indicate that this tool draws a box on the map display when
-   * the mouse is being dragged to show the zoom-in area
+   * the mouse is being dragged to show the zoom-in area.
    */
   @Override
   public boolean drawDragBox() {
