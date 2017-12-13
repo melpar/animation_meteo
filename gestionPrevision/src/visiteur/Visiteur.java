@@ -3,6 +3,7 @@ package visiteur;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
+import previsionVents.ZonePrevision;
 
 public interface Visiteur {
 	void agitSur(ElementVisitable element);
@@ -13,4 +14,5 @@ public interface Visiteur {
 
 	void agitSur(Prevision element);
 
+	public void agitSur(ZonePrevision element);
 }

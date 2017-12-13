@@ -70,5 +70,13 @@ public class ListePrevision implements ElementVisitable {
   public void applique(Visiteur visiteur) {
     visiteur.agitSur(this);
   }
+  
+  public void setZonePrevisions(ZonePrevision zone) {
+		this.zonePrevision = zone;
+	}
+
+	public void setListePrevision(ArrayList<Prevision> arrayList) {
+		this.listePrevision = arrayList;
+	}
 
 }
