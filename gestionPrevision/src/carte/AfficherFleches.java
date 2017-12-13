@@ -33,7 +33,7 @@ public class AfficherFleches extends SafeAction {
               previsions.getZonePrevision().getLatitudePosition(i),
               previsions.getZonePrevision().getLongitudePosition(j),
               20 * previsions.getZonePrevision().getPasX(),
-              20 * previsions.getZonePrevision().getPasX(), 1, 1);
+              20 * previsions.getZonePrevision().getPasY(), 1, 1);
           VisiteurMoyenne visiteur = new VisiteurMoyenne(zone);
           previsions.applique(visiteur);
           InformationsVents v = new InformationsVents();
