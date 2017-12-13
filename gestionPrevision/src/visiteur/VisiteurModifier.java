@@ -28,7 +28,6 @@ public abstract class VisiteurModifier implements Visiteur {
 	 */
 	
 	void zoneModifier(Prevision prevision) {
-		
 		double limiteX = zoneModifier.getNombreX()*zoneModifier.getPasX();
 		double limiteY = zoneModifier.getNombreY()*zoneModifier.getPasY();
 		for(double positionX = zoneModifier.getLatitudeHautGauche();positionX<limiteX;positionX+=zonePrevision.getPasX()) {
