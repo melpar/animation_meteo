@@ -40,6 +40,8 @@ public class VisiteurContrasteProgressif extends VisiteurModifier {
 			vent.setVitesseVent(vent.getVitesseVent() * (1 + coefficient));
 		}
 	}
+
+	
 	
 
 

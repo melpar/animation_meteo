@@ -29,16 +29,5 @@ public class VisiteurCoefficient extends VisiteurModifier {
 	void modification(DonneeVent vent) {
 		vent.setVitesseVent(vent.getVitesseVent() * (1 + coefficient));
 	}
-	
-
-
-
-	@Override
-	public void agitSur(ZonePrevision element) {
-		element.applique(this);
-	}
-
-	
-
-	
+		
 }

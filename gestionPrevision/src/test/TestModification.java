@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import edition.implementation.Json;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
@@ -80,6 +81,10 @@ public class TestModification {
     assertTrue(ventMilieu.getVitesseVent()==ancienneValeurMilieux/2);
     assertTrue(ventFin.getVitesseVent()==ancienneValeurFin);
   }
-  
+  @Test
+  public void testSauvegardeVent() {    
+	  Json json = new Json();
+		json.JsonWrite(listePrevisionTest, "test2.json");
+  }
 
 }

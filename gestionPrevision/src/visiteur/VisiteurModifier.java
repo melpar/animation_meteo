@@ -52,6 +52,11 @@ public abstract class VisiteurModifier implements Visiteur {
 	}
 	
 	@Override
+	public void agitSur(ZonePrevision element) {
+
+	}
+	
+	@Override
 	public void agitSur(Prevision element) {
 		zoneModifier(element);
 	}
