@@ -1,16 +1,34 @@
-package analyse_grib;
+package analysefichiergrib;
 
+/**
+ * Representation d'un vent extrait d'un fichier grib.
+ * 
+ * @author StudioLab
+ *
+ */
 public class Vent {
   private int latitude;
   private int longitude;
   private double vecteurU;
   private double vecteurV;
 
-  public Vent(int la, int lo, double u, double v) {
-    this.latitude = la;
-    this.longitude = lo;
-    this.vecteurU = u;
-    this.vecteurV = v;
+  /**
+   * Constructeur de vent.
+   * 
+   * @param lat
+   *          Latitude du vent
+   * @param lon
+   *          Longitude du vent
+   * @param vecteurU
+   *          Vecteur su l'axe X
+   * @param vecteurV
+   *          Vecteur su l'axe Y
+   */
+  public Vent(int lat, int lon, double vecteurU, double vecteurV) {
+    this.latitude = lat;
+    this.longitude = lon;
+    this.vecteurU = vecteurU;
+    this.vecteurV = vecteurV;
   }
 
   public int getLatitude() {

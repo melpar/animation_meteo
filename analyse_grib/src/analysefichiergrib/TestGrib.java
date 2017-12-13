@@ -1,4 +1,4 @@
-package analyse_grib;
+package analysefichiergrib;
 
 import org.junit.Test;
 

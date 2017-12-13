@@ -1,6 +1,7 @@
-package analyse_grib;
+package analysefichiergrib;
 
 import java.io.FileNotFoundException;
+
 import java.io.IOException;
 
 import net.sourceforge.jgrib.GribFile;
@@ -9,13 +10,16 @@ import net.sourceforge.jgrib.GribRecordGDS;
 import net.sourceforge.jgrib.NoValidGribException;
 import net.sourceforge.jgrib.NotSupportedException;
 
-public class ParserGrib_save {
+public class ParserGribSave {
 
   public static void main(String[] args) {
-    ParserGrib_save parser = new ParserGrib_save();
+    ParserGribSave parser = new ParserGribSave();
     parser.parserGrib();
   }
 
+  /**
+   * Parse le fichier grib.
+   */
   public void parserGrib() {
     try {
       // GribFile grb = new GribFile("NorthEurope.grb");

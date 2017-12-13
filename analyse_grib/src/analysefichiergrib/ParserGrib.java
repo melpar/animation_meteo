@@ -1,4 +1,4 @@
-package analyse_grib;
+package analysefichiergrib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,20 @@ import net.sourceforge.jgrib.GribRecord;
 import net.sourceforge.jgrib.GribRecordGDS;
 import net.sourceforge.jgrib.NoValidGribException;
 
+/**
+ * Parser d'un fichier grib pour extraire des vents.
+ * 
+ * @author StudioLab
+ *
+ */
 public class ParserGrib {
-
+  /**
+   * Extrait les informations du fichier grib.
+   * 
+   * @param nameFile
+   *          Chemin du fichier grib a parser.
+   * @return liste des vents
+   */
   public List<Vent> parserGrib(String nameFile) {
     List<Vent> ret = new ArrayList<>();
     try {
@@ -41,6 +53,13 @@ public class ParserGrib {
     return ret;
   }
 
+  /**
+   * Recupere les parametres du fichier grib
+   * 
+   * @param nameFile
+   *          Nom du fichier.
+   * @return une information grille.
+   */
   public InformationsGrille getInformationsGrille(String nameFile) {
     InformationsGrille informations = new InformationsGrille();
 
@@ -84,6 +103,6 @@ public class ParserGrib {
 
   public static void main(String[] args) {
     ParserGrib parser = new ParserGrib();
-    InformationsGrille infos = parser.getInformationsGrille("H:\\gascogne.grb");
+    parser.getInformationsGrille("H:\\gascogne.grb");
   }
 }

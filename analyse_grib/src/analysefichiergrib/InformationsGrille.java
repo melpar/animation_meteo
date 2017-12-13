@@ -1,9 +1,16 @@
-package analyse_grib;
+package analysefichiergrib;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Representation des parametres du fichier grib.
+ * 
+ * @author StudioLab
+ *
+ */
 public class InformationsGrille {
   private double lattidude;
   private double longitude;
