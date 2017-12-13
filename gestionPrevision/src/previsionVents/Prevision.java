@@ -10,9 +10,9 @@ public class Prevision implements ElementVisitable {
   private Date datePrevision;
   private DonneeVent[][] listeDonneVent;
   private FabriqueDonnee fabriqueDonnee;
-  
+
   public Prevision() {
-	  super();
+    super();
   }
 
   public DonneeVent getDonneeVent(int positionX, int positionY) {
@@ -45,19 +45,6 @@ public class Prevision implements ElementVisitable {
 
   public Date getDatePrevision() {
     return datePrevision;
-  }
-
-  public DonneeVent getDonneVent(int positionX, int positionY) {
-    if ((positionX > this.listeDonneVent.length - 1)
-        || (positionY > this.listeDonneVent[0].length - 1)) {
-      return null;
-    }
-    if ((positionX < 0) || (positionY < 0)) {
-      return null;
-    }
-
-    return this.listeDonneVent[positionX][positionX];
-
   }
 
   public DonneeVent[][] getListeDonneVent() {

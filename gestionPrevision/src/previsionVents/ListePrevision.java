@@ -11,15 +11,17 @@ public class ListePrevision implements ElementVisitable {
 
   private List<Prevision> listePrevision;
   private ZonePrevision zonePrevision;
-  
+
   public ListePrevision() {
-	  super();
+    super();
   }
 
   public ListePrevision(double latitude, double longitude, double pasX, double pasY, int nombreX,
       int nombreY) {
     this.listePrevision = new ArrayList<Prevision>();
     this.zonePrevision = new ZonePrevision(latitude, longitude, pasX, pasY, nombreX, nombreY);
+    FacadePrevisionVents facade = FacadePrevisionVents.getFacadePrevisionVents();
+    facade.setPrevisions(this);
   }
 
   public void ajouterPrevision(Date datePrevision) {
@@ -27,15 +29,17 @@ public class ListePrevision implements ElementVisitable {
         this.zonePrevision.getNombreY()));
   }
 
-  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, double latitude, double longitude) {
-   
+  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, double latitude,
+      double longitude) {
+
     int positionX = this.zonePrevision.getPositionX(latitude);
     int positionY = this.zonePrevision.getPositionY(longitude);
     this.ajouterDonneeVent(datePrevision, u, v, latitude, longitude);
     return true;
   }
-  
-  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, int positionX,int positionY) {
+
+  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, int positionX,
+      int positionY) {
     int indicePrevision = this.getPrevision(datePrevision);
     if (indicePrevision == -1) {
       return false;
@@ -51,7 +55,7 @@ public class ListePrevision implements ElementVisitable {
       }
     }
     this.ajouterPrevision(datePrevision);
-    return this.listePrevision.size()-1;
+    return this.listePrevision.size() - 1;
   }
 
   public List<Prevision> getListePrevision() {
@@ -70,13 +74,17 @@ public class ListePrevision implements ElementVisitable {
   public void applique(Visiteur visiteur) {
     visiteur.agitSur(this);
   }
-  
-  public void setZonePrevisions(ZonePrevision zone) {
-		this.zonePrevision = zone;
-	}
 
-	public void setListePrevision(ArrayList<Prevision> arrayList) {
-		this.listePrevision = arrayList;
-	}
+  public void setZonePrevisions(ZonePrevision zone) {
+    this.zonePrevision = zone;
+  }
+
+  public void setListePrevision(ArrayList<Prevision> arrayList) {
+    this.listePrevision = arrayList;
+  }
+
+  public Prevision getUnePrevision(Date date) {
+    return this.listePrevision.get(this.getPrevision(date));
+  }
 
 }
