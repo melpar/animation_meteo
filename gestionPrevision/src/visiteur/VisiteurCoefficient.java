@@ -33,6 +33,11 @@ public class VisiteurCoefficient extends VisiteurModifier {
 
 
 
+	@Override
+	public void agitSur(ZonePrevision element) {
+		element.applique(this);
+	}
+
 	
 
 	
