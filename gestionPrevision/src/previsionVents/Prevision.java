@@ -11,7 +11,6 @@ public class Prevision implements ElementVisitable {
 	private DonneeVent[][] listeDonneVent;
 	private FabriqueDonnee fabriqueDonnee;
 
-<<<<<<< Upstream, based on origin/master
   public Date getDatePrevision() {
     return datePrevision;
   }
@@ -27,7 +26,6 @@ public class Prevision implements ElementVisitable {
     return this.listeDonneVent[positionX][positionY];
     
   }  
-=======
 	public Prevision(Date datePrevision, int nombreX, int nombreY) {
 		this.datePrevision = datePrevision;
 		this.listeDonneVent = new DonneeVent[nombreX][nombreY];
@@ -38,7 +36,6 @@ public class Prevision implements ElementVisitable {
 		}
 		this.fabriqueDonnee = new FabriqueDonnee();
 	}
->>>>>>> 5266b59 Robin comit
 
 	public void ajouterDonneeVent(double u, double v, int positionX, int positionY) {
 		this.listeDonneVent[positionX][positionY] = this.fabriqueDonnee.creeDonneeVent(u, v);
