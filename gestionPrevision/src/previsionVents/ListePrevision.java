@@ -11,6 +11,10 @@ public class ListePrevision implements ElementVisitable {
 
   private List<Prevision> listePrevision;
   private ZonePrevision zonePrevision;
+  
+  public ListePrevision() {
+	  super();
+  }
 
   public ListePrevision(double latitude, double longitude, double pasX, double pasY, int nombreX,
       int nombreY) {
