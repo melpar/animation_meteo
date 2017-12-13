@@ -96,7 +96,8 @@ public class TestModification {
     ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
     Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,0.5, 190);//seuil à 190 kmH
     listePrevisionTest.applique(modifier);
-    assertTrue(ventFort.getVitesseVent()>ancienneValeurFort);
+    double valeurTester = ancienneValeurFort*2 / ( 1.0 + Math.exp( -0.5 * ( ancienneValeurFort - 190 ) ) );
+    assertTrue(ventFort.getVitesseVent()==valeurTester);
     assertTrue(ventMilieu.getVitesseVent()<ancienneValeurMilieux);
     assertTrue(ventFin.getVitesseVent()>ancienneValeurFin);
   }
@@ -123,7 +124,12 @@ public class TestModification {
 	  Json json = new Json();
 	  json.JsonWrite(listePrevisionTest, "test2.json");
 	  ListePrevision listePrevisionLecture = json.JsonRead("test2.json");
-	  assertTrue(listePrevisionTest.equals(listePrevisionLecture));
+	  
+	  DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+	  DonneeVent[][] donneeEnregistre = listePrevisionLecture.getListePrevision().get(0).getListeDonneVent();
+	  DonneeVent vent= donnee[3][4];
+	  DonneeVent ventEnregistrer= donneeEnregistre[3][4];
+	  assertTrue(vent.getVitesseVent()==ventEnregistrer.getVitesseVent());
   }
 
 }
