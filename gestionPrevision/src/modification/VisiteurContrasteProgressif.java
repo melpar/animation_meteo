@@ -7,7 +7,7 @@ import previsionVents.ZonePrevision;
 
 public class VisiteurContrasteProgressif extends VisiteurModifier {
 
-	final int SEUIL_DEFAUT = 100;
+	final double SEUIL_DEFAUT = 100;
 	
 	double coefficient;
 	double seuil;
@@ -27,6 +27,7 @@ public class VisiteurContrasteProgressif extends VisiteurModifier {
 		} else {
 			this.seuil=seuil;
 		}
+		System.out.println("mon seuil : "+this.seuil);
 	}
 	
 	/**

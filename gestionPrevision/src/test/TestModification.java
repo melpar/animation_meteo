@@ -11,6 +11,7 @@ import edition.implementation.Json;
 import modification.VisiteurCoefficient;
 import modification.VisiteurContrasteLineaire;
 import modification.VisiteurContrasteProgressif;
+import modification.VisiteurMoyenne;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
@@ -101,6 +102,23 @@ public class TestModification {
     assertTrue(ventFort.getVitesseVent()>ancienneValeurFort);
     assertTrue(ventMilieu.getVitesseVent()<ancienneValeurMilieux);
     assertTrue(ventFin.getVitesseVent()>ancienneValeurFin);
+  }
+  
+  @Test
+  public void testSeuilDefaut() {
+    
+    ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
+    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevisionTest);
+    listePrevisionTest.applique(moyenne);
+	System.out.println("moyenne vitesse : "+moyenne.getMoyenneVitesse());
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,50, 100);//seuil à 190 kmH
+    
+    VisiteurMoyenne moyenneFinale = new VisiteurMoyenne(zonePrevisionTest);
+    listePrevisionTest.applique(moyenneFinale);
+	System.out.println("moyenne vitesse finale : "+moyenneFinale.getMoyenneVitesse());
+    
+    //listePrevisionTest.applique(modifier);
+    
   }
   
   @Test

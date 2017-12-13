@@ -4,10 +4,11 @@ import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
+import visiteur.Visiteur;
 
 public class VisiteurContrasteLineaire extends VisiteurModifier {
 
-	
+	final double SEUIL_DEFAUT = 100;
 	
 	double coefficient;
 	double seuil;
@@ -23,10 +24,11 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 		}
 		
 		if(seuil <0 || seuil >= VITESSE_MAX) {
-			this.seuil = 100;
+			this.seuil = SEUIL_DEFAUT;
 		} else {
 			this.seuil=seuil;
 		}
+		System.out.println(this.seuil);
 	}
 	
 	/**
