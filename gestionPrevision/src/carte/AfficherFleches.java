@@ -7,8 +7,10 @@ import java.util.List;
 import org.geotools.map.MapContext;
 import org.geotools.swing.action.SafeAction;
 
+import modification.VisiteurMoyenne;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
+import previsionVents.ZonePrevision;
 
 public class AfficherFleches extends SafeAction {
   MapContext map;
@@ -24,13 +26,16 @@ public class AfficherFleches extends SafeAction {
       Dessiner dessiner = new Dessiner(map);
       List<InformationsVents> vents = new ArrayList<>();
       Prevision prev = this.previsions.getListePrevision().get(0);
-      for (int i = 0; i < prev.getListeDonneVent().length; i++) {
-        for (int j = 0; j < prev.getListeDonneVent()[i].length; j++) {
+      for (int i = 0; i < prev.getListeDonneVent().length; i += 20) {
+        for (int j = 0; j < prev.getListeDonneVent()[i].length; j += 20) {
           System.out.println("action");
+          ZonePrevision zone = new ZonePrevision(i, j, 20, 20, 1, 1);
+          VisiteurMoyenne visiteur = new VisiteurMoyenne(zone);
+          previsions.applique(visiteur);
           InformationsVents v = new InformationsVents();
           v.setPositionY(this.previsions.getZonePrevision().getLatitudePosition(i));
           v.setPositionX(this.previsions.getZonePrevision().getLongitudePosition(j));
-          v.setDirection(prev.getDonneeVent(i, j).getOrientationVent());
+          v.setDirection(visiteur.getMoyenneDirection());
           vents.add(v);
         }
 

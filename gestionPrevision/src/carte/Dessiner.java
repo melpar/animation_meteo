@@ -25,16 +25,10 @@ public class Dessiner {
 
   MapContext map;
   final SimpleFeatureType TYPE;
-  private static final int coefficient = 1;
-  private static final int taille = 10;
+  private static final int coefficient = 120000;
+  private static final double taille = 0.6;
   private int indice;
 
-  /**
-   * Initialiser le calque
-   * 
-   * @param map
-   * @param modif
-   */
   public Dessiner(MapContext map) {
     this.map = map;
     indice = 0;
@@ -43,7 +37,7 @@ public class Dessiner {
   }
 
   /**
-   * initialiser le builder
+   * initialiser le builder.
    * 
    * @return
    */
@@ -101,8 +95,8 @@ public class Dessiner {
     GeometryFactory gFac = JTSFactoryFinder.getGeometryFactory(JTSFactoryFinder.EMPTY_HINTS);
     Coordinate[] coordinates = new Coordinate[5];
 
-    double x = infos.getPositionX();
-    double y = infos.getPositionY();
+    double x = infos.getPositionX() * coefficient - 45 * coefficient;
+    double y = infos.getPositionY() * coefficient + 55 * coefficient;
     System.out.println("x :" + x + " y :" + y);
     double z = Math.sin(infos.getDirection()) * taille * coefficient;
     double w = Math.cos(infos.getDirection()) * taille * coefficient;

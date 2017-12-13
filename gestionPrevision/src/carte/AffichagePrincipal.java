@@ -62,38 +62,7 @@ public class AffichagePrincipal {
     JButton boutonZoom = new JButton("+");
     boutonZoom.addMouseListener(new ListenerBoutonZoom(frame.getMapPane(), dessiner));
     frame.getToolBar().add(boutonZoom);
-    // boutonZoom.addActionListener(new ActionListener() {
-    // public void actionPerformed(ActionEvent e) {
-    // frame.getMapPane().setState(JMapPane.);
-    // }
-    // });
 
-    // ZoomInAction action = (ZoomInAction) boutonZoom.getAction();
-    // frame.getMapPane().addMouseWheelListener(new MouseWheelListener() {
-    // public void mouseWheelMoved(MouseWheelEvent ev) {
-    // System.out.println("molette");
-    // try {
-    // afficherFleches.action(null);
-    // } catch (Throwable e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
-    // int clicks = ev.getWheelRotation();
-    // // -ve means wheel moved up, +ve means down
-    // int sign = (clicks < 0 ? -1 : 1);
-    //
-    // ReferencedEnvelope env = frame.getMapPane().getDisplayArea();
-    // double width = env.getWidth();
-    // double delta = 1.5 * sign;
-    //
-    // env.expandBy(delta);
-    // frame.getMapPane().setDisplayArea((org.opengis.geometry.Envelope) env);
-    // frame.getMapPane().repaint();
-    // }
-    // });
-
-    // ZoomInAction zoomAction = new Zoom(frame.getMapPane());
-    // boutonZoom.setAction(zoomAction);
     System.out.println(frame.getMapPane());
     System.out.println(frame.getMapPane().getComponentCount());
     JMenuBar menuBar = new JMenuBar();
