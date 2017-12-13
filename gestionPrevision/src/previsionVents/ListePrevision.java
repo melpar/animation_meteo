@@ -26,7 +26,7 @@ public class ListePrevision implements ElementVisitable {
   public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, double latitude,
       double longitude) {
     int indicePrevision = this.getPrevision(datePrevision);
-    if (indicePrevision != -1) {
+    if (indicePrevision == -1) {
       return false;
     }
     int positionX = this.zonePrevision.getPositionX(latitude);
@@ -41,7 +41,8 @@ public class ListePrevision implements ElementVisitable {
         return indice;
       }
     }
-    return -1;
+    this.ajouterPrevision(datePrevision);
+    return this.listePrevision.size()-1;
   }
 
   public List<Prevision> getListePrevision() {
