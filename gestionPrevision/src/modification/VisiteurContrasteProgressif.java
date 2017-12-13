@@ -1,16 +1,18 @@
-package visiteur;
+package modification;
 
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
 
-public class VisiteurContrasteLineaire extends VisiteurModifier {
+public class VisiteurContrasteProgressif extends VisiteurModifier {
 
+	final int SEUIL_DEFAUT = 100;
+	
 	double coefficient;
 	double seuil;
 	
-	public VisiteurContrasteLineaire(ZonePrevision zone,double coefficient,double seuil) {
+	public VisiteurContrasteProgressif(ZonePrevision zone,double coefficient,double seuil) {
 		super(zone);
 		
 		// Le coefficient ne peux pas etre superieur a 1 ou inferieur a -1
@@ -20,8 +22,8 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 			this.coefficient=coefficient;
 		}
 		
-		if(seuil <=0 || seuil >= 400) {
-			this.seuil = 100;
+		if(seuil <=0 || seuil >= VITESSE_MAX) {
+			this.seuil = SEUIL_DEFAUT;
 		} else {
 			this.seuil=seuil;
 		}
@@ -34,11 +36,17 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 
 	@Override
 	void modification(DonneeVent vent) {
+		double valeur;
 		if(vent.getVitesseVent() < seuil) {
-			vent.setVitesseVent(vent.getVitesseVent() * (1 - coefficient));
+			valeur = vent.getVitesseVent() * (1 - coefficient);
+			
 		} else {
-			vent.setVitesseVent(vent.getVitesseVent() * (1 + coefficient));
+			valeur = vent.getVitesseVent() * (1 + coefficient);
 		}
+		if(valeur > VITESSE_MAX) {
+			valeur = VITESSE_MAX;
+		}
+		vent.setVitesseVent(valeur);
 	}
 
 	
