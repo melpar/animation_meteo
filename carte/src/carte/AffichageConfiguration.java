@@ -2,7 +2,10 @@ package carte;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,7 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 public class AffichageConfiguration extends JFrame {
   JPanel general = new JPanel();
@@ -29,9 +34,9 @@ public class AffichageConfiguration extends JFrame {
   JRadioButton kmh = new JRadioButton("km/h");
   JRadioButton noeud = new JRadioButton("noeud");
   JRadioButton mph = new JRadioButton("mph");
-  JRadioButton fleches = new JRadioButton("km/h");
-  JRadioButton couleurs = new JRadioButton("noeud");
-  JRadioButton barbules = new JRadioButton("mph");
+  JRadioButton fleches = new JRadioButton("Fleches");
+  JRadioButton couleurs = new JRadioButton("Couleurs");
+  JRadioButton barbules = new JRadioButton("Barbules");
   JRadioButton supprimer = new JRadioButton("Supprimer les fichiers précédents");
   JRadioButton conserver = new JRadioButton("Conserver les fichiers précédents");
   // création d'un groupe de bouton pour gerer liées les boutons radio
@@ -47,14 +52,14 @@ public class AffichageConfiguration extends JFrame {
   public AffichageConfiguration() {
 
     // definissions du titre
-    this.setTitle("Modification");
+    this.setTitle("Configuration");
 
     // définion de la taille
-    this.setSize(600, 400);
+    this.setSize(600, 500);
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    general.setLayout(new GridLayout(6, 1));
+    general.setLayout(new GridLayout(5, 1));
     initChoixUnite();
 
     initChoixRepresentation();
@@ -62,6 +67,8 @@ public class AffichageConfiguration extends JFrame {
     initChoixStockage();
 
     initChoixTelechargement();
+    
+    initChoixDensite();
     ValiderConfiguration valider = new ValiderConfiguration();
     valider.setConfig(this);
     boutonValider.addMouseListener(valider);
@@ -88,28 +95,42 @@ public class AffichageConfiguration extends JFrame {
         AffichageConfiguration.this.dispose();
       }
     });
-    JPanel panelValide = new JPanel();
-    panelValide.setLayout(new BorderLayout());
-    panelValide.add(boutonAnnuler, BorderLayout.WEST);
-    panelValide.add(boutonValider, BorderLayout.EAST);
+
+
+
+
     general.add(choixUnite);
     general.add(choixRepresentation);
     general.add(choixDossier);
     general.add(choixDensite);
     general.add(choixTelechargement);
-    general.add(panelValide);
+
     this.setContentPane(general);
     this.setVisible(true);
   }
 
   private void initChoixTelechargement() {
-    choixTelechargement.setLayout(new GridLayout(4, 1));
+    choixTelechargement.setLayout(new GridBagLayout());
+    
     groupTelechargement.add(conserver);
     groupTelechargement.add(supprimer);
 
-    choixTelechargement.add(new JLabel("Séléctionner la représentation du vent : "));
-    choixTelechargement.add(conserver);
-    choixTelechargement.add(supprimer);
+    GridBagConstraints parametre = new GridBagConstraints();
+    parametre.anchor = GridBagConstraints.LINE_START;
+    parametre.weightx = 1;
+    parametre.weighty = 3;
+    
+    choixTelechargement.add(new JLabel("Choix sauvegarde : "),parametre);
+    parametre.gridy=1;
+    choixTelechargement.add(conserver,parametre);
+    parametre.gridy=2;
+    choixTelechargement.add(supprimer,parametre);
+    parametre.insets = new Insets(5, 30, 5, 5);
+    parametre.gridy=3;
+    parametre.gridx=3;
+    choixTelechargement.add(boutonAnnuler, parametre);
+    parametre.gridx=4;
+    choixTelechargement.add(boutonValider, parametre);
 
     choixTelechargement.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
   }
@@ -128,9 +149,9 @@ public class AffichageConfiguration extends JFrame {
 
   private void initChoixRepresentation() {
     choixRepresentation.setLayout(new GridLayout(4, 1));
-    groupRepresentation.add(kmh);
-    groupRepresentation.add(noeud);
-    groupRepresentation.add(mph);
+    groupRepresentation.add(fleches);
+    groupRepresentation.add(couleurs);
+    groupRepresentation.add(barbules);
 
     choixRepresentation.add(new JLabel("Séléctionner la représentation du vent : "));
     choixRepresentation.add(fleches);
@@ -154,6 +175,19 @@ public class AffichageConfiguration extends JFrame {
 
     choixUnite.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
+  }
+  
+  private void initChoixDensite() {
+    choixDensite.setLayout(new GridBagLayout());
+    choixDensite.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+    GridBagConstraints modification = new GridBagConstraints();
+    modification.anchor = GridBagConstraints.LINE_START;
+    modification.weightx = 1;
+    modification.weighty = 3;
+    
+    choixDensite.add(new JLabel("Choissisez le nombre de point desiré :"),modification);
+    modification.gridx =1;
+    choixDensite.add(new JSpinner(new SpinnerNumberModel(10,0,100,1)),modification);
   }
 
   public static void main(String[] args) {
