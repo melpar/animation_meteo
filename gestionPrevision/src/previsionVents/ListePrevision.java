@@ -23,14 +23,19 @@ public class ListePrevision implements ElementVisitable {
         this.zonePrevision.getNombreY()));
   }
 
-  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, double latitude,
-      double longitude) {
+  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, double latitude, double longitude) {
+   
+    int positionX = this.zonePrevision.getPositionX(latitude);
+    int positionY = this.zonePrevision.getPositionY(longitude);
+    this.ajouterDonneeVent(datePrevision, u, v, latitude, longitude);
+    return true;
+  }
+  
+  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, int positionX,int positionY) {
     int indicePrevision = this.getPrevision(datePrevision);
     if (indicePrevision == -1) {
       return false;
     }
-    int positionX = this.zonePrevision.getPositionX(latitude);
-    int positionY = this.zonePrevision.getPositionY(longitude);
     this.listePrevision.get(indicePrevision).ajouterDonneeVent(u, v, positionX, positionY);
     return true;
   }
