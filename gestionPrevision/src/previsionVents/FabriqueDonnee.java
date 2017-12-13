@@ -6,7 +6,7 @@ public class FabriqueDonnee {
   public DonneeVent creeDonneeVent(double u,double v) {  
     double orientation =this.calculOrientation(u,v);
     double vitesse =this.calculvitesse(u, v);    
-    return new DonneeVent(vitesse*3.6 , orientation);   
+    return new DonneeVent(vitesse*COEFFICIENT_KILOMETRE_HEURE, orientation);   
   }
   
   private double calculOrientation(double u,double v) {
