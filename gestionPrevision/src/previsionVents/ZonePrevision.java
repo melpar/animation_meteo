@@ -11,6 +11,10 @@ public class ZonePrevision implements ElementVisitable{
 	private double pasY;
 	private int nombreX;
 	private int nombreY;
+	
+	public ZonePrevision() {
+		  super();
+	}
 
 	public ZonePrevision(double longitude, double latitude, double pasX, double pasY, int nombreX, int nombreY) {
 		this.longitudeHautGauche = longitude;

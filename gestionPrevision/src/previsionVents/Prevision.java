@@ -10,6 +10,10 @@ public class Prevision implements ElementVisitable {
   private Date datePrevision;
   private DonneeVent[][] listeDonneVent;
   private FabriqueDonnee fabriqueDonnee;
+  
+  public Prevision() {
+	  super();
+  }
 
   public DonneeVent getDonneeVent(int positionX, int positionY) {
     if ((positionX > this.listeDonneVent.length - 1)
