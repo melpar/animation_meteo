@@ -80,6 +80,11 @@ public class VisiteurCoefficient implements Visiteur {
 		
 	}
 
+	@Override
+	public void agitSur(ZonePrevision element) {
+		element.applique(this);
+	}
+
 	
 
 	
