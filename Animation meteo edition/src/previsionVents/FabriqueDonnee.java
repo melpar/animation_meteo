@@ -1,12 +1,12 @@
 package previsionVents;
 
 public class FabriqueDonnee { 
-  private static final  double COEFFICIENT_KILOMETRE_HEURE = 3.6;  
+  
   
   public DonneeVent creeDonneeVent(double u,double v) {  
     double orientation =this.calculOrientation(u,v);
     double vitesse =this.calculvitesse(u, v);    
-    return new DonneeVent(vitesse*COEFFICIENT_KILOMETRE_HEURE, orientation);   
+    return new DonneeVent(vitesse, orientation);   
   }
   
   private double calculOrientation(double u,double v) {
