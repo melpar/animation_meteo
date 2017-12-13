@@ -26,17 +26,17 @@ public class FabricationListPrevision {
 
     // la zone
     ZonePrevision zone = new ZonePrevision();
-    zone.setLatitude(latitude); ///////////////////////// nicolas
-    zone.setLongitude(longitude); ///////////////////////// nicolas
-    zone.setPasX(pasX); ///////////////////////// nicolas
-    zone.setPasY(pasY); ///////////////////////// nicolas
-    zone.setNombreX(nombreX); ///////////////////////// nicolas
-    zone.setNombreY(nombreY); ///////////////////////// nicolas
+    zone.setLatitude(latitude); 
+    zone.setLongitude(longitude); 
+    zone.setPasX(pasX); 
+    zone.setPasY(pasY); 
+    zone.setNombreX(nombreX);
+    zone.setNombreY(nombreY);
 
-    listPrevisions.setZonePrevisions(zone); ///////////////////////// nicolas
+    listPrevisions.setZonePrevisions(zone);
 
     // liste preivision
-    listPrevisions.setListePrevision(new ArrayList<Prevision>()); ///////////////////////// nicolas
+    listPrevisions.setListePrevision(new ArrayList<Prevision>());
 
     return listPrevisions;
   }
