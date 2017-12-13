@@ -16,148 +16,148 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class AffichageConfiguration extends JFrame {
-	JPanel general = new JPanel();
-	JPanel choixUnite = new JPanel();
-	JPanel choixRepresentation = new JPanel();
-	JPanel choixDossier = new JPanel();
-	JPanel choixDensite = new JPanel();
-	JPanel choixTelechargement = new JPanel();
+  JPanel general = new JPanel();
+  JPanel choixUnite = new JPanel();
+  JPanel choixRepresentation = new JPanel();
+  JPanel choixDossier = new JPanel();
+  JPanel choixDensite = new JPanel();
+  JPanel choixTelechargement = new JPanel();
 
-	JTextField valeurseuil = new JTextField();
+  JTextField valeurseuil = new JTextField();
 
-	// cr√©ation des boutons
-	JRadioButton kmh = new JRadioButton("km/h");
-	JRadioButton noeud = new JRadioButton("noeud");
-	JRadioButton mph = new JRadioButton("mph");
-	JRadioButton fleches = new JRadioButton("km/h");
-	JRadioButton couleurs = new JRadioButton("noeud");
-	JRadioButton barbules = new JRadioButton("mph");
-	JRadioButton supprimer = new JRadioButton("Supprimer les fichiers prÈcÈdents");
-	JRadioButton conserver = new JRadioButton("Conserver les fichiers prÈcÈdents");
-	// cr√©ation d'un groupe de bouton pour gerer li√©es les boutons radio
-	ButtonGroup groupUnite = new ButtonGroup();
-	ButtonGroup groupRepresentation = new ButtonGroup();
-	ButtonGroup groupTelechargement = new ButtonGroup();
+  // cr√©ation des boutons
+  JRadioButton kmh = new JRadioButton("km/h");
+  JRadioButton noeud = new JRadioButton("noeud");
+  JRadioButton mph = new JRadioButton("mph");
+  JRadioButton fleches = new JRadioButton("km/h");
+  JRadioButton couleurs = new JRadioButton("noeud");
+  JRadioButton barbules = new JRadioButton("mph");
+  JRadioButton supprimer = new JRadioButton("Supprimer les fichiers pr√©c√©dents");
+  JRadioButton conserver = new JRadioButton("Conserver les fichiers pr√©c√©dents");
+  // cr√©ation d'un groupe de bouton pour gerer li√©es les boutons radio
+  ButtonGroup groupUnite = new ButtonGroup();
+  ButtonGroup groupRepresentation = new ButtonGroup();
+  ButtonGroup groupTelechargement = new ButtonGroup();
 
-	JLabel labelFichier = new JLabel("h:/");
-	JButton boutonFichier = new JButton("Choisir");
-	JButton boutonValider = new JButton("Valider");
-	JButton boutonAnnuler = new JButton("Annuler");
+  JLabel labelFichier = new JLabel("h:/");
+  JButton boutonFichier = new JButton("Choisir");
+  JButton boutonValider = new JButton("Valider");
+  JButton boutonAnnuler = new JButton("Annuler");
 
-	public AffichageConfiguration() {
+  public AffichageConfiguration() {
 
-		// definissions du titre
-		this.setTitle("Modification");
+    // definissions du titre
+    this.setTitle("Modification");
 
-		// d√©finion de la taille
-		this.setSize(600, 400);
+    // d√©finion de la taille
+    this.setSize(600, 400);
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		general.setLayout(new GridLayout(6, 1));
-		initChoixUnite();
+    general.setLayout(new GridLayout(6, 1));
+    initChoixUnite();
 
-		initChoixRepresentation();
+    initChoixRepresentation();
 
-		initChoixStockage();
+    initChoixStockage();
 
-		initChoixTelechargement();
-		ValiderConfiguration valider = new ValiderConfiguration();
-		valider.setConfig(this);
-		boutonValider.addMouseListener(valider);
+    initChoixTelechargement();
+    ValiderConfiguration valider = new ValiderConfiguration();
+    valider.setConfig(this);
+    boutonValider.addMouseListener(valider);
 
-		boutonAnnuler.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
+    boutonAnnuler.addMouseListener(new MouseListener() {
+      @Override
+      public void mouseReleased(MouseEvent e) {
+      }
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
+      @Override
+      public void mousePressed(MouseEvent e) {
+      }
 
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
+      @Override
+      public void mouseExited(MouseEvent e) {
+      }
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
+      @Override
+      public void mouseEntered(MouseEvent e) {
+      }
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AffichageConfiguration.this.dispose();
-			}
-		});
-		JPanel panelValide = new JPanel();
-		panelValide.setLayout(new BorderLayout());
-		panelValide.add(boutonAnnuler, BorderLayout.WEST);
-		panelValide.add(boutonValider, BorderLayout.EAST);
-		general.add(choixUnite);
-		general.add(choixRepresentation);
-		general.add(choixDossier);
-		general.add(choixDensite);
-		general.add(choixTelechargement);
-		general.add(panelValide);
-		this.setContentPane(general);
-		this.setVisible(true);
-	}
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        AffichageConfiguration.this.dispose();
+      }
+    });
+    JPanel panelValide = new JPanel();
+    panelValide.setLayout(new BorderLayout());
+    panelValide.add(boutonAnnuler, BorderLayout.WEST);
+    panelValide.add(boutonValider, BorderLayout.EAST);
+    general.add(choixUnite);
+    general.add(choixRepresentation);
+    general.add(choixDossier);
+    general.add(choixDensite);
+    general.add(choixTelechargement);
+    general.add(panelValide);
+    this.setContentPane(general);
+    this.setVisible(true);
+  }
 
-	private void initChoixTelechargement() {
-		choixTelechargement.setLayout(new GridLayout(4, 1));
-		groupTelechargement.add(conserver);
-		groupTelechargement.add(supprimer);
+  private void initChoixTelechargement() {
+    choixTelechargement.setLayout(new GridLayout(4, 1));
+    groupTelechargement.add(conserver);
+    groupTelechargement.add(supprimer);
 
-		choixTelechargement.add(new JLabel("SÈlÈctionner la reprÈsentation du vent : "));
-		choixTelechargement.add(conserver);
-		choixTelechargement.add(supprimer);
+    choixTelechargement.add(new JLabel("S√©l√©ctionner la repr√©sentation du vent : "));
+    choixTelechargement.add(conserver);
+    choixTelechargement.add(supprimer);
 
-		choixTelechargement.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-	}
+    choixTelechargement.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+  }
 
-	private void initChoixStockage() {
-		choixDossier.setLayout(new GridLayout(2, 1));
-		JPanel panelChoix = new JPanel();
-		panelChoix.setLayout(new BorderLayout());
-		panelChoix.add(labelFichier, BorderLayout.CENTER);
-		panelChoix.add(boutonFichier, BorderLayout.EAST);
-		choixDossier.add(new JLabel("Choisir le dossier de stockage : "));
-		choixDossier.add(panelChoix);
+  private void initChoixStockage() {
+    choixDossier.setLayout(new GridLayout(2, 1));
+    JPanel panelChoix = new JPanel();
+    panelChoix.setLayout(new BorderLayout());
+    panelChoix.add(labelFichier, BorderLayout.CENTER);
+    panelChoix.add(boutonFichier, BorderLayout.EAST);
+    choixDossier.add(new JLabel("Choisir le dossier de stockage : "));
+    choixDossier.add(panelChoix);
 
-		choixDossier.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-	}
+    choixDossier.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+  }
 
-	private void initChoixRepresentation() {
-		choixRepresentation.setLayout(new GridLayout(4, 1));
-		groupRepresentation.add(kmh);
-		groupRepresentation.add(noeud);
-		groupRepresentation.add(mph);
+  private void initChoixRepresentation() {
+    choixRepresentation.setLayout(new GridLayout(4, 1));
+    groupRepresentation.add(kmh);
+    groupRepresentation.add(noeud);
+    groupRepresentation.add(mph);
 
-		choixRepresentation.add(new JLabel("SÈlÈctionner la reprÈsentation du vent : "));
-		choixRepresentation.add(fleches);
-		choixRepresentation.add(couleurs);
-		choixRepresentation.add(barbules);
+    choixRepresentation.add(new JLabel("S√©l√©ctionner la repr√©sentation du vent : "));
+    choixRepresentation.add(fleches);
+    choixRepresentation.add(couleurs);
+    choixRepresentation.add(barbules);
 
-		choixRepresentation.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-	}
+    choixRepresentation.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+  }
 
-	private void initChoixUnite() {
-		choixUnite.setLayout(new GridLayout(4, 1));
+  private void initChoixUnite() {
+    choixUnite.setLayout(new GridLayout(4, 1));
 
-		groupUnite.add(kmh);
-		groupUnite.add(noeud);
-		groupUnite.add(mph);
+    groupUnite.add(kmh);
+    groupUnite.add(noeud);
+    groupUnite.add(mph);
 
-		choixUnite.add(new JLabel("SÈlectionner l'unitÈ: "));
-		choixUnite.add(kmh);
-		choixUnite.add(noeud);
-		choixUnite.add(mph);
+    choixUnite.add(new JLabel("S√©l√©ctionner l'unit√©: "));
+    choixUnite.add(kmh);
+    choixUnite.add(noeud);
+    choixUnite.add(mph);
 
-		choixUnite.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+    choixUnite.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
 
-	}
+  }
 
-	public static void main(String[] args) {
-		AffichageConfiguration aff = new AffichageConfiguration();
-	}
+  public static void main(String[] args) {
+    AffichageConfiguration aff = new AffichageConfiguration();
+  }
 
 }
