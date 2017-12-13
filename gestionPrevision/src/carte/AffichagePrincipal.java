@@ -18,6 +18,7 @@ import org.geotools.map.MapContext;
 import org.geotools.swing.JMapFrame;
 import org.geotools.swing.action.SafeAction;
 
+import edition.implementation.Json;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
 
@@ -73,7 +74,7 @@ public class AffichagePrincipal {
     frame.setJMenuBar(menuBar);
     JMenu menuFichier = new JMenu("Fichier");
     menuBar.add(menuFichier);
-    menuFichier.add(new SafeAction("Ouvrir fichier") {
+    menuFichier.add(new SafeAction("Ouvrir un fichier Grib") {
       public void action(ActionEvent e) throws Throwable {
 
         JFileChooser choix = new JFileChooser();
@@ -88,6 +89,26 @@ public class AffichagePrincipal {
           ListePrevision prevision = recupGrib
               .getListePrevision(choix.getSelectedFile().getAbsolutePath());
           afficherFleches.setPrevisions(prevision);
+          afficherFleches.action(null);
+        } else {
+        }
+        ;// pas de fichier choisi
+      }
+    });
+
+    menuFichier.add(new SafeAction("Ouvrir un fichier JSON") {
+      public void action(ActionEvent e) throws Throwable {
+
+        JFileChooser choix = new JFileChooser();
+        int retour = choix.showOpenDialog(null);
+        if (retour == JFileChooser.APPROVE_OPTION) {
+          // un fichier a été choisi (sortie par OK)
+          // nom du fichier choisi
+          choix.getSelectedFile().getName();
+          // chemin absolu du fichier choisi
+          choix.getSelectedFile().getAbsolutePath();
+          ListePrevision listePrevision = new Json().JsonRead("test2.json");
+          afficherFleches.setPrevisions(listePrevision);
           afficherFleches.action(null);
         } else {
         }
