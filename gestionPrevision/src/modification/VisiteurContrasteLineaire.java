@@ -13,6 +13,13 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 	double coefficient;
 	double seuil;
 	
+	/**
+	 * 
+	 * @param zone selectionee
+	 * @param niveau de contraste
+	 * @param seuil du contraste
+	 */
+	
 	public VisiteurContrasteLineaire(ZonePrevision zone,double coefficient,double seuil) {
 		super(zone);
 		
@@ -28,7 +35,6 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 		} else {
 			this.seuil=seuil;
 		}
-		System.out.println(this.seuil);
 	}
 	
 	/**

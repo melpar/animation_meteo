@@ -6,8 +6,6 @@ import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
 
 public class VisiteurMoyenne extends VisiteurModifier {
-
-	final int SEUIL_DEFAUT = 100;
 	
 	int nbDonneeVitesse;
 	int nbDonneeDirection;
@@ -16,10 +14,7 @@ public class VisiteurMoyenne extends VisiteurModifier {
 	
 	public VisiteurMoyenne(ZonePrevision zone) {
 		super(zone);
-		nbDonneeVitesse=0;
-		nbDonneeDirection=0;
-		totalDonneesVitesse=0;
-		totalDonneesDirection=0;
+		reset();
 	}
 	
 	/**
@@ -30,7 +25,7 @@ public class VisiteurMoyenne extends VisiteurModifier {
 	@Override
 	void modification(DonneeVent vent) {
 		totalDonneesVitesse +=vent.getVitesseVent();
-		totalDonneesDirection +=vent.getVitesseVent();
+		totalDonneesDirection +=vent.getOrientationVent();
 		nbDonneeVitesse++;
 		nbDonneeDirection++;
 	}
@@ -41,6 +36,13 @@ public class VisiteurMoyenne extends VisiteurModifier {
 	
 	public double getMoyenneDirection() {
 		return totalDonneesDirection/nbDonneeDirection;
+	}
+	
+	public void reset() {
+		nbDonneeVitesse=0;
+		nbDonneeDirection=0;
+		totalDonneesVitesse=0;
+		totalDonneesDirection=0;
 	}
 	
 

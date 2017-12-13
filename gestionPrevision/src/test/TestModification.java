@@ -14,15 +14,12 @@ import modification.VisiteurContrasteProgressif;
 import modification.VisiteurMoyenne;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
-import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
 import visiteur.Visiteur;
 
 public class TestModification {
   
   private ListePrevision listePrevisionTest;
-  private ListePrevision listeModificationTest;
-  private Prevision previsionTest;
   private Date dateTest;
   
   
@@ -111,12 +108,12 @@ public class TestModification {
     VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevisionTest);
     listePrevisionTest.applique(moyenne);
 	System.out.println("moyenne vitesse : "+moyenne.getMoyenneVitesse());
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,50, 100);//seuil à 190 kmH
-    
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,1, 100);//seuil à 190 kmH
+    listePrevisionTest.applique(modifier);
     VisiteurMoyenne moyenneFinale = new VisiteurMoyenne(zonePrevisionTest);
     listePrevisionTest.applique(moyenneFinale);
 	System.out.println("moyenne vitesse finale : "+moyenneFinale.getMoyenneVitesse());
-    
+	System.out.println("moyenne direction finale : "+moyenneFinale.getMoyenneDirection());
     //listePrevisionTest.applique(modifier);
     
   }
@@ -124,7 +121,9 @@ public class TestModification {
   @Test
   public void testSauvegardeVent() {    
 	  Json json = new Json();
-		json.JsonWrite(listePrevisionTest, "test2.json");
+	  json.JsonWrite(listePrevisionTest, "test2.json");
+	  ListePrevision listePrevisionLecture = json.JsonRead("test2.json");
+	  assertTrue(listePrevisionTest.equals(listePrevisionLecture));
   }
 
 }

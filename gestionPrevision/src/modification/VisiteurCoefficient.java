@@ -9,6 +9,12 @@ public class VisiteurCoefficient extends VisiteurModifier {
 
 	double coefficient;
 	
+	/**
+	 * 
+	 * @param zone selectionee
+	 * @param coefficient
+	 */
+	
 	public VisiteurCoefficient(ZonePrevision zone,double coefficient) {
 		super(zone);
 		
