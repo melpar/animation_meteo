@@ -45,7 +45,7 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 	@Override
 	void modification(DonneeVent vent) {
 		// expression : vitesse
-		double valeur =  vent.getVitesseVent()*2 / ( 1.0 + Math.exp( -coefficient * ( vent.getVitesseVent() - seuil ) ) ); 
+		double valeur =  vent.getVitesseVent()*2.0f / ( 1.0 + Math.exp( -coefficient * ( vent.getVitesseVent() - seuil ) ) ); 
 		if(valeur > VITESSE_MAX) {
 			valeur = VITESSE_MAX;
 		}

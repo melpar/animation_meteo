@@ -25,13 +25,16 @@ public class TestModification {
   
   @Before
   public void initialisation() {
-    this.dateTest= new Date();
-    this.listePrevisionTest=new ListePrevision(1,1,5,5,10,10);
+    this.dateTest = new Date();
+    this.listePrevisionTest = new ListePrevision(1,1,5,5,10,10);
     
     this.listePrevisionTest.ajouterPrevision(this.dateTest); 
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);//creation d'un vent inferieur a 190kmH
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 20, 50,(int) 0,(int) 0);//creation d'un vent superieur a 190kmH
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 30, 50,(int) 9,(int) 9);//creation d'un vent superieur a 190kmH
+    //creation d'un vent inferieur a 190kmH
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);
+    //creation d'un vent superieur a 190kmH
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 20, 50,(int) 0,(int) 0);
+    //creation d'un vent superieur a 190kmH
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 30, 50,(int) 9,(int) 9);
   }
   
   @Test
@@ -78,7 +81,7 @@ public class TestModification {
     double ancienneValeurFin = ventFin.getVitesseVent();
     
     ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
-    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest,0.5, 190);//seuil à 190 kmH
+    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest,0.5, 190);//seuil ï¿½ 190 kmH
     listePrevisionTest.applique(modifier);
     
     assertTrue(ventFort.getVitesseVent()-ancienneValeurFort*2<0.1);
@@ -97,7 +100,7 @@ public class TestModification {
     double ancienneValeurFin = ventFin.getVitesseVent();
     
     ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,0.5, 190);//seuil à 190 kmH
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,0.5, 190);//seuil ï¿½ 190 kmH
     listePrevisionTest.applique(modifier);
     
     double valeurTester = ancienneValeurFort*2 / ( 1.0 + Math.exp( -0.5 * ( ancienneValeurFort - 190 ) ) );
@@ -115,7 +118,7 @@ public class TestModification {
     listePrevisionTest.applique(moyenne);
 	double valeurMoyenneAncienne = moyenne.getMoyenneVitesse();
 	
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,1, 100);//seuil à 190 kmH
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,1, 100);//seuil ï¿½ 190 kmH
     listePrevisionTest.applique(modifier);
     
     moyenne.reset();

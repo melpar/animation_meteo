@@ -1,6 +1,7 @@
 package edition.mains;
 
 import edition.implementation.Edition;
+import edition.implementation.Json;
 import edition.visiteur.VisiteurAffichage;
 import java.util.Date;
 
@@ -25,6 +26,9 @@ public class MainEdition {
     ListePrevision listePrevision = edition.creerListPrevision();
 
     listePrevision.applique(new VisiteurAffichage());
+    
+    new Json().JsonWrite(listePrevision, "test.json");
+    
   }
 
 }
