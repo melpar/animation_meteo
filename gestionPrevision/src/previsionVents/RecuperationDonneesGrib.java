@@ -9,7 +9,7 @@ import analysefichiergrib.Vent;
 public class RecuperationDonneesGrib {
   public static void main(String[] args) {
     RecuperationDonneesGrib recuperationTest = new RecuperationDonneesGrib();
-    ListePrevision listePrevisionTest = recuperationTest.getListePrevision();
+    ListePrevision listePrevisionTest = recuperationTest.getListePrevision("gascogne.grb");
     System.out.println(listePrevisionTest.getNombrePrevision());
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     System.out.println(donnee.length);
@@ -28,9 +28,9 @@ public class RecuperationDonneesGrib {
     }
   }
 
-  public ListePrevision getListePrevision() {
+  public ListePrevision getListePrevision(String nom) {
     ParserGrib parser = new ParserGrib();
-    InformationsGrille informations = parser.getInformationsGrille("gascogne.grb");
+    InformationsGrille informations = parser.getInformationsGrille(nom);
     List<Vent> liste = informations.getVents();
 
     ListePrevision listePrevision = new ListePrevision(informations.getLattidude(),

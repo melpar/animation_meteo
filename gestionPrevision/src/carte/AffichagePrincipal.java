@@ -85,7 +85,8 @@ public class AffichagePrincipal {
           // chemin absolu du fichier choisi
           choix.getSelectedFile().getAbsolutePath();
           RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
-          ListePrevision prevision = recupGrib.getListePrevision();
+          ListePrevision prevision = recupGrib
+              .getListePrevision(choix.getSelectedFile().getAbsolutePath());
           afficherFleches.setPrevisions(prevision);
           afficherFleches.action(null);
         } else {
