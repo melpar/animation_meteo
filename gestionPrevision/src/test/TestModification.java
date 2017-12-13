@@ -12,7 +12,9 @@ import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
+import visiteur.Visiteur;
 import visiteur.VisiteurCoefficient;
+import visiteur.VisiteurContrasteProgressif;
 
 public class TestModification {
   
@@ -29,8 +31,8 @@ public class TestModification {
     
     this.listePrevisionTest.ajouterPrevision(this.dateTest); 
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 0,(int) 0);
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 9,(int) 9);
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 20, 50,(int) 0,(int) 0);
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 30, 50,(int) 9,(int) 9);
   }
   
   @Test
@@ -68,18 +70,18 @@ public class TestModification {
   public void testModifierContrasteVent() {    
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     DonneeVent ventMilieu= donnee[3][4];
-    DonneeVent ventDebut= donnee[0][0];
+    DonneeVent ventFort= donnee[0][0];
     DonneeVent ventFin= donnee[9][9];
-    double ancienneValeurDebut = ventDebut.getVitesseVent();
+    double ancienneValeurFort = ventFort.getVitesseVent();
     double ancienneValeurMilieux = ventMilieu.getVitesseVent();
     double ancienneValeurFin = ventFin.getVitesseVent();
     
-    ZonePrevision zonePrevisionTest=new ZonePrevision(6,3,5,5,7,7);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
+    ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
+    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest,0.5, 1);
     listePrevisionTest.applique(modifier);
-    assertTrue(ventDebut.getVitesseVent()==ancienneValeurDebut);
-    assertTrue(ventMilieu.getVitesseVent()==ancienneValeurMilieux/2);
-    assertTrue(ventFin.getVitesseVent()==ancienneValeurFin);
+    assertTrue(ventFort.getVitesseVent()-ancienneValeurFort*2<0.1);
+    assertTrue(ventMilieu.getVitesseVent()-ancienneValeurMilieux/2<0.1);
+    assertTrue(ventFin.getVitesseVent()-ancienneValeurFin*2<0.1);
   }
   @Test
   public void testSauvegardeVent() {    
