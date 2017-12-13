@@ -15,7 +15,7 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
 	public VisiteurContrasteLineaire(ZonePrevision zone,double coefficient,double seuil) {
 		super(zone);
 		
-		// Le coefficient ne peux pas etre superieur a 1 ou inferieur a -1
+		// Le coefficient ne peux pas etre superieur a 1 ou inferieur a -1 
 		if(Math.abs(coefficient) > 10) {
 			this.coefficient = 0;
 		} else {
