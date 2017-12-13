@@ -92,7 +92,8 @@ public class TestPrevision {
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50, (int)3,(int) 4);
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     DonneeVent vent= donnee[3][4];
-    System.out.println();
+    System.out.println(vent.getVitesseVent());
+    System.out.println(vent.getOrientationVent());
     assertTrue(vent.getOrientationVent()-50<1);
     assertTrue(vent.getVitesseVent()>0);
     
