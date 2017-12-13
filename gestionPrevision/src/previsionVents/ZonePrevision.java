@@ -3,95 +3,96 @@ package previsionVents;
 import visiteur.ElementVisitable;
 import visiteur.Visiteur;
 
-public class ZonePrevision implements ElementVisitable{
+public class ZonePrevision implements ElementVisitable {
 
-	private double longitudeHautGauche;
-	private double latitudeHautGauche;
-	private double pasX;
-	private double pasY;
-	private int nombreX;
-	private int nombreY;
-	
-	public ZonePrevision() {
-		  super();
-	}
+  private double longitudeHautGauche;
+  private double latitudeHautGauche;
+  private double pasX;
+  private double pasY;
+  private int nombreX;
+  private int nombreY;
 
-	public ZonePrevision(double longitude, double latitude, double pasX, double pasY, int nombreX, int nombreY) {
-		this.longitudeHautGauche = longitude;
-		this.latitudeHautGauche = latitude;
-		this.pasX = pasX;
-		this.pasY = pasY;
-		this.nombreX = nombreX;
-		this.nombreY = nombreY;
-	}
+  public ZonePrevision() {
+    super();
+  }
 
-	public int getPositionX(Double latitude) {
-		return (int) ((latitude - this.latitudeHautGauche) / nombreX);
-	}
+  public ZonePrevision(double longitude, double latitude, double pasX, double pasY, int nombreX,
+      int nombreY) {
+    this.longitudeHautGauche = longitude;
+    this.latitudeHautGauche = latitude;
+    this.pasX = pasX;
+    this.pasY = pasY;
+    this.nombreX = nombreX;
+    this.nombreY = nombreY;
+  }
 
-	public int getPositionY(Double longitude) {
-		return (int) ((longitude - this.longitudeHautGauche) / nombreY);
-	}
+  public int getPositionX(Double latitude) {
+    return (int) ((latitude - this.latitudeHautGauche) / nombreX);
+  }
 
-	public double getLatitudePosition(int postiontX) {
-		return this.latitudeHautGauche + (this.pasX * postiontX);
-	}
+  public int getPositionY(Double longitude) {
+    return (int) ((longitude - this.longitudeHautGauche) / nombreY);
+  }
 
-	public double getLongitudePosition(int postionY) {
-		return this.longitudeHautGauche + (this.pasY * postionY);
-	}
+  public double getLatitudePosition(int postiontX) {
+    return this.latitudeHautGauche + (this.pasX * postiontX);
+  }
 
-	public double getLongitudeHautGauche() {
-		return longitudeHautGauche;
-	}
+  public double getLongitudePosition(int postionY) {
+    return this.longitudeHautGauche + (this.pasY * postionY);
+  }
 
-	public double getLatitudeHautGauche() {
-		return latitudeHautGauche;
-	}
+  public double getLongitudeHautGauche() {
+    return longitudeHautGauche;
+  }
 
-	public double getPasX() {
-		return pasX;
-	}
+  public double getLatitudeHautGauche() {
+    return latitudeHautGauche;
+  }
 
-	public double getPasY() {
-		return pasY;
-	}
+  public double getPasX() {
+    return pasX;
+  }
 
-	public int getNombreX() {
-		return nombreX;
-	}
+  public double getPasY() {
+    return pasY;
+  }
 
-	public int getNombreY() {
-		return nombreY;
-	}
+  public int getNombreX() {
+    return nombreX;
+  }
 
-	@Override
-	public void applique(Visiteur visiteur) {
-		visiteur.agitSur(this);
-	}
+  public int getNombreY() {
+    return nombreY;
+  }
 
-	public void setLatitude(double latitude) {
-		this.latitudeHautGauche = latitude;
-	}
+  @Override
+  public void applique(Visiteur visiteur) {
+    visiteur.agitSur(this);
+  }
 
-	public void setLongitude(double longitude) {
-		this.longitudeHautGauche = longitude;
-	}
+  public void setLatitude(double latitude) {
+    this.latitudeHautGauche = latitude;
+  }
 
-	public void setPasX(double pasX) {
-		this.pasX = pasX;
-	}
+  public void setLongitude(double longitude) {
+    this.longitudeHautGauche = longitude;
+  }
 
-	public void setPasY(double pasY) {
-		this.pasY = pasY;
-	}
+  public void setPasX(double pasX) {
+    this.pasX = pasX;
+  }
 
-	public void setNombreX(int nombreX) {
-		this.nombreX = nombreX;
-	}
+  public void setPasY(double pasY) {
+    this.pasY = pasY;
+  }
 
-	public void setNombreY(int nombreY) {
-		this.nombreY = nombreY;
-	}
+  public void setNombreX(int nombreX) {
+    this.nombreX = nombreX;
+  }
+
+  public void setNombreY(int nombreY) {
+    this.nombreY = nombreY;
+  }
 
 }

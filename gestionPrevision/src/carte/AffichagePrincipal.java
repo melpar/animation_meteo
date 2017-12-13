@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -17,12 +18,13 @@ import org.geotools.map.MapContext;
 import org.geotools.swing.JMapFrame;
 import org.geotools.swing.action.SafeAction;
 
+import previsionVents.ListePrevision;
+import previsionVents.RecuperationDonneesGrib;
+
 /**
  * Prompts the user for a shapefile and displays the contents on the screen in a
- * map frame.
- * <p>
- * This is the GeoTools Quickstart application used in documentationa and
- * tutorials. *
+ * map frame. This is the GeoTools Quickstart application used in documentationa
+ * and tutorials. *
  */
 public class AffichagePrincipal {
 
@@ -104,7 +106,22 @@ public class AffichagePrincipal {
     menuBar.add(menuFichier);
     menuFichier.add(new SafeAction("Ouvrir fichier") {
       public void action(ActionEvent e) throws Throwable {
-        System.out.println("fichier");
+
+        JFileChooser choix = new JFileChooser();
+        int retour = choix.showOpenDialog(null);
+        if (retour == JFileChooser.APPROVE_OPTION) {
+          // un fichier a été choisi (sortie par OK)
+          // nom du fichier choisi
+          choix.getSelectedFile().getName();
+          // chemin absolu du fichier choisi
+          choix.getSelectedFile().getAbsolutePath();
+          RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
+          ListePrevision prevision = recupGrib.getListePrevision();
+          afficherFleches.setPrevisions(prevision);
+          afficherFleches.action(null);
+        } else {
+        }
+        ;// pas de fichier choisi
       }
     });
 

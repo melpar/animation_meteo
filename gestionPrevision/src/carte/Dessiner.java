@@ -25,8 +25,8 @@ public class Dessiner {
 
   MapContext map;
   final SimpleFeatureType TYPE;
-  private static final int coefficient = 10000;
-  private static final int taille = 25;
+  private static final int coefficient = 1;
+  private static final int taille = 10;
   private int indice;
 
   /**
@@ -74,6 +74,7 @@ public class Dessiner {
     ((DefaultFeatureCollection) collectionLines).add(featureLine);
 
     for (InformationsVents infos : vents) {
+      System.out.println("ajouter calque");
       ((DefaultFeatureCollection) collectionLines).add(ajouterFigure(infos));
     }
     float lineWidt = 2.0f; // epaisseur des trai
@@ -89,11 +90,11 @@ public class Dessiner {
   }
 
   /**
-   * creation de la figure
+   * creation de la figure.
    * 
-   * @param x
-   * @param y
-   * @return
+   * @param infos
+   *          informations relatives au vent.
+   * @return représentation d'une fleche
    */
   LineString creerFigure(InformationsVents infos) {
     infos.setDirection(infos.getDirection() % (2 * Math.PI));
@@ -102,15 +103,7 @@ public class Dessiner {
 
     double x = infos.getPositionX();
     double y = infos.getPositionY();
-    double latStart = 100000.0;
-    double lonStart = 0.0;
-
-    double latEnd = 75000.0;
-    double lonEnd = -25000.0;
-
-    double latEnd2 = 75000.0;
-    double lonEnd2 = 25000.0;
-
+    System.out.println("x :" + x + " y :" + y);
     double z = Math.sin(infos.getDirection()) * taille * coefficient;
     double w = Math.cos(infos.getDirection()) * taille * coefficient;
     double coeff1x = 0.0;
@@ -132,13 +125,6 @@ public class Dessiner {
     coordinates[0] = new Coordinate(x, y);
     coordinates[1] = new Coordinate(x + w, y + z);
     coordinates[2] = new Coordinate(x + w + coeff1x, y + z - coeff1y);
-    // if (infos.getDirection() > 0 && infos.getDirection() <= Math.PI / 2) {
-    // coordinates[2] = new Coordinate(x + w + coeff1x, y + z - coeff1y);
-    //
-    // } else {
-    // coordinates[2] = new Coordinate(x + w - coeff1x, y + z - coeff1y);
-    //
-    // }
 
     coordinates[3] = new Coordinate(x + w, y + z);
     coordinates[4] = new Coordinate(x + w - coeff2x, y + z + coeff2y);
@@ -149,11 +135,11 @@ public class Dessiner {
   }
 
   /**
-   * mise en forme de la figure
+   * mise en forme de la figure.
    * 
-   * @param x
-   * @param y
-   * @return
+   * @param infos
+   *          informations relatives à la fleches
+   * @return représentation de la fleche
    */
   SimpleFeature ajouterFigure(InformationsVents infos) {
     SimpleFeatureBuilder featureBuilderLines = new SimpleFeatureBuilder(TYPE);

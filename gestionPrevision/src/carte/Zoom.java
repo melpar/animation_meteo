@@ -5,8 +5,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -117,17 +115,17 @@ public class Zoom extends ZoomInTool {
       getMapPane().setDisplayArea(env);
 
     }
-    List<InformationsVents> vents = new ArrayList<>();
-
-    for (int i = 0; i < 10000000; i += 100000) {
-      InformationsVents v = new InformationsVents();
-      v.setPositionX(i);
-      v.setPositionY(i);
-      v.setDirection(7 * Math.PI / 4);
-      vents.add(v);
-    }
-
-    dessiner.ajouterCalque(vents);
+    // List<InformationsVents> vents = new ArrayList<>();
+    //
+    // for (int i = 0; i < 10000000; i += 100000) {
+    // InformationsVents v = new InformationsVents();
+    // v.setPositionX(i);
+    // v.setPositionY(i);
+    // v.setDirection(7 * Math.PI / 4);
+    // vents.add(v);
+    // }
+    //
+    // dessiner.ajouterCalque(vents);
     System.out.println("released");
   }
 

@@ -7,8 +7,12 @@ import java.util.List;
 import org.geotools.map.MapContext;
 import org.geotools.swing.action.SafeAction;
 
+import previsionVents.ListePrevision;
+import previsionVents.Prevision;
+
 public class AfficherFleches extends SafeAction {
   MapContext map;
+  ListePrevision previsions;
 
   public AfficherFleches(MapContext m) {
     super("Afficher");
@@ -16,18 +20,32 @@ public class AfficherFleches extends SafeAction {
   }
 
   public void action(ActionEvent e) throws Throwable {
-    System.out.println("afficher");
-    Dessiner dessiner = new Dessiner(map);
-    List<InformationsVents> vents = new ArrayList<>();
+    if (this.previsions != null) {
+      Dessiner dessiner = new Dessiner(map);
+      List<InformationsVents> vents = new ArrayList<>();
+      Prevision prev = this.previsions.getListePrevision().get(0);
+      for (int i = 0; i < prev.getListeDonneVent().length; i++) {
+        for (int j = 0; j < prev.getListeDonneVent()[i].length; j++) {
+          System.out.println("action");
+          InformationsVents v = new InformationsVents();
+          v.setPositionY(this.previsions.getZonePrevision().getLatitudePosition(i));
+          v.setPositionX(this.previsions.getZonePrevision().getLongitudePosition(j));
+          v.setDirection(prev.getDonneeVent(i, j).getOrientationVent());
+          vents.add(v);
+        }
 
-    for (int i = 0; i < 10000000; i += 100000) {
-      InformationsVents v = new InformationsVents();
-      v.setPositionX(i);
-      v.setPositionY(i);
-      v.setDirection(7 * Math.PI / 4);
-      vents.add(v);
+      }
+
+      dessiner.ajouterCalque(vents);
     }
 
-    dessiner.ajouterCalque(vents);
+  }
+
+  public ListePrevision getPrevisions() {
+    return previsions;
+  }
+
+  public void setPrevisions(ListePrevision previsions) {
+    this.previsions = previsions;
   }
 }
