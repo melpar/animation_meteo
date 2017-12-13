@@ -95,8 +95,8 @@ public class Dessiner {
     GeometryFactory gFac = JTSFactoryFinder.getGeometryFactory(JTSFactoryFinder.EMPTY_HINTS);
     Coordinate[] coordinates = new Coordinate[5];
 
-    double x = infos.getPositionX() * coefficient;
-    double y = infos.getPositionY() * coefficient;
+    double x = infos.getPositionX() * coefficient + 500000;
+    double y = infos.getPositionY() * coefficient + 500000;
     System.out.println("x :" + x + " y :" + y);
     double z = Math.sin(infos.getDirection()) * taille * coefficient;
     double w = Math.cos(infos.getDirection()) * taille * coefficient;

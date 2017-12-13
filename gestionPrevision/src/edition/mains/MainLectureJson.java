@@ -6,9 +6,14 @@ import previsionVents.ListePrevision;
 
 public class MainLectureJson {
 
-	public static void main(String[] args) {
-		ListePrevision listePrevision = new Json().JsonRead("test2.json");
-		listePrevision.applique(new VisiteurAffichage());
-	}
+  /**
+   * Execute une lecture de fichier JSON.
+   * 
+   * @param args pas utilisé
+   */
+  public static void main(String[]args) {
+    ListePrevision listePrevision = new Json().JsonRead("test2.json");
+    listePrevision.applique(new VisiteurAffichage());
+  }
 
 }

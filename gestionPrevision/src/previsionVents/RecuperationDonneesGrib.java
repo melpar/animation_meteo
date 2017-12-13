@@ -7,6 +7,10 @@ import analysefichiergrib.ParserGrib;
 import analysefichiergrib.Vent;
 
 public class RecuperationDonneesGrib {
+  /**
+   * Permet de lancer un récupération de données Grib.
+   * @param args pas utilisés
+   */
   public static void main(String[] args) {
     RecuperationDonneesGrib recuperationTest = new RecuperationDonneesGrib();
     ListePrevision listePrevisionTest = recuperationTest.getListePrevision("gascogne.grb");
@@ -21,13 +25,18 @@ public class RecuperationDonneesGrib {
     for (int i = 0; i < donnee.length; i++) {
       for (int y = 0; y < donnee[0].length; y++) {
         System.out.println("coordonee : (" + i + " " + y + ")(lat: " + zone.getLatitudePosition(i)
-            + "\tlong: " + zone.getLongitudePosition(y));
+            + "\tlong: " + zone.getLongitudePosition(y) + " )");
         System.out.print("Orientation :" + donnee[i][y].getOrientationVent());
         System.out.println("\tVitesse :" + donnee[i][y].getVitesseVent());
       }
     }
   }
 
+  /**
+   * Permet de parser le fichier grib dont le nom est en parametre.
+   * @param nom nom du fichier (chemin complet)
+   * @return liste de prévision créée
+   */
   public ListePrevision getListePrevision(String nom) {
     ParserGrib parser = new ParserGrib();
     InformationsGrille informations = parser.getInformationsGrille(nom);

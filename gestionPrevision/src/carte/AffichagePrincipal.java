@@ -1,5 +1,6 @@
 package carte;
 
+import edition.implementation.Json;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,6 @@ import org.geotools.map.MapContext;
 import org.geotools.swing.JMapFrame;
 import org.geotools.swing.action.SafeAction;
 
-import edition.implementation.Json;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
 
@@ -27,6 +27,7 @@ import previsionVents.RecuperationDonneesGrib;
  * map frame. This is the GeoTools Quickstart application used in documentationa
  * and tutorials. *
  */
+@SuppressWarnings("deprecation")
 public class AffichagePrincipal {
 
   private SetFrame modifFrame;
@@ -37,6 +38,7 @@ public class AffichagePrincipal {
    * GeoTools Quickstart demo application. Prompts the user for a shapefile and
    * displays its contents on the screen in a map frame
    */
+  @SuppressWarnings({ "serial" })
   public void afficherFenetrePrincipale() throws Exception {
     // display a data store file chooser dialog for shapefiles
     File file;
@@ -91,6 +93,7 @@ public class AffichagePrincipal {
           afficherFleches.setPrevisions(prevision);
           afficherFleches.action(null);
         } else {
+          System.out.println("pas de fichier");
         }
         ;// pas de fichier choisi
       }
@@ -111,6 +114,7 @@ public class AffichagePrincipal {
           afficherFleches.setPrevisions(listePrevision);
           afficherFleches.action(null);
         } else {
+          System.out.println("pas de fichier");
         }
         ;// pas de fichier choisi
       }
@@ -131,6 +135,14 @@ public class AffichagePrincipal {
     this.modifFrame.setLabelDateValue(value);
   }
 
+  /**
+   * Permet de lancer l'affichage de la fenetre.
+   * 
+   * @param args
+   *          pas utilisé
+   * @throws Exception
+   *           si erreur lors de l'affichage
+   */
   public static void main(String[] args) throws Exception {
     AffichagePrincipal aff = new AffichagePrincipal();
     aff.afficherFenetrePrincipale();
