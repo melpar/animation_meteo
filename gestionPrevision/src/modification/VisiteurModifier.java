@@ -1,12 +1,15 @@
-package visiteur;
+package modification;
 
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
+import visiteur.ElementVisitable;
+import visiteur.Visiteur;
 
 public abstract class VisiteurModifier implements Visiteur {
 
+	final int VITESSE_MAX = 400;
 	
 	ZonePrevision zoneModifier;
 	ZonePrevision zonePrevision;

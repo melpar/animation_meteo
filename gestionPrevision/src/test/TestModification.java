@@ -8,13 +8,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edition.implementation.Json;
+import modification.VisiteurCoefficient;
+import modification.VisiteurContrasteLineaire;
+import modification.VisiteurContrasteProgressif;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
 import visiteur.Visiteur;
-import visiteur.VisiteurCoefficient;
-import visiteur.VisiteurContrasteProgressif;
 
 public class TestModification {
   
@@ -30,9 +31,9 @@ public class TestModification {
     this.listePrevisionTest=new ListePrevision(1,1,5,5,10,10);
     
     this.listePrevisionTest.ajouterPrevision(this.dateTest); 
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 20, 50,(int) 0,(int) 0);
-    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 30, 50,(int) 9,(int) 9);
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 10, 50,(int) 3,(int) 4);//creation d'un vent inferieur a 190kmH
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 20, 50,(int) 0,(int) 0);//creation d'un vent superieur a 190kmH
+    this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 30, 50,(int) 9,(int) 9);//creation d'un vent superieur a 190kmH
   }
   
   @Test
@@ -67,7 +68,7 @@ public class TestModification {
   }
   
   @Test
-  public void testModifierContrasteVent() {    
+  public void testModifierContrasteProgressifVent() {    
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     DonneeVent ventMilieu= donnee[3][4];
     DonneeVent ventFort= donnee[0][0];
@@ -77,12 +78,31 @@ public class TestModification {
     double ancienneValeurFin = ventFin.getVitesseVent();
     
     ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
-    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest,0.5, 1);
+    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest,0.5, 190);//seuil à 190 kmH
     listePrevisionTest.applique(modifier);
     assertTrue(ventFort.getVitesseVent()-ancienneValeurFort*2<0.1);
     assertTrue(ventMilieu.getVitesseVent()-ancienneValeurMilieux/2<0.1);
     assertTrue(ventFin.getVitesseVent()-ancienneValeurFin*2<0.1);
   }
+  
+  @Test
+  public void testModifierContrasteLineaireVent() {    
+    DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+    DonneeVent ventMilieu= donnee[3][4];
+    DonneeVent ventFort= donnee[0][0];
+    DonneeVent ventFin= donnee[9][9];
+    double ancienneValeurFort = ventFort.getVitesseVent();
+    double ancienneValeurMilieux = ventMilieu.getVitesseVent();
+    double ancienneValeurFin = ventFin.getVitesseVent();
+    
+    ZonePrevision zonePrevisionTest=new ZonePrevision(1,1,5,5,10,10);
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest,0.5, 190);//seuil à 190 kmH
+    listePrevisionTest.applique(modifier);
+    assertTrue(ventFort.getVitesseVent()>ancienneValeurFort);
+    assertTrue(ventMilieu.getVitesseVent()<ancienneValeurMilieux);
+    assertTrue(ventFin.getVitesseVent()>ancienneValeurFin);
+  }
+  
   @Test
   public void testSauvegardeVent() {    
 	  Json json = new Json();
