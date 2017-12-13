@@ -27,6 +27,6 @@ class ActionDessiner implements ActionListener {
     // TODO Auto-generated method stub
     nb += 10;
     System.out.println("dessin " + nb);
-    Dessiner dessiner1 = new Dessiner(map, nb);
+    Dessiner dessiner1 = new Dessiner(map);
   }
 }

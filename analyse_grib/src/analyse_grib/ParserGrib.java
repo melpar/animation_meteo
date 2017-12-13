@@ -85,8 +85,5 @@ public class ParserGrib {
   public static void main(String[] args) {
     ParserGrib parser = new ParserGrib();
     InformationsGrille infos = parser.getInformationsGrille("H:\\gascogne.grb");
-    // for (Vent v : infos.getVents()) {
-    // System.out.println("vit " + v.getVecteurU() + " dir " + v.getVecteurU());
-    // }
   }
 }
