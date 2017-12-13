@@ -31,10 +31,16 @@ public class VisiteurMoyenne extends VisiteurModifier {
 	}
 
 	public double getMoyenneVitesse() {
+		if(nbDonneeVitesse==0) {
+			return 0;
+		}
 		return totalDonneesVitesse/nbDonneeVitesse;
 	}
 	
 	public double getMoyenneDirection() {
+		if(nbDonneeDirection==0) {
+			return 0;
+		}
 		return totalDonneesDirection/nbDonneeDirection;
 	}
 	
