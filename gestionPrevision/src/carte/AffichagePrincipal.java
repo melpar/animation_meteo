@@ -84,12 +84,15 @@ public class AffichagePrincipal {
         if (retour == JFileChooser.APPROVE_OPTION) {
           // un fichier a été choisi (sortie par OK)
           // nom du fichier choisi
-          choix.getSelectedFile().getName();
+          System.out.println(choix.getSelectedFile().getName());
           // chemin absolu du fichier choisi
           choix.getSelectedFile().getAbsolutePath();
+          System.out.println("1");
           RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
+          System.out.println("1");
           ListePrevision prevision = recupGrib
               .getListePrevision(choix.getSelectedFile().getAbsolutePath());
+          System.out.println("1");
           afficherFleches.setPrevisions(prevision);
           afficherFleches.action(null);
         } else {
