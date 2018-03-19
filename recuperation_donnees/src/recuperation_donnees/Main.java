@@ -14,11 +14,10 @@ public class Main {
 		method.addArgument("Unit", "e");
 		//method.addArgument("maxt", "maxt");
 		
-		method.addArgument("token", "KXeusWlDWAcJSVThzFtvlkfJLAKntlcD");
+		//method.addArgument("token", "OjzBWkAdpnninaMKyxNqzqWyFFLezfea");
 
 		// Construct the invoker
 		NOAAWeather weather = new NOAAWeather();
-
 		// Request for data :)
 		String data;
 		try {

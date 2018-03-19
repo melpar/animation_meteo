@@ -24,6 +24,7 @@ class RESTClient {
 
     String getDataAsString(Map<String, String> args) throws IOException {
         String requestUrl = constructRequestUrl(args);
+        System.out.println("url:"+requestUrl);
         String response = requestForData(requestUrl);
 
         if(response == null) return "";
@@ -36,9 +37,10 @@ class RESTClient {
         
 
         HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
-        httpConnection.setRequestProperty("Authorization", "Token KXeusWlDWAcJSVThzFtvlkfJLAKntlcD");
-        httpConnection.setRequestMethod("GET");
-        
+        httpConnection.addRequestProperty("Authorization", "Token OjzBWkAdpnninaMKyxNqzqWyFFLezfea");
+        //httpConnection.setRequestProperty("Token","OjzBWkAdpnninaMKyxNqzqWyFFLezfea");
+        httpConnection.setRequestMethod("POST");
+        System.out.println(httpConnection.toString());
         BufferedReader reader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
 
         String line = null;
