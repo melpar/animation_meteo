@@ -25,8 +25,7 @@ public class VisisteurMemoire implements Visiteur {
 
   @Override
   public void agitSur(ListePrevision element) {
-    // TODO Auto-generated method stub
-
+    sauvegarde = element;
   }
 
   @Override
