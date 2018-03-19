@@ -1,7 +1,7 @@
 package previsionVents;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import visiteur.ElementVisitable;
@@ -24,21 +24,13 @@ public class ListePrevision implements ElementVisitable {
     facade.setPrevisions(this);
   }
 
-  public void ajouterPrevision(Date datePrevision) {
+  public void ajouterPrevision(Calendar datePrevision) {
     this.listePrevision.add(new Prevision(datePrevision, this.zonePrevision.getNombreX(),
         this.zonePrevision.getNombreY()));
   }
 
-  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, double latitude,
-      double longitude) {
 
-    int positionX = this.zonePrevision.getPositionX(latitude);
-    int positionY = this.zonePrevision.getPositionY(longitude);
-    this.ajouterDonneeVent(datePrevision, u, v, latitude, longitude);
-    return true;
-  }
-
-  public Boolean ajouterDonneeVent(Date datePrevision, double u, double v, int positionX,
+  public Boolean ajouterDonneeVent(Calendar datePrevision, double u, double v, int positionX,
       int positionY) {
     int indicePrevision = this.getPrevision(datePrevision);
     if (indicePrevision == -1) {
@@ -48,7 +40,7 @@ public class ListePrevision implements ElementVisitable {
     return true;
   }
 
-  public int getPrevision(Date datePrevision) {
+  public int getPrevision(Calendar datePrevision) {
     for (int indice = 0; indice < this.listePrevision.size(); indice++) {
       if (this.listePrevision.get(indice).getDatePrevision().equals(datePrevision)) {
         return indice;
@@ -83,7 +75,7 @@ public class ListePrevision implements ElementVisitable {
     this.listePrevision = arrayList;
   }
 
-  public Prevision getUnePrevision(Date date) {
+  public Prevision getUnePrevision(Calendar date) {
     return this.listePrevision.get(this.getPrevision(date));
   }
 

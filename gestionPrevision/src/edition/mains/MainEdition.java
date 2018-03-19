@@ -1,5 +1,6 @@
 package edition.mains;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import edition.implementation.Edition;
@@ -23,22 +24,23 @@ public class MainEdition {
     /*
      * creation de la date de la prevision
      */
-    Date date = new Date();
+    Calendar calendar = Calendar.getInstance();
+    
 
     /*
      * ajoue d'une prevision a l'edition
      */
-    edition.ajouterPrevision(date, 3, 1.0, 2.0);
+    edition.ajouterPrevision(calendar, 3, 1.0, 2.0);
 
     /*
      * modification de la date
      */
-    date = new Date(date.getTime() + 3600 * 1000 * 3);
+    calendar.set(2018,3,19,11,43);   
 
     /*
      * ajoue d'une prevision a l'edition
      */
-    edition.ajouterPrevision(date, 1, 3.0, 4.0);
+    edition.ajouterPrevision(calendar, 1, 3.0, 4.0);
 
     /*
      * conversion de l'objet edition en objet listPrevision

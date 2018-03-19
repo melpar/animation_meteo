@@ -1,7 +1,7 @@
 package edition.implementation;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
@@ -63,7 +63,7 @@ public class Edition {
    * @param direction
    *          direction du vent
    */
-  public void ajouterPrevision(Date date, int duree, double vitesse, double direction) {
+  public void ajouterPrevision(Calendar date, int duree, double vitesse, double direction) {
     for (int i = 0; i < duree; i++) {
       Prevision prevision = new Prevision();
       DonneeVent[][] donnees = new DonneeVent[this.NOMBRE_POINT][this.NOMBRE_POINT];
@@ -76,7 +76,8 @@ public class Edition {
       }
       prevision.setMatrice(donnees);
 
-      date = new Date(date.getTime() + 3600 * 1000);
+      //date = new Date(date.getTime() + 3600 * 1000);
+      date = Calendar.getInstance();
 
       prevision.setDate(date);
 

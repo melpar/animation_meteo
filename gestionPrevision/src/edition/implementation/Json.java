@@ -1,26 +1,25 @@
 package edition.implementation;
 
+import edition.usines.FabricationListPrevision;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import edition.adapteurs.AdapteurAjouterPrevision;
-import edition.usines.FabricationListPrevision;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.ZonePrevision;
 
 public class Json {
 
-  @SuppressWarnings({ "unchecked", "deprecation" })
+  @SuppressWarnings("unchecked")
   public void JsonWrite(ListePrevision previsions, String path) {
 
     JSONObject obj = new JSONObject();
@@ -50,16 +49,10 @@ public class Json {
       JSONObject unePrevision = new JSONObject();
 
       // date de la prevision
-      Date date = previsions.getListePrevision().get(i).getDatePrevision();
-
-      JSONObject listDate = new JSONObject();
-
-      listDate.put("jour", new Integer(date.getDay()));
-      listDate.put("mois", new Integer(date.getMonth()));
-      listDate.put("annee", new Integer(date.getYear()));
-      listDate.put("heure", new Integer(date.getHours()));
-
-      unePrevision.put("Date", listDate);
+      Calendar date = previsions.getListePrevision().get(i).getDatePrevision();
+      date.set(2, Calendar.MONTH);
+      DateFormat indfm = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");
+      unePrevision.put("Date", indfm.format(date.getTime()));
 
       // matrice
       DonneeVent[][] donneeVent = previsions.getListePrevision().get(i).getListeDonneVent();
@@ -95,7 +88,6 @@ public class Json {
 
   }
 
-  @SuppressWarnings("unchecked")
   public ListePrevision JsonRead(String path) {
 
     JSONParser parser = new JSONParser();
@@ -121,12 +113,6 @@ public class Json {
       for (int i = 0; i < previsions.size(); i++) {
         JSONObject prevision = (JSONObject) previsions.get("Prevision " + i);
 
-        JSONObject date = (JSONObject) prevision.get("Date");
-        Integer jour = ((Long) date.get("jour")).intValue();
-        Integer mois = ((Long) date.get("mois")).intValue();
-        Integer annee = ((Long) date.get("annee")).intValue();
-        Integer heure = ((Long) date.get("heure")).intValue();
-
         JSONArray matrice = (JSONArray) prevision.get("Matrice");
         DonneeVent[][] donneeVent = new DonneeVent[nombreX][nombreY];
 
@@ -142,10 +128,6 @@ public class Json {
             donneeVent[j][k].setOrientationVent(direction);
           }
         }
-
-        AdapteurAjouterPrevision.AjouterPrevision(listePrevision.getListePrevision(), jour, mois,
-            annee, heure, donneeVent);
-
       }
 
       return listePrevision;
