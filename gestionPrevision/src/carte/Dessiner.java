@@ -95,33 +95,34 @@ public class Dessiner {
     GeometryFactory gFac = JTSFactoryFinder.getGeometryFactory(JTSFactoryFinder.EMPTY_HINTS);
     Coordinate[] coordinates = new Coordinate[5];
 
-    double x = infos.getPositionX() * coefficient + 500000;
-    double y = infos.getPositionY() * coefficient + 500000;
+    double y = infos.getPositionX();
+    double x = infos.getPositionY();
     System.out.println("x :" + x + " y :" + y);
-    double z = Math.sin(infos.getDirection()) * taille * coefficient;
-    double w = Math.cos(infos.getDirection()) * taille * coefficient;
+    double z = Math.sin(infos.getDirection()) * taille;
+    double w = Math.cos(infos.getDirection()) * taille;
     double coeff1x = 0.0;
     double coeff1y = 0.0;
     double coeff2x = 0.0;
     double coeff2y = 0.0;
     if (infos.getDirection() > 0 && infos.getDirection() < Math.PI) {
-      coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille * coefficient * 1 / 4;
-      coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille * coefficient * 1 / 4;
-      coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille * coefficient * 1 / 4;
-      coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille * coefficient * 1 / 4;
+      coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille;
+      coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille;
+      coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille;
+      coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille;
     } else {
-      coeff1x = Math.sin((infos.getDirection() - Math.PI / 4)) * taille * coefficient * 1 / 4;
-      coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille * coefficient * 1 / 4;
-      coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille * coefficient * 1 / 4;
-      coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille * coefficient * 1 / 4;
+      coeff1x = Math.sin((infos.getDirection() - Math.PI / 4)) * taille;
+      coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille;
+      coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille;
+      coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille;
 
     }
-    coordinates[0] = new Coordinate(x, y);
-    coordinates[1] = new Coordinate(x + w, y + z);
-    coordinates[2] = new Coordinate(x + w + coeff1x, y + z - coeff1y);
+    coordinates[0] = CalculPosition.convertEpsg4326to3857(new Coordinate(x, y));
+    System.out.println(coordinates[0].x+" "+coordinates[0].y);
+    coordinates[1] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w, y + z));
+    coordinates[2] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w + coeff1x, y + z - coeff1y));
 
-    coordinates[3] = new Coordinate(x + w, y + z);
-    coordinates[4] = new Coordinate(x + w - coeff2x, y + z + coeff2y);
+    coordinates[3] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w, y + z));
+    coordinates[4] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w - coeff2x, y + z + coeff2y));
 
     LineString line = gFac.createLineString(coordinates);
     System.out.println(line);

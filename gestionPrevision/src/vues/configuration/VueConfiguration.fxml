@@ -15,7 +15,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Selectionner l'uniter:" />
+            <Label text="Selectionner l'unité:" />
             <RadioButton mnemonicParsing="false" selected="true" text="km/h">
                <toggleGroup>
                   <ToggleGroup fx:id="uniter" />
@@ -35,7 +35,7 @@
             <Label fx:id="labelPath" text="/home/louarn/app" />
             <Button mnemonicParsing="false" onAction="#modifierDossierStockage" text="Choisir" />
             <Separator prefWidth="200.0" />
-            <Label text="Choisir le nombre de point desirer : " />
+            <Label text="Choisir le nombre de points desiré : " />
             <TextField onKeyTyped="#keyTyped" />
             <Separator prefWidth="200.0" />
             <Label text="SÃ©lectionner la representation du vent : " />
