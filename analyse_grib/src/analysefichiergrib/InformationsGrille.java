@@ -3,7 +3,9 @@ package analysefichiergrib;
 import java.util.ArrayList;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Representation des parametres du fichier grib.
@@ -18,19 +20,18 @@ public class InformationsGrille {
   private double pasY;
   private int nombreX;
   private int nombreY;
-  private List<List<Vent>> listeVents;
-  private Date datePrevision;
+  private Map<Date, List<Vent>> listeVents;
 
   public InformationsGrille() {
-    this.listeVents = new ArrayList<List<Vent>>();
+    this.listeVents = new HashMap<Date, List<Vent>>();
 
   }
 
-  public void addVent(int i, Vent v) {
-    if (this.listeVents.size() <= i) {
-      this.listeVents.add(new ArrayList<>());
+  public void addVent(Date d, Vent v) {
+    if (this.listeVents.get(d) == null) {
+      this.listeVents.put(d, new ArrayList<>());
     }
-    this.listeVents.get(i).add(v);
+    this.listeVents.get(d).add(v);
   }
 
   public double getLattidude() {
@@ -81,15 +82,8 @@ public class InformationsGrille {
     this.nombreY = nombreY;
   }
 
-  public List<List<Vent>> getVents() {
+  public Map<Date, List<Vent>> getVents() {
     return this.listeVents;
   }
 
-  public Date getDatePrevision() {
-    return datePrevision;
-  }
-
-  public void setDatePrevision(Date datePrevision) {
-    this.datePrevision = datePrevision;
-  }
 }

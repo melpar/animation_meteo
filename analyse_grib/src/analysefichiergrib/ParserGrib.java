@@ -1,7 +1,11 @@
 package analysefichiergrib;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.sourceforge.jgrib.GribFile;
 import net.sourceforge.jgrib.GribRecord;
@@ -76,23 +80,20 @@ public class ParserGrib {
       informations.setPasY(r2.getGridDY());
 
       for (int index = 0; index < grb.getRecordCount() / 2; index++) {
-        System.out.println(grb.getRecord(index * 2 + 1).getTime().getTime());
+        Date date = grb.getRecord(index * 2 + 1).getTime().getTime();
 
         GribRecord ventU = grb.getRecord(index * 2 + 1);
-        informations.setDatePrevision(ventU.getTime().getTime());
         GribRecord ventV = grb.getRecord((index + 1) * 2);
 
         // GribRecord ventD = grb.getRecord(4);
         int nbx = r2.getGridNX();
-        System.out.println(nbx);
         int nby = r2.getGridNY();
-        System.out.println(nby);
         for (int i = 0; i < nbx; i++) {
           for (int j = 0; j < nby; j++) {
             // affichage des la donnee (i,j)
             try {
               Vent v = new Vent(i, j, ventU.getValue(i, j), ventV.getValue(i, j));
-              informations.addVent(index, v);
+              informations.addVent(date, v);
             } catch (NoValidGribException e) {
               e.printStackTrace();
             }
@@ -108,6 +109,27 @@ public class ParserGrib {
 
   public static void main(String[] args) {
     ParserGrib parser = new ParserGrib();
-    parser.getInformationsGrille("gascogne.grb");
+    InformationsGrille infos = parser.getInformationsGrille("gascogne.grb");
+    System.out.println(infos.getLattidude());
+
+    System.out.println(infos.getLongitude());
+    System.out.println(infos.getNombreX());
+    System.out.println(infos.getNombreY());
+    System.out.println(infos.getPasX());
+    System.out.println(infos.getPasY());
+    Map<Date, List<Vent>> vents = infos.getVents();
+    Set cles = vents.keySet();
+    Iterator it = cles.iterator();
+    while (it.hasNext()) {
+      Date cle = (Date) it.next();
+      System.out.println(cle);
+      // for (Vent v : vents.get(cle)) {
+      // System.out.println(" " + v.getLatitude());
+      // System.out.println(" " + v.getLongitude());
+      // System.out.println(" " + v.getVecteurU());
+      // System.out.println(" " + v.getVecteurV());
+      // }
+      ; // tu peux typer plus finement ici
+    }
   }
 }
