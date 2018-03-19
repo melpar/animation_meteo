@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.modification.ControleurModification">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -24,10 +24,10 @@
             <RadioButton mnemonicParsing="false" text="Coeffissiant" toggleGroup="$Choix" />
             <Separator prefWidth="200.0" />
             <Label text="Le contraste" />
-            <TextField />
+            <TextField onKeyTyped="#keyTyped" />
             <Separator prefWidth="200.0" />
             <Label text="Coefficient" />
-            <TextField />
+            <TextField fx:id="coefficient" onKeyTyped="#keyTyped" />
             <Separator prefWidth="200.0" />
             <DatePicker />
             <Separator prefWidth="200.0" />

@@ -16,7 +16,7 @@ public class MainVueModification extends Application {
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("../../vues/modification/VueModification.fxml"));
     Scene scene = new Scene(root);
-    primaryStage.setTitle("Popu Modification");
+    primaryStage.setTitle("Popu Modificationsdf");
     primaryStage.setScene(scene);
     primaryStage.show();
   }
