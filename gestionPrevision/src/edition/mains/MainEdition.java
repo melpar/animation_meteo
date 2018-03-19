@@ -1,34 +1,55 @@
 package edition.mains;
 
-import edition.implementation.Edition;
-import edition.implementation.Json;
-import edition.visiteur.VisiteurAffichage;
 import java.util.Date;
 
+import edition.implementation.Edition;
+import edition.visiteur.VisiteurAffichage;
 import previsionVents.ListePrevision;
 
 public class MainEdition {
 
   /**
-   * Permet de simuler le comportement de la popup.
-   * @param args pas utilisés
+   * Permet de simuler le comportement de la popup d'édition.
+   * 
+   * @param
    */
-  @SuppressWarnings("deprecation")
   public static void main(String[] args) {
 
-    Date date = new Date();
+    /*
+     * Creation d'un edition
+     */
     Edition edition = new Edition(0.0, 0.0, 10.0, 10.0);
+
+    /*
+     * creation de la date de la prevision
+     */
+    Date date = new Date();
+
+    /*
+     * ajoue d'une prevision a l'edition
+     */
     edition.ajouterPrevision(date, 3, 1.0, 2.0);
 
-    date.setHours(date.getDate() + 3);
-    edition.ajouterPrevision(date, 5, 3.0, 4.0);
+    /*
+     * modification de la date
+     */
+    date = new Date(date.getTime() + 3600 * 1000 * 3);
 
+    /*
+     * ajoue d'une prevision a l'edition
+     */
+    edition.ajouterPrevision(date, 1, 3.0, 4.0);
+
+    /*
+     * conversion de l'objet edition en objet listPrevision
+     */
     ListePrevision listePrevision = edition.creerListPrevision();
 
+    /*
+     * affichage d'une prevision
+     */
     listePrevision.applique(new VisiteurAffichage());
-    
-    new Json().JsonWrite(listePrevision, "test.json");
-    
+
   }
 
 }

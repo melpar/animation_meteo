@@ -1,6 +1,10 @@
 package previsionVents;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import analysefichiergrib.InformationsGrille;
 import analysefichiergrib.ParserGrib;
@@ -14,16 +18,16 @@ public class RecuperationDonneesGrib {
   public static void main(String[] args) {
     RecuperationDonneesGrib recuperationTest = new RecuperationDonneesGrib();
     ListePrevision listePrevisionTest = recuperationTest.getListePrevision("gascogne.grb");
-    System.out.println(listePrevisionTest.getNombrePrevision());
+    System.out.println("Nombre de prévisions : "+listePrevisionTest.getNombrePrevision());
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     System.out.println(donnee.length);
     System.out.println(donnee[0].length);
     ZonePrevision zone = listePrevisionTest.getZonePrevision();
     System.out.println("longitude : " + zone.getLongitudeHautGauche());
     System.out.println("latitude : " + zone.getLatitudeHautGauche());
-
     for (int i = 0; i < donnee.length; i++) {
       for (int y = 0; y < donnee[0].length; y++) {
+        
         System.out.println("coordonee : (" + i + " " + y + ")(lat: " + zone.getLatitudePosition(i)
             + "\tlong: " + zone.getLongitudePosition(y) + " )");
         System.out.print("Orientation :" + donnee[i][y].getOrientationVent());
@@ -39,17 +43,24 @@ public class RecuperationDonneesGrib {
    */
   public ListePrevision getListePrevision(String nom) {
     ParserGrib parser = new ParserGrib();
+    System.out.println("parse");
     InformationsGrille informations = parser.getInformationsGrille(nom);
-    List<Vent> liste = informations.getVents();
+    System.out.println("parsé");
+    Map<Date, List<Vent>> liste = informations.getVents();
 
     ListePrevision listePrevision = new ListePrevision(informations.getLattidude(),
         informations.getLongitude(), informations.getPasX(), informations.getPasY(),
         informations.getNombreX(), informations.getNombreY());
 
-    for (Vent vent : informations.getVents()) {
-      listePrevision.ajouterDonneeVent(informations.getDatePrevision(), vent.getVecteurU(),
-          vent.getVecteurV(), vent.getLatitude(), vent.getLongitude());
-
+    Set<Date> cles = liste.keySet();
+    Iterator<Date> it = cles.iterator();
+    while (it.hasNext()) {
+      Date date = it.next();
+      List<Vent> vents = liste.get(date);
+      for(Vent vent : vents){
+        listePrevision.ajouterDonneeVent(date, vent.getVecteurU(),
+            vent.getVecteurV(), vent.getLatitude(), vent.getLongitude());
+      }
     }
     return listePrevision;
   }
