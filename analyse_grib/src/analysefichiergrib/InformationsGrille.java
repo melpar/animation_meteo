@@ -18,15 +18,19 @@ public class InformationsGrille {
   private double pasY;
   private int nombreX;
   private int nombreY;
-  private List<Vent> listeVents;
+  private List<List<Vent>> listeVents;
   private Date datePrevision;
 
   public InformationsGrille() {
-    this.listeVents = new ArrayList<Vent>();
+    this.listeVents = new ArrayList<List<Vent>>();
+
   }
 
-  public void addVent(Vent v) {
-    this.listeVents.add(v);
+  public void addVent(int i, Vent v) {
+    if (this.listeVents.size() <= i) {
+      this.listeVents.add(new ArrayList<>());
+    }
+    this.listeVents.get(i).add(v);
   }
 
   public double getLattidude() {
@@ -77,7 +81,7 @@ public class InformationsGrille {
     this.nombreY = nombreY;
   }
 
-  public List<Vent> getVents() {
+  public List<List<Vent>> getVents() {
     return this.listeVents;
   }
 

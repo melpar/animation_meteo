@@ -75,26 +75,31 @@ public class ParserGrib {
       informations.setPasX(r2.getGridDX());
       informations.setPasY(r2.getGridDY());
 
-      GribRecord ventU = grb.getRecord(1);
-      informations.setDatePrevision(ventU.getTime().getTime());
-      GribRecord ventV = grb.getRecord(2);
+      for (int index = 0; index < grb.getRecordCount() / 2; index++) {
+        System.out.println(grb.getRecord(index * 2 + 1).getTime().getTime());
 
-      // GribRecord ventD = grb.getRecord(4);
-      int nbx = r2.getGridNX();
-      System.out.println(nbx);
-      int nby = r2.getGridNY();
-      System.out.println(nby);
-      for (int i = 0; i < nbx; i++) {
-        for (int j = 0; j < nby; j++) {
-          // affichage des la donnee (i,j)
-          try {
-            Vent v = new Vent(i, j, ventU.getValue(i, j), ventV.getValue(i, j));
-            informations.addVent(v);
-          } catch (NoValidGribException e) {
-            e.printStackTrace();
+        GribRecord ventU = grb.getRecord(index * 2 + 1);
+        informations.setDatePrevision(ventU.getTime().getTime());
+        GribRecord ventV = grb.getRecord((index + 1) * 2);
+
+        // GribRecord ventD = grb.getRecord(4);
+        int nbx = r2.getGridNX();
+        System.out.println(nbx);
+        int nby = r2.getGridNY();
+        System.out.println(nby);
+        for (int i = 0; i < nbx; i++) {
+          for (int j = 0; j < nby; j++) {
+            // affichage des la donnee (i,j)
+            try {
+              Vent v = new Vent(i, j, ventU.getValue(i, j), ventV.getValue(i, j));
+              informations.addVent(index, v);
+            } catch (NoValidGribException e) {
+              e.printStackTrace();
+            }
           }
         }
       }
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -103,6 +108,6 @@ public class ParserGrib {
 
   public static void main(String[] args) {
     ParserGrib parser = new ParserGrib();
-    parser.getInformationsGrille("H:\\gascogne.grb");
+    parser.getInformationsGrille("gascogne.grb");
   }
 }
