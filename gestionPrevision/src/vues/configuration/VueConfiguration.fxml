@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.configuration.ControleurConfiguration">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,13 +32,13 @@
             <RadioButton mnemonicParsing="false" text="Barbule" toggleGroup="$vent" />
             <Separator prefWidth="200.0" />
             <Label text="Choisir le dossier de stockage : " />
-            <Label text="/home/louarn/app" />
-            <Button mnemonicParsing="false" text="Choisir" />
+            <Label fx:id="labelPath" text="/home/louarn/app" />
+            <Button mnemonicParsing="false" onAction="#modifierDossierStockage" text="Choisir" />
             <Separator prefWidth="200.0" />
-            <Label text="Choisir le nombre de pont desirer : " />
-            <TextField />
+            <Label text="Choisir le nombre de point desirer : " />
+            <TextField onKeyTyped="#keyTyped" />
             <Separator prefWidth="200.0" />
-            <Label text="Sélectionné la representation du vent : " />
+            <Label text="Sélectionner la representation du vent : " />
             <RadioButton mnemonicParsing="false" selected="true" text="Conserver les fichiers pécédents">
                <toggleGroup>
                   <ToggleGroup fx:id="choix" />

@@ -18,7 +18,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <Label text="Puissance" />
-                  <TextField />
+                  <TextField onKeyTyped="#keyTyped" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -30,7 +30,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <Label text="Direction" />
-                  <TextField />
+                  <TextField onKeyTyped="#keyTyped" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -42,7 +42,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
                   <Label text="Durée" />
-                  <TextField />
+                  <TextField onKeyTyped="#keyTyped" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -56,7 +56,7 @@
                   <Label text="Date " />
                   <DatePicker />
                   <Label text="Durée : " />
-                  <TextField />
+                  <TextField onKeyTyped="#keyTyped" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
