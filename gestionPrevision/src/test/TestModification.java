@@ -176,7 +176,9 @@ public class TestModification {
     assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
     VisiteurRestauration restauration = new VisiteurRestauration(memoire);
     listePrevisionTest.applique(restauration);
-    assertTrue(vent.getVitesseVent() == ancienneValeur);
+    DonneeVent[][] donnee2 = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+    DonneeVent vent2 = donnee2[3][4];
+    assertTrue(vent2.getVitesseVent() == ancienneValeur);
   }
 
 }
