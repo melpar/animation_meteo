@@ -1,5 +1,9 @@
 package modification;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
@@ -10,7 +14,22 @@ import visiteur.Visiteur;
 public class VisisteurMemoire implements Visiteur {
 
   private ListePrevision sauvegarde;
-  
+
+  public VisisteurMemoire(ZonePrevision zonePrevision) {
+
+    double latitude = zonePrevision.getLatitudeHautGauche();
+    double longitude = zonePrevision.getLongitudeHautGauche();
+    double pasX = zonePrevision.getPasX();
+    double pasY = zonePrevision.getPasY();
+    int nombreX = zonePrevision.getNombreX();
+    int nombreY = zonePrevision.getNombreY();
+    sauvegarde = new ListePrevision(latitude, longitude, pasX, pasY, nombreX, nombreY);
+  }
+
+  public ListePrevision getSauvegarde() {
+    return sauvegarde;
+  }
+
   @Override
   public void agitSur(ElementVisitable element) {
     // TODO Auto-generated method stub
@@ -25,13 +44,37 @@ public class VisisteurMemoire implements Visiteur {
 
   @Override
   public void agitSur(ListePrevision element) {
-    sauvegarde = element;
+    sauvegarde.setZonePrevisions(element.getZonePrevision());
+    for (Prevision prevision : element.getListePrevision()) {
+      prevision.applique(this);
+    }
   }
 
   @Override
   public void agitSur(Prevision element) {
-    // TODO Auto-generated method stub
+    Date date = element.getDatePrevision();
+    // sauvegarde.ajouterPrevision(date);
+    Prevision previsionSave = sauvegarde.getUnePrevision(date);
 
+    DonneeVent[][] donneesX = element.getListeDonneVent();
+    DonneeVent[][] donneesSaveX = new DonneeVent[donneesX.length][];
+    for (int x = 0; x < donneesX.length; x++) {
+      DonneeVent[] donneesY = donneesX[x];
+      DonneeVent[] donneesSaveY = new DonneeVent[donneesY.length];
+      for (int y = 0; y < donneesY.length; y++) {
+        double vitesseVent = donneesY[y].getVitesseVent();
+        double orientationVent = donneesY[y].getOrientationVent();
+        DonneeVent donneesSaveVent = new DonneeVent(vitesseVent, orientationVent);
+        donneesSaveY[y] = donneesSaveVent;
+      }
+      donneesSaveX[x] = donneesSaveY;
+    }
+    previsionSave.setMatrice(donneesSaveX);
+    List<Prevision> list = sauvegarde.getListePrevision();
+    ArrayList<Prevision> listPrevision = new ArrayList<Prevision>();
+    listPrevision.addAll(list);
+    listPrevision.add(previsionSave);
+    sauvegarde.setListePrevision(listPrevision);
   }
 
   @Override
