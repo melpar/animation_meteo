@@ -22,7 +22,7 @@ public class TestPrevision {
   private FabriqueDonnee fabriquetest;
 
   /**
-   * Initialise les données nécessaires aux tests.
+   * Initialise les données nécessaires aux tests. 
    */
   @Before
   public void initialisation() {
