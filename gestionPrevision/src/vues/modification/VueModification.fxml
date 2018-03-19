@@ -26,7 +26,7 @@
             <Label text="Le contraste" />
             <TextField />
             <Separator prefWidth="200.0" />
-            <Label text="Coeffissiant" />
+            <Label text="Coefficient" />
             <TextField />
             <Separator prefWidth="200.0" />
             <DatePicker />
