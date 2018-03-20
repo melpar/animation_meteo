@@ -29,12 +29,8 @@ public class AdapteurAjouterPrevision {
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(annee, mois, jour);
-		Date date = calendar.getTime();
-		date.setHours(heure);
-		date.setMinutes(0);
-		date.setSeconds(0);
 		
-		prevision.setDate(date);
+		prevision.setDate(calendar);
 		DonneeVent [][] donnees = new DonneeVent[nombreX][nombreY];
 		for (int i = 0; i < nombreX; i++) {
 			for (int j = 0; j < nombreY; j++) {
@@ -57,12 +53,13 @@ public class AdapteurAjouterPrevision {
 		Prevision prevision = new Prevision();
 		// creation de la date
 		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
 //		date.setJour(jour);
 //		date.setMois(mois);
 //		date.setAnnee(annee);
 //		date.setHeure(heure);
 		////////////////////////////////////////			Modifier date utiliser notre classe
-		prevision.setDate(date);
+		prevision.setDate(calendar);
 		prevision.setMatrice(donnees);
 		previsions.add(prevision);
 	}

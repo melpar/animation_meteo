@@ -111,6 +111,7 @@ public class Zoom extends ZoomInTool {
     if (dragged && !ev.getPoint().equals(startPosDevice)) {
       Envelope2D env = new Envelope2D();
       env.setFrameFromDiagonal(startPosWorld, ev.getWorldPos());
+      
       System.out.println("x = "+startPosDevice.getX()+" | y = "+startPosDevice.getY());
       System.out.println("x = "+ev.getWorldPos().getX()+" | y = "+ev.getWorldPos().getY());
       dragged = false;

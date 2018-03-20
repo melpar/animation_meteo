@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import java.util.Calendar;
+
 import analysefichiergrib.InformationsGrille;
 import analysefichiergrib.ParserGrib;
 import analysefichiergrib.Vent;
@@ -58,7 +60,9 @@ public class RecuperationDonneesGrib {
       Date date = it.next();
       List<Vent> vents = liste.get(date);
       for(Vent vent : vents){
-        listePrevision.ajouterDonneeVent(date, vent.getVecteurU(),
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        listePrevision.ajouterDonneeVent(c, vent.getVecteurU(),
             vent.getVecteurV(), vent.getLatitude(), vent.getLongitude());
       }
     }
