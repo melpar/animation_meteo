@@ -22,7 +22,6 @@ import javax.mail.internet.MimeMessage;
 
 public class Mail {
 
-  final int port = 465;
   final String username = "animation.meteo@gmail.com";
   final String NOAA = "query@saildocs.com";
   final String password = "animationmeteo";
@@ -81,7 +80,8 @@ public class Mail {
     props.put("mail.smtp.starttls.enable", "true");
     props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.smtp.port", "587");
-
+    props.put("mail.smtp.ssl.trust", "*");
+    
     Session session = Session.getInstance(props, new javax.mail.Authenticator() {
       protected PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(username, password);
@@ -101,7 +101,7 @@ public class Mail {
 
       // 3 -> Envoi du message
       Transport transport = session.getTransport("smtp");
-      transport.connect("smtp.gmail.com", port, username, password);
+      transport.connect("smtp.gmail.com", 587, username, password);
       transport.sendMessage(message, message.getAllRecipients());
       transport.close();
 
@@ -123,7 +123,7 @@ public class Mail {
       Properties properties = new Properties();
 
       properties.put("mail.pop3.host", host);
-      properties.put("mail.pop3.port", "995");
+      properties.put("mail.pop3.port", "993");
       properties.put("mail.pop3.starttls.enable", "true");
       Session emailSession = Session.getDefaultInstance(properties);
 
