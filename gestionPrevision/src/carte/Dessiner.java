@@ -89,7 +89,7 @@ public class Dessiner {
       }
     }
 
-    float lineWidt = 2.0f; // epaisseur des trai
+    float lineWidt = 2.0f; // epaisseur des traits
 
     Style lineStyle = SLD.createLineStyle(Color.red, lineWidt); // definition de
                                                                 // la couleur et

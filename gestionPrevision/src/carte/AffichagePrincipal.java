@@ -86,14 +86,12 @@ public class AffichagePrincipal {
           System.out.println(choix.getSelectedFile().getName());
           // chemin absolu du fichier choisi
           choix.getSelectedFile().getAbsolutePath();
-          System.out.println("1");
           RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
-          System.out.println("1");
           ListePrevision prevision = recupGrib
               .getListePrevision(choix.getSelectedFile().getAbsolutePath());
-          System.out.println("1");
           afficherFleches.setPas(5);
           afficherFleches.action(null);
+          System.out.println(featureSource.getBounds().getMaxX()+" "featureSource.getBounds().getMaxY());
         } else {
           System.out.println("pas de fichier");
         }

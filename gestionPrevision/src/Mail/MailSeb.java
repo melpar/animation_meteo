@@ -48,7 +48,9 @@ public class MailSeb {
     props.put("mail.smtp.starttls.enable", "true");
     props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.smtp.port", "587");
-    props.put("mail.smtp.ssl.trust", "*");
+    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.EnableSSL.enable", "true");
     Session session = Session.getInstance(props, new javax.mail.Authenticator() {
       protected PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(username, password);
@@ -56,7 +58,7 @@ public class MailSeb {
     });
     session.setDebug(true);
     try {
-      
+
       // 2 -> Création du message
       Message message = new MimeMessage(session);
       message.setFrom(new InternetAddress(NOAA));
@@ -64,7 +66,7 @@ public class MailSeb {
       message.setSubject("Teste");
       message.setText("Send grib:" + getlattitudepg() + "S," + getlattitudepd() + "S,"
           + getlongitudepg() + "W," + getlongitudepd() + "W|1,1|00,12,24|WIND");
-      
+
       // 3 -> Envoi du message
       Transport transport = session.getTransport("smtp");
       transport.connect("smtp.gmail.com", 587, username, password);
@@ -77,15 +79,20 @@ public class MailSeb {
   }
 
   private Message getMessage() {
-
     Message monmessage = null;
+
     try {
-      // 1 -> Création de la session
       Properties properties = new Properties();
+
       properties.put("mail.pop3.host", host);
-      properties.put("mail.pop3.port", "993");
+      properties.put("mail.pop3.port", "995");
       properties.put("mail.pop3.starttls.enable", "true");
-      Session emailSession = Session.getDefaultInstance(properties);
+      properties.put("mail.pop3s.ssl.trust", "*");
+      Session emailSession = Session.getInstance(properties, new javax.mail.Authenticator() {
+        protected PasswordAuthentication getPasswordAuthentication() {
+          return new PasswordAuthentication(username, password);
+        }
+      });
 
       // create the POP3 store object and connect with the pop server
       Store store = emailSession.getStore("pop3s");
@@ -123,7 +130,7 @@ public class MailSeb {
           || (disposition.equalsIgnoreCase(Part.INLINE))))) {
         File save = new File(part.getFileName());
         nomfichier = part.getFileName();
-        FileWriter ecriture = new FileWriter(dir+"/"+save);
+        FileWriter ecriture = new FileWriter(dir + "/" + save);
         InputStreamReader lecture = new InputStreamReader(part.getInputStream());
         int flux;
         while ((flux = lecture.read()) != 0) {
@@ -136,7 +143,7 @@ public class MailSeb {
     return nomfichier;
   }
 
-  public String getGribFile(String dir ,double lattitudepg, double lattitudepd, double longitudepg,
+  public String getGribFile(String dir, double lattitudepg, double lattitudepd, double longitudepg,
       double longitudepd)
       throws FileNotFoundException, MessagingException, IOException, InterruptedException {
     this.lattitudePointGauche = lattitudepg;
@@ -148,11 +155,11 @@ public class MailSeb {
     Thread.sleep(4000);
     monmessage = getMessage();
     String lienversfichier = "";
+    System.out.println("dir : " + dir);
+    System.out.println("mon message : " + monmessage);
     lienversfichier = recuperationfichiergribenpiecejointe(dir, monmessage);
     return lienversfichier;
   }
-
-
 
   private void setlattitudepg(double lattitudepg) {
     this.lattitudePointGauche = lattitudepg;
@@ -185,13 +192,13 @@ public class MailSeb {
   public double getlongitudepd() {
     return longitudepointDroit;
   }
-  
+
   public static void main(String[] args)
       throws FileNotFoundException, MessagingException, IOException, InterruptedException {
 
     MailSeb mail = new MailSeb();
 
-    String res = mail.getGribFile("Gribs",0.0, 0.0, 10.0, 3353.0);
+    String res = mail.getGribFile("Gribs", 0.0, 0.0, 10.0, 3353.0);
 
     System.out.println(res);
 

@@ -52,8 +52,8 @@ public class Zoom extends ZoomInTool {
   }
 
   /**
-   * Zoom in by the currently set increment, with the map centred at the location
-   * (in world coords) of the mouse click.
+   * Zoom in by the currently set increment, with the map centred at the
+   * location (in world coords) of the mouse click.
    * 
    * @param e
    *          map mapPane mouse event
@@ -68,7 +68,7 @@ public class Zoom extends ZoomInTool {
 
     double newX = mapPos.getX() - 0.5d * paneArea.getWidth() / newScale;
     double newY = mapPos.getY() + 0.5d * paneArea.getHeight() / newScale;
-    DirectPosition2D corner = new DirectPosition2D(newX,newY);
+    DirectPosition2D corner = new DirectPosition2D(newX, newY);
 
     Envelope2D newMapArea = new Envelope2D();
     newMapArea.setFrameFromCenter(mapPos, corner);
@@ -76,8 +76,8 @@ public class Zoom extends ZoomInTool {
   }
 
   /**
-   * Records the map position of the mouse event in case this button press is the
-   * beginning of a mouse drag.
+   * Records the map position of the mouse event in case this button press is
+   * the beginning of a mouse drag.
    *
    * @param ev
    *          the mouse event
@@ -111,9 +111,9 @@ public class Zoom extends ZoomInTool {
     if (dragged && !ev.getPoint().equals(startPosDevice)) {
       Envelope2D env = new Envelope2D();
       env.setFrameFromDiagonal(startPosWorld, ev.getWorldPos());
-      
-      System.out.println("x = "+startPosDevice.getX()+" | y = "+startPosDevice.getY());
-      System.out.println("x = "+ev.getWorldPos().getX()+" | y = "+ev.getWorldPos().getY());
+
+      System.out.println("x = " + startPosDevice.getX() + " | y = " + startPosDevice.getY());
+      System.out.println("x = " + ev.getWorldPos().getX() + " | y = " + ev.getWorldPos().getY());
       dragged = false;
       getMapPane().setDisplayArea(env);
     }
