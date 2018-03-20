@@ -2,6 +2,7 @@ package edition.implementation;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
@@ -52,19 +53,22 @@ public class Edition {
   }
 
   /**
-   * Ajoute une prevision pour une zone
+   * Ajouter une prevision pour une zone
    * 
    * @param date
    *          date debut de la prevision
    * @param duree
-   *          nombre d'heur que dure une prevision
+   *          nombres d'heures que dure une prevision
    * @param vitesse
    *          vitesse du vent
    * @param direction
    *          direction du vent
    */
-  public void ajouterPrevision(Calendar date, int duree, double vitesse, double direction) {
-    for (int i = 0; i < duree; i++) {
+  public void ajouterPrevision(Calendar date, int duree, double vitesse, double direction) {    
+    for (int i = 1; i <= duree; i++) {
+      TimeZone.setDefault(TimeZone.getTimeZone("GTM+1:00"));
+      Calendar datePrevision = Calendar.getInstance();
+      datePrevision.setTimeZone(TimeZone.getTimeZone("GMT+1:00"));
       Prevision prevision = new Prevision();
       DonneeVent[][] donnees = new DonneeVent[this.NOMBRE_POINT][this.NOMBRE_POINT];
       for (int j = 0; j < this.NOMBRE_POINT; j++) {
@@ -74,13 +78,9 @@ public class Edition {
           donnees[j][k].setVitesseVent(vitesse);
         }
       }
-      prevision.setMatrice(donnees);
-
-      //date = new Date(date.getTime() + 3600 * 1000);
-      date = Calendar.getInstance();
-
-      prevision.setDate(date);
-
+      prevision.setMatrice(donnees);     
+      prevision.setDate(datePrevision);
+      datePrevision.setTimeInMillis((3600000 * (i)) + date.getTimeInMillis());
       this.previsions.add(prevision);
     }
   }
