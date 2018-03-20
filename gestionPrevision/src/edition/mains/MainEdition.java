@@ -1,8 +1,6 @@
 package edition.mains;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 
 import edition.implementation.Edition;
 import edition.visiteur.VisiteurAffichage;
@@ -26,18 +24,16 @@ public class MainEdition {
      * creation de la date de la prevision
      */
     Calendar calendar = Calendar.getInstance();
-    
-    
 
     /*
      * ajoue d'une prevision a l'edition
      */
-    edition.ajouterPrevision(calendar, 3, 1.0, 2.0);
+    edition.ajouterPrevision(calendar, 30, 1.0, 2.0);
 
     /*
      * modification de la date
      */
-    calendar.set(2018,3,19,11,43);   
+    calendar.set(2018, 3, 19, 11, 43);
 
     /*
      * ajoue d'une prevision a l'edition
