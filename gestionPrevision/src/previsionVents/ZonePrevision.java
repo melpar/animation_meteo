@@ -34,12 +34,12 @@ public class ZonePrevision implements ElementVisitable {
     return (int) ((longitude - this.longitudeHautGauche) / nombreY);
   }
 
-  public double getLatitudePosition(int postiontX) {
-    return this.latitudeHautGauche + (this.pasX * postiontX);
+  public double getLatitudePosition(int postionY) {
+    return this.latitudeHautGauche - (this.pasY * postionY);
   }
 
-  public double getLongitudePosition(int postionY) {
-    return this.longitudeHautGauche + (this.pasY * postionY);
+  public double getLongitudePosition(int postionX) {
+    return this.longitudeHautGauche + (this.pasX * postionX);
   }
 
   public double getLongitudeHautGauche() {

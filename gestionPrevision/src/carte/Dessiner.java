@@ -25,8 +25,7 @@ public class Dessiner {
 
   MapContext map;
   final SimpleFeatureType TYPE;
-  private static final int coefficient = 100000;
-  private static final double taille = 1;
+  private static final double taille = 0.5;
   private int indice;
 
   public Dessiner(MapContext map) {
@@ -105,15 +104,15 @@ public class Dessiner {
     double coeff2x = 0.0;
     double coeff2y = 0.0;
     if (infos.getDirection() > 0 && infos.getDirection() < Math.PI) {
-      coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille;
-      coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille;
-      coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille;
-      coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille;
+      coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille*0.5;
+      coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille*0.5;
+      coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille*0.5;
+      coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille*0.5;
     } else {
-      coeff1x = Math.sin((infos.getDirection() - Math.PI / 4)) * taille;
-      coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille;
-      coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille;
-      coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille;
+      coeff1x = Math.sin((infos.getDirection() - Math.PI / 4)) * taille*0.5;
+      coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille*0.5;
+      coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille*0.5;
+      coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille*0.5;
 
     }
     coordinates[0] = CalculPosition.convertEpsg4326to3857(new Coordinate(x, y));
