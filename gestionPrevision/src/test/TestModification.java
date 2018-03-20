@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -22,11 +23,11 @@ import visiteur.Visiteur;
 public class TestModification {
 
   private ListePrevision listePrevisionTest;
-  private Date dateTest;
+  private Calendar dateTest;
 
   @Before
   public void initialisation() {
-    this.dateTest = new Date();
+    this.dateTest = Calendar.getInstance();
     this.listePrevisionTest = new ListePrevision(1, 1, 5, 5, 10, 10);
 
     this.listePrevisionTest.ajouterPrevision(this.dateTest);
