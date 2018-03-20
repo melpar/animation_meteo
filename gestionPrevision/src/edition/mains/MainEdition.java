@@ -2,6 +2,7 @@ package edition.mains;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import edition.implementation.Edition;
 import edition.visiteur.VisiteurAffichage;
@@ -25,6 +26,7 @@ public class MainEdition {
      * creation de la date de la prevision
      */
     Calendar calendar = Calendar.getInstance();
+    
     
 
     /*
@@ -50,6 +52,7 @@ public class MainEdition {
     /*
      * affichage d'une prevision
      */
+
     listePrevision.applique(new VisiteurAffichage());
 
   }
