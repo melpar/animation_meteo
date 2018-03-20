@@ -20,7 +20,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class MailSeb {
+public class Mail {
 
   final String username = "animation.meteo@gmail.com";
   final String NOAA = "query@saildocs.com";
@@ -196,7 +196,7 @@ public class MailSeb {
   public static void main(String[] args)
       throws FileNotFoundException, MessagingException, IOException, InterruptedException {
 
-    MailSeb mail = new MailSeb();
+    Mail mail = new Mail();
 
     String res = mail.getGribFile("Gribs", 0.0, 0.0, 10.0, 3353.0);
 
