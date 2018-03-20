@@ -1,20 +1,24 @@
 package edition.implementation;
 
-import edition.usines.FabricationListPrevision;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import edition.usines.FabricationListPrevision;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
+import previsionVents.Prevision;
 import previsionVents.ZonePrevision;
 
 public class Json {
@@ -51,7 +55,7 @@ public class Json {
       // date de la prevision
       Calendar date = previsions.getListePrevision().get(i).getDatePrevision();
       date.set(2, Calendar.MONTH);
-      DateFormat indfm = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");
+      DateFormat indfm = new SimpleDateFormat("dd-MM-yyyy HH'h'mm");
       unePrevision.put("Date", indfm.format(date.getTime()));
 
       // matrice
@@ -93,6 +97,7 @@ public class Json {
     JSONParser parser = new JSONParser();
 
     try {
+      ArrayList<Prevision> listPrevision = new ArrayList<Prevision>();
 
       Object obj = parser.parse(new FileReader(path));
 
@@ -105,13 +110,32 @@ public class Json {
       Integer nombreX = ((Long) jsonObject.get("nombre X")).intValue();
       Integer nombreY = ((Long) jsonObject.get("nombre Y")).intValue();
 
-      ListePrevision listePrevision = FabricationListPrevision.creerListPrevisionVide(latitude,
+      ListePrevision zonePrevision = FabricationListPrevision.creerListPrevisionVide(latitude,
           longitude, pasX, pasY, nombreX, nombreY);
 
       JSONObject previsions = (JSONObject) jsonObject.get("Previsions");
 
       for (int i = 0; i < previsions.size(); i++) {
+        Prevision unePrevision = new Prevision();
+
         JSONObject prevision = (JSONObject) previsions.get("Prevision " + i);
+
+        String date = (String) prevision.get("Date");
+        String[] gestionCalendrier = date.split(" ");
+        String[] gestionDate = gestionCalendrier[0].split("-");
+        String[] gestionHeure = gestionCalendrier[1].split("h");
+
+        int day = Integer.parseInt(gestionDate[0]);
+        int month = Integer.parseInt(gestionDate[1]);
+        int year = Integer.parseInt(gestionDate[2]);
+
+        int hourOfDay = Integer.parseInt(gestionHeure[0]);
+        int minute = Integer.parseInt(gestionHeure[1]);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hourOfDay, minute);
+
+        unePrevision.setDate(cal);
 
         JSONArray matrice = (JSONArray) prevision.get("Matrice");
         DonneeVent[][] donneeVent = new DonneeVent[nombreX][nombreY];
@@ -128,9 +152,11 @@ public class Json {
             donneeVent[j][k].setOrientationVent(direction);
           }
         }
+        unePrevision.setMatrice(donneeVent);
+        listPrevision.add(unePrevision);
       }
-
-      return listePrevision;
+      zonePrevision.setListePrevision(listPrevision);
+      return zonePrevision;
 
     } catch (FileNotFoundException e) {
       e.printStackTrace();

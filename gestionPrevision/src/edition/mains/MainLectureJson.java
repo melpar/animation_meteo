@@ -9,10 +9,11 @@ public class MainLectureJson {
   /**
    * Execute une lecture de fichier JSON.
    * 
-   * @param args pas utilisé
+   * @param args
+   *          pas utilisé
    */
-  public static void main(String[]args) {
-    ListePrevision listePrevision = new Json().JsonRead("test2.json");
+  public static void main(String[] args) {
+    ListePrevision listePrevision = new Json().JsonRead("test3.json");
     listePrevision.applique(new VisiteurAffichage());
   }
 
