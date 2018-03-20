@@ -43,7 +43,7 @@
             <VBox prefHeight="137.0" prefWidth="138.0" spacing="10.0">
                <children>
                   <Label text="Durée" />
-                  <TextField onKeyTyped="#keyTyped" />
+                  <TextField fx:id="dureeVal" onKeyTyped="#keyTyped" prefHeight="25.0" prefWidth="59.0" />
                   <Label text="Heures : " />
                   <ComboBox fx:id="heuresVal" prefWidth="150.0" />
                </children>
