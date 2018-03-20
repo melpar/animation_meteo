@@ -1,7 +1,7 @@
 package analysefichiergrib;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +20,14 @@ public class InformationsGrille {
   private double pasY;
   private int nombreX;
   private int nombreY;
-  private Map<Date, List<Vent>> listeVents;
+  private Map<Calendar, List<Vent>> listeVents;
 
   public InformationsGrille() {
-    this.listeVents = new HashMap<Date, List<Vent>>();
+    this.listeVents = new HashMap<Calendar, List<Vent>>();
 
   }
 
-  public void addVent(Date d, Vent v) {
+  public void addVent(Calendar d, Vent v) {
     if (this.listeVents.get(d) == null) {
       this.listeVents.put(d, new ArrayList<>());
     }
@@ -82,7 +82,7 @@ public class InformationsGrille {
     this.nombreY = nombreY;
   }
 
-  public Map<Date, List<Vent>> getVents() {
+  public Map<Calendar, List<Vent>> getVents() {
     return this.listeVents;
   }
 

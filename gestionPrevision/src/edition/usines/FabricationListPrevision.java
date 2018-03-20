@@ -35,7 +35,7 @@ public class FabricationListPrevision {
 
     listPrevisions.setZonePrevisions(zone);
 
-    // liste preivision
+    // liste prevision
     listPrevisions.setListePrevision(new ArrayList<Prevision>());
 
     return listPrevisions;

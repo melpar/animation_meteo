@@ -1,10 +1,9 @@
 package edition.mains;
 
-import java.io.IOException;
-import java.util.Date;
-
 import edition.implementation.Json;
 import edition.visiteur.VisiteurAffichage;
+import java.io.IOException;
+import java.util.Calendar;
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
@@ -15,10 +14,11 @@ public class MainEcritureJson {
 
     // creation d'une ListPrevision
     ListePrevision previsions = new ListePrevision(1.0, 2.0, 3.0, 4.0, 3, 3);
+    
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2018,3,19,11,43);   
 
-    Date date = new Date(12);
-
-    Prevision prevision = new Prevision(date, 3, 3);
+    Prevision prevision = new Prevision(calendar, 3, 3);
     DonneeVent[][] matrice = prevision.getListeDonneVent();
 
     for (int i = 0; i < 3; i++) {
@@ -36,7 +36,7 @@ public class MainEcritureJson {
 
     // creation json
     Json json = new Json();
-    json.JsonWrite(previsions, "test2.json");
+    json.JsonWrite(previsions, "test3.json");
 
   }
 }

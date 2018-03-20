@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -22,11 +23,11 @@ import visiteur.Visiteur;
 public class TestModification {
 
   private ListePrevision listePrevisionTest;
-  private Date dateTest;
+  private Calendar dateTest;
 
   @Before
   public void initialisation() {
-    this.dateTest = new Date();
+    this.dateTest = Calendar.getInstance();
     this.listePrevisionTest = new ListePrevision(1, 1, 5, 5, 10, 10);
 
     this.listePrevisionTest.ajouterPrevision(this.dateTest);
@@ -176,7 +177,9 @@ public class TestModification {
     assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
     VisiteurRestauration restauration = new VisiteurRestauration(memoire);
     listePrevisionTest.applique(restauration);
-    assertTrue(vent.getVitesseVent() == ancienneValeur);
+    DonneeVent[][] donnee2 = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+    DonneeVent vent2 = donnee2[3][4];
+    assertTrue(vent2.getVitesseVent() == ancienneValeur);
   }
 
 }

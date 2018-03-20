@@ -1,6 +1,6 @@
 package modification;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
@@ -39,7 +39,7 @@ public class VisiteurRestauration implements Visiteur {
 
   @Override
   public void agitSur(Prevision element) {
-    Date date = element.getDatePrevision();
+    Calendar date = element.getDatePrevision();
     Prevision previsionSave = memoire.getUnePrevision(date);
 
     DonneeVent[][] donneesSave = previsionSave.getListeDonneVent();

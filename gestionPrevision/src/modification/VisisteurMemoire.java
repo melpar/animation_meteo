@@ -1,7 +1,7 @@
 package modification;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import previsionVents.DonneeVent;
@@ -52,11 +52,12 @@ public class VisisteurMemoire implements Visiteur {
 
   @Override
   public void agitSur(Prevision element) {
-    Date date = element.getDatePrevision();
-    // sauvegarde.ajouterPrevision(date);
-    Prevision previsionSave = sauvegarde.getUnePrevision(date);
-
+    Calendar date = element.getDatePrevision();
     DonneeVent[][] donneesX = element.getListeDonneVent();
+    int nombreX = donneesX.length;
+    int nombreY = donneesX[0].length;
+    // sauvegarde.ajouterPrevision(date);
+    Prevision previsionSave = new Prevision(date, nombreX, nombreY);
     DonneeVent[][] donneesSaveX = new DonneeVent[donneesX.length][];
     for (int x = 0; x < donneesX.length; x++) {
       DonneeVent[] donneesY = donneesX[x];

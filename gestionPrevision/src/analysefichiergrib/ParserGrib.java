@@ -1,6 +1,7 @@
 package analysefichiergrib;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -94,7 +95,9 @@ public class ParserGrib {
             // affichage des la donnee (i,j)
             try {
               Vent v = new Vent(i, j, ventU.getValue(i, j), ventV.getValue(i, j));
-              informations.addVent(date, v);
+              Calendar calendar = Calendar.getInstance();
+              calendar.setTime(date);
+              informations.addVent(calendar, v);
             } catch (NoValidGribException e) {
               e.printStackTrace();
             }
@@ -118,11 +121,11 @@ public class ParserGrib {
     System.out.println(infos.getNombreY());
     System.out.println(infos.getPasX());
     System.out.println(infos.getPasY());
-    Map<Date, List<Vent>> vents = infos.getVents();
-    Set cles = vents.keySet();
-    Iterator it = cles.iterator();
+    Map<Calendar, List<Vent>> vents = infos.getVents();
+    Set<Calendar> cles = vents.keySet();
+    Iterator<Calendar> it = cles.iterator();
     while (it.hasNext()) {
-      Date cle = (Date) it.next();
+      Calendar cle = it.next();
       System.out.println(cle);
       // for (Vent v : vents.get(cle)) {
       // System.out.println(" " + v.getLatitude());
@@ -130,7 +133,6 @@ public class ParserGrib {
       // System.out.println(" " + v.getVecteurU());
       // System.out.println(" " + v.getVecteurV());
       // }
-      ; // tu peux typer plus finement ici
     }
   }
 }

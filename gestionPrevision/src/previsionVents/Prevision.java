@@ -1,13 +1,13 @@
 package previsionVents;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import visiteur.ElementVisitable;
 import visiteur.Visiteur;
 
 public class Prevision implements ElementVisitable {
 
-  private Date datePrevision;
+  private Calendar datePrevision;
   private DonneeVent[][] listeDonneVent;
   private FabriqueDonnee fabriqueDonnee;
 
@@ -28,7 +28,7 @@ public class Prevision implements ElementVisitable {
 
   }
 
-  public Prevision(Date datePrevision, int nombreX, int nombreY) {
+  public Prevision(Calendar datePrevision, int nombreX, int nombreY) {
     this.datePrevision = datePrevision;
     this.listeDonneVent = new DonneeVent[nombreX][nombreY];
     for (int posX = 0; posX < this.listeDonneVent.length; posX++) {
@@ -43,7 +43,7 @@ public class Prevision implements ElementVisitable {
     this.listeDonneVent[positionX][positionY] = this.fabriqueDonnee.creeDonneeVent(u, v);
   }
 
-  public Date getDatePrevision() {
+  public Calendar getDatePrevision() {
     return datePrevision;
   }
 
@@ -57,7 +57,7 @@ public class Prevision implements ElementVisitable {
 
   }
 
-  public void setDate(Date date) {
+  public void setDate(Calendar date) {
     this.datePrevision = date;
   }
 
