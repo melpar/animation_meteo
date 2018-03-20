@@ -26,10 +26,10 @@ public class TestModificationImpl {
   private ListePrevision listePrevisionTest;
   private Calendar dateTest;
   private ModifierImpl modifier;
-
+  
   @Before
   public void initialisation() {
-    modifier = new ModifierImpl();
+    
     dateTest = Calendar.getInstance();
     this.listePrevisionTest = new ListePrevision(1, 1, 5, 5, 10, 10);
 
@@ -40,8 +40,8 @@ public class TestModificationImpl {
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 20, 50, (int) 0, (int) 0);
     // creation d'un vent superieur a 190kmH
     this.listePrevisionTest.ajouterDonneeVent(this.dateTest, 30, 50, (int) 9, (int) 9);
-
-    FacadePrevisionVents.getFacadePrevisionVents().setPrevisions(listePrevisionTest);
+    
+    modifier = new ModifierImpl();
   }
 
   @Test
@@ -52,32 +52,17 @@ public class TestModificationImpl {
     double ancienneValeur = vent.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
-    listePrevisionTest.applique(modifier);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
 
-    assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
-
-    double vitesseTest = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
-        .getListePrevision().get(0).getListeDonneVent()[3][4].getVitesseVent();
+    double vitesseTest = listePrevisionTest.getListePrevision().get(0).getListeDonneVent()[3][4].getVitesseVent();
     assertTrue(vitesseTest == ancienneValeur / 2);
   }
 
-  @Test
-  public void testModifierCoefficientVentImpl() {
-
-    DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
-    DonneeVent vent = donnee[3][4];
-    double ancienneValeur = vent.getVitesseVent();
-
-    ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    float coefficient = (float) -0.5;
-    modifier.modifierCoefficientVent(zonePrevisionTest, coefficient);
-    assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
-  }
 
   @Test
   public void testModifierZoneVent() {
-    DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
+    DonneeVent[][] donnee = FacadePrevisionVents.getFacadePrevisionVents()
+        .getPrevisions().getListePrevision().get(0).getListeDonneVent();
     DonneeVent ventMilieu = donnee[3][4];
     DonneeVent ventDebut = donnee[0][0];
     DonneeVent ventFin = donnee[9][9];
@@ -86,8 +71,8 @@ public class TestModificationImpl {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(6, 3, 5, 5, 7, 7);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
-    listePrevisionTest.applique(modifier);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+
 
     assertTrue(ventDebut.getVitesseVent() == ancienneValeurDebut);
     assertTrue(ventMilieu.getVitesseVent() == ancienneValeurMilieux / 2);
@@ -105,9 +90,8 @@ public class TestModificationImpl {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest, 0.5, 190);// seuil �
-                                                                                     // 190 kmH
-    listePrevisionTest.applique(modifier);
+    this.modifier.modifierContrasteProgressifVent(zonePrevisionTest, (float) 0.5, 190);;
+
 
     assertTrue(ventFort.getVitesseVent() - ancienneValeurFort * 2 < 0.1);
     assertTrue(ventMilieu.getVitesseVent() - ancienneValeurMilieux / 2 < 0.1);
@@ -125,9 +109,7 @@ public class TestModificationImpl {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest, 0.5, 190);// seuil � 190
-                                                                                   // kmH
-    listePrevisionTest.applique(modifier);
+    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, (float) 0.5, 190);
 
     double valeurTester = ancienneValeurFort * 2
         / (1.0 + Math.exp(-0.5 * (ancienneValeurFort - 190)));
@@ -138,21 +120,10 @@ public class TestModificationImpl {
 
   @Test
   public void testMoyenne() {
-
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-
-    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevisionTest);
-    listePrevisionTest.applique(moyenne);
-    double valeurMoyenneAncienne = moyenne.getMoyenneVitesse();
-
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest, 1, 100);// seuil � 190
-                                                                                 // kmH
-    listePrevisionTest.applique(modifier);
-
-    moyenne.reset();
-    listePrevisionTest.applique(moyenne);
-
-    assertTrue(valeurMoyenneAncienne != moyenne.getMoyenneVitesse());
+    double valeurMoyenneAncienne =  this.modifier.getMoyenneVitesseVent(zonePrevisionTest);
+    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, 1, 100);
+    assertTrue(valeurMoyenneAncienne !=  this.modifier.getMoyenneVitesseVent(zonePrevisionTest));
   }
 
   @Test
@@ -173,8 +144,8 @@ public class TestModificationImpl {
   @Test
   public void testMemoire() {
     Json json = new Json();
-    json.JsonWrite(listePrevisionTest, "test2.json");
-    ListePrevision listePrevisionLecture = json.JsonRead("test2.json");
+    json.JsonWrite(listePrevisionTest, "test3.json");
+    ListePrevision listePrevisionLecture = json.JsonRead("test3.json");
 
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
     DonneeVent[][] donneeEnregistre = listePrevisionLecture.getListePrevision().get(0)
@@ -203,5 +174,13 @@ public class TestModificationImpl {
     DonneeVent vent2 = donnee2[3][4];
     assertTrue(vent2.getVitesseVent() == ancienneValeur);
   }
+  
+//  @Test
+//  public void testPileRestauration1() {
+//    ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
+//    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, 1, 100);
+//
+//    this.modifier.restaureArriere();
+//  }
 
 }

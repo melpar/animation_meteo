@@ -23,7 +23,9 @@ public class VisisteurMemoire implements Visiteur {
     double pasY = zonePrevision.getPasY();
     int nombreX = zonePrevision.getNombreX();
     int nombreY = zonePrevision.getNombreY();
-    sauvegarde = new ListePrevision(latitude, longitude, pasX, pasY, nombreX, nombreY);
+    sauvegarde = new ListePrevision();
+    sauvegarde.setListePrevision(new ArrayList<Prevision>());
+    //latitude, longitude, pasX, pasY, nombreX, nombreY);
   }
 
   public ListePrevision getSauvegarde() {
