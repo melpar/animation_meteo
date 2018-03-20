@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javafx.beans.binding.ListExpression;
 import visiteur.ElementVisitable;
 import visiteur.Visiteur;
 
 public class ListePrevision implements ElementVisitable {
-
   private List<Prevision> listePrevision;
   private ZonePrevision zonePrevision;
 
@@ -28,7 +28,6 @@ public class ListePrevision implements ElementVisitable {
     this.listePrevision.add(new Prevision(datePrevision, this.zonePrevision.getNombreX(),
         this.zonePrevision.getNombreY()));
   }
-
 
   public Boolean ajouterDonneeVent(Calendar datePrevision, double u, double v, int positionX,
       int positionY) {

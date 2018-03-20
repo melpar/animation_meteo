@@ -1,7 +1,6 @@
 package carte;
 
 import java.awt.Color;
-import java.util.List;
 
 import org.geotools.data.collection.CollectionFeatureSource;
 import org.geotools.data.simple.SimpleFeatureCollection;
@@ -11,6 +10,7 @@ import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.geotools.map.MapContext;
+import org.geotools.map.MapLayer;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.geotools.styling.SLD;
 import org.geotools.styling.Style;
@@ -21,11 +21,16 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 
+import modification.VisiteurMoyenne;
+import previsionVents.FacadePrevisionVents;
+import previsionVents.ListePrevision;
+import previsionVents.Prevision;
+import previsionVents.ZonePrevision;
+
 public class Dessiner {
 
   MapContext map;
   final SimpleFeatureType TYPE;
-  private static final double taille = 0.5;
   private int indice;
 
   public Dessiner(MapContext map) {
@@ -56,8 +61,10 @@ public class Dessiner {
    * 
    * @return
    */
-  MapContext ajouterCalque(List<InformationsVents> vents) {
-
+  MapContext ajouterCalque(Prevision prev, double t, int pas) {
+    if (map.getLayerCount() == 2) {
+      map.removeLayer(1);
+    }
     // build the type
 
     SimpleFeatureBuilder featureBuilderLines = new SimpleFeatureBuilder(TYPE);
@@ -66,18 +73,32 @@ public class Dessiner {
     SimpleFeature featureLine = featureBuilderLines.buildFeature(null);
     ((DefaultFeatureCollection) collectionLines).add(featureLine);
 
-    for (InformationsVents infos : vents) {
-      System.out.println("ajouter calque");
-      ((DefaultFeatureCollection) collectionLines).add(ajouterFigure(infos));
+    ListePrevision previsions = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions();
+    for (int i = 0; i < prev.getListeDonneVent().length; i += pas) {
+      for (int j = 0; j < prev.getListeDonneVent()[i].length; j += pas) {
+        ZonePrevision zone = new ZonePrevision(previsions.getZonePrevision().getLatitudePosition(i),
+            previsions.getZonePrevision().getLongitudePosition(j),
+            previsions.getZonePrevision().getPasX(), previsions.getZonePrevision().getPasY(), 1, 1);
+        VisiteurMoyenne visiteur = new VisiteurMoyenne(zone);
+        previsions.applique(visiteur);
+        InformationsVents v = new InformationsVents();
+        v.setPositionY(previsions.getZonePrevision().getLatitudePosition(i));
+        v.setPositionX(previsions.getZonePrevision().getLongitudePosition(j));
+        v.setDirection(visiteur.getMoyenneDirection());
+        ((DefaultFeatureCollection) collectionLines).add(ajouterFigure(v, t));
+      }
     }
+
     float lineWidt = 2.0f; // epaisseur des trai
 
-    Style lineStyle = SLD.createLineStyle(Color.red, lineWidt); // definition de la couleur et de
+    Style lineStyle = SLD.createLineStyle(Color.red, lineWidt); // definition de
+                                                                // la couleur et
+                                                                // de
     // l'epaisseur
 
     SimpleFeatureSource collectionFeatureSource = new CollectionFeatureSource(collectionLines);
-
-    map.addLayer(collectionFeatureSource, lineStyle);// ajout du calque : dessin + caracteristique
+    MapLayer layer = new MapLayer(collectionFeatureSource, lineStyle);
+    map.addLayer(layer);// ajout du calque : dessin + caracteristique
 
     return map;
   }
@@ -89,7 +110,7 @@ public class Dessiner {
    *          informations relatives au vent.
    * @return représentation d'une fleche
    */
-  LineString creerFigure(InformationsVents infos) {
+  LineString creerFigure(InformationsVents infos, double taille) {
     infos.setDirection(infos.getDirection() % (2 * Math.PI));
     GeometryFactory gFac = JTSFactoryFinder.getGeometryFactory(JTSFactoryFinder.EMPTY_HINTS);
     Coordinate[] coordinates = new Coordinate[5];
@@ -104,24 +125,26 @@ public class Dessiner {
     double coeff2x = 0.0;
     double coeff2y = 0.0;
     if (infos.getDirection() > 0 && infos.getDirection() < Math.PI) {
-      coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille*0.5;
-      coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille*0.5;
-      coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille*0.5;
-      coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille*0.5;
+      coeff1x = Math.sin((infos.getDirection() - 3 * Math.PI / 4)) * taille * 0.5;
+      coeff1y = Math.cos(infos.getDirection() - 3 * Math.PI / 4) * taille * 0.5;
+      coeff2x = Math.sin(infos.getDirection() + 3 * Math.PI / 4) * taille * 0.5;
+      coeff2y = Math.cos(infos.getDirection() + 3 * Math.PI / 4) * taille * 0.5;
     } else {
-      coeff1x = Math.sin((infos.getDirection() - Math.PI / 4)) * taille*0.5;
-      coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille*0.5;
-      coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille*0.5;
-      coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille*0.5;
+      coeff1x = Math.sin((infos.getDirection() - Math.PI / 4)) * taille * 0.5;
+      coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille * 0.5;
+      coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille * 0.5;
+      coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille * 0.5;
 
     }
     coordinates[0] = CalculPosition.convertEpsg4326to3857(new Coordinate(x, y));
-    System.out.println(coordinates[0].x+" "+coordinates[0].y);
+    System.out.println(coordinates[0].x + " " + coordinates[0].y);
     coordinates[1] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w, y + z));
-    coordinates[2] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w + coeff1x, y + z - coeff1y));
+    coordinates[2] = CalculPosition
+        .convertEpsg4326to3857(new Coordinate(x + w + coeff1x, y + z - coeff1y));
 
     coordinates[3] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w, y + z));
-    coordinates[4] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w - coeff2x, y + z + coeff2y));
+    coordinates[4] = CalculPosition
+        .convertEpsg4326to3857(new Coordinate(x + w - coeff2x, y + z + coeff2y));
 
     LineString line = gFac.createLineString(coordinates);
     System.out.println(line);
@@ -135,9 +158,9 @@ public class Dessiner {
    *          informations relatives à la fleches
    * @return représentation de la fleche
    */
-  SimpleFeature ajouterFigure(InformationsVents infos) {
+  SimpleFeature ajouterFigure(InformationsVents infos, double taille) {
     SimpleFeatureBuilder featureBuilderLines = new SimpleFeatureBuilder(TYPE);
-    featureBuilderLines.add(creerFigure(infos));
+    featureBuilderLines.add(creerFigure(infos, taille));
     SimpleFeature featureLine = featureBuilderLines.buildFeature(null);
     return featureLine;
   }

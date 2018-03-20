@@ -1,6 +1,5 @@
 package carte;
 
-import edition.implementation.Json;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -19,6 +18,7 @@ import org.geotools.map.MapContext;
 import org.geotools.swing.JMapFrame;
 import org.geotools.swing.action.SafeAction;
 
+import edition.implementation.Json;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
 
@@ -54,9 +54,8 @@ public class AffichagePrincipal {
 
     // Create a JMapFrame with a menu to choose the display style for the
     JMapFrame frame = new JMapFrame(map);
-    frame.setSize(800, 600);
+    frame.setSize(1500, 1000);
     frame.enableStatusBar(true);
-
     // frame.enableTool(JMapFrame.Tool.PAN, JMapFrame.Tool.RESET);
     frame.enableToolBar(true);
     frame.getToolBar().remove(1);
@@ -93,7 +92,7 @@ public class AffichagePrincipal {
           ListePrevision prevision = recupGrib
               .getListePrevision(choix.getSelectedFile().getAbsolutePath());
           System.out.println("1");
-          afficherFleches.setPrevisions(prevision);
+          afficherFleches.setPas(5);
           afficherFleches.action(null);
         } else {
           System.out.println("pas de fichier");
@@ -114,7 +113,7 @@ public class AffichagePrincipal {
           // chemin absolu du fichier choisi
           choix.getSelectedFile().getAbsolutePath();
           ListePrevision listePrevision = new Json().JsonRead("test2.json");
-          afficherFleches.setPrevisions(listePrevision);
+          afficherFleches.setPas(5);
           afficherFleches.action(null);
         } else {
           System.out.println("pas de fichier");
