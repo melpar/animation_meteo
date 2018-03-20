@@ -5,14 +5,13 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="fenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.edition.ControleurEdition">
+<BorderPane fx:id="fenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.edition.ControleurEdition">
    <top>
       <HBox prefHeight="137.0" prefWidth="577.0" BorderPane.alignment="CENTER">
          <children>
@@ -58,7 +57,7 @@
                <children>
                   <Label text="Date " />
                   <DatePicker />
-                  <Label prefHeight="17.0" prefWidth="70.0" text="Minutes" />
+                  <Label prefHeight="17.0" prefWidth="70.0" text="Minutes :" />
                   <ComboBox fx:id="minutesVal" prefWidth="150.0" />
                </children>
                <padding>
@@ -85,12 +84,6 @@
       </HBox>
    </top>
    <center>
-      <TableView prefHeight="234.0" prefWidth="494.0" BorderPane.alignment="CENTER">
-        <columns>
-            <TableColumn prefWidth="75.0" text="Date" />
-          <TableColumn prefWidth="75.0" text="Puissance" />
-          <TableColumn prefWidth="75.0" text="Direction" />
-        </columns>
-      </TableView>
+      <TableView fx:id="listePrevision" prefHeight="234.0" prefWidth="494.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

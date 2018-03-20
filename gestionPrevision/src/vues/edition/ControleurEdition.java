@@ -1,10 +1,15 @@
 package vues.edition;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import previsionVents.Prevision;
 
 public class ControleurEdition {
 
@@ -18,16 +23,47 @@ public class ControleurEdition {
   TextField dureeVal;
 
   @FXML
-  DatePicker datePrevision;
-
-  @FXML
   ComboBox<String> heuresVal;
 
   @FXML
   ComboBox<String> minutesVal;
 
   @FXML
+  TableView<NouvelleAjout> listePrevision;
+
+  @FXML
+  TableColumn<NouvelleAjout, String> datePrevision;
+
+  @FXML
+  TableColumn<NouvelleAjout, Float> puissancePrevision;
+
+  @FXML
+  TableColumn<NouvelleAjout, String> heurePrevision;
+
+  @FXML
+  TableColumn<NouvelleAjout, Float> directionPrevision;
+
+  @FXML
+  TableColumn<Prevision, Integer> dureePrevision;
+
+  ObservableList<NouvelleAjout> listeObservable;
+
+  @FXML
   public void initialize() {
+    this.listeObservable = FXCollections.observableArrayList();
+
+    this.datePrevision = new TableColumn<NouvelleAjout, String>("Date");
+    this.puissancePrevision = new TableColumn<NouvelleAjout, Float>("Puissance (Km\\h)");
+    this.directionPrevision = new TableColumn<NouvelleAjout, Float>("Direction (° rad)");
+
+    datePrevision.setCellValueFactory(new PropertyValueFactory<>("date"));
+    puissancePrevision.setCellValueFactory(new PropertyValueFactory<>("puissance"));
+    directionPrevision.setCellValueFactory(new PropertyValueFactory<>("direction"));
+
+    this.listePrevision.getColumns().add(datePrevision);
+    this.listePrevision.getColumns().add(puissancePrevision);
+    this.listePrevision.getColumns().add(directionPrevision);
+
     for (int i = 0; i < 24; i++) {
       heuresVal.getItems().add(i + "");
     }
@@ -42,13 +78,16 @@ public class ControleurEdition {
 
   @FXML
   public void actionBoutonAjouter() {
+    float p = 0;
+    float d = 0;
+    int du = 0;
+
     String chaine;
     try {
       chaine = puissanceVal.getText();
-      System.out.println("ok :" + chaine);
       if (!chaine.equals("")) {
         puissanceVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
-        float p = Float.parseFloat(chaine);
+        p = Float.parseFloat(chaine);
         puissanceVal.setText("" + p);
       } else {
         puissanceVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
@@ -62,8 +101,8 @@ public class ControleurEdition {
       chaine = directionVal.getText();
       if (!chaine.equals("")) {
         directionVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
-        float p = (Float.parseFloat(chaine) % 360);
-        directionVal.setText("" + p);
+        d = (Float.parseFloat(chaine) % 360);
+        directionVal.setText("" + d);
       } else {
         directionVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
       }
@@ -73,17 +112,23 @@ public class ControleurEdition {
 
     try {
       chaine = dureeVal.getText();
-      System.out.println("duree:" + chaine);
       if (!chaine.equals("")) {
         dureeVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
-        float p = (Integer.parseInt(chaine));
-        dureeVal.setText("" + p);
+        du = (Integer.parseInt(chaine));
+        dureeVal.setText("" + du);
       }
     } catch (NumberFormatException e) {
       dureeVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
     }
 
-    System.out.println("ok");
+    NouvelleAjout n = new NouvelleAjout("10-10-10", d, p, "18;13", du);
+    listeObservable.addAll(FXCollections.observableArrayList(n));
+    this.actualiserListePrevision();
+
+  }
+
+  private void actualiserListePrevision() {
+    this.listePrevision.setItems(this.listeObservable);
   }
 
   @FXML
@@ -102,6 +147,64 @@ public class ControleurEdition {
     if ((car >= 'a' && car <= 'z') || (car >= 'A' && car <= 'Z')) {
       k.consume();
     }
+  }
+
+  public class NouvelleAjout {
+
+    public String date;
+    public float direction;
+    public float puissance;
+    public String heure;
+    public int duree;
+
+    public NouvelleAjout(String date, float direction, float puissance, String heure, int duree) {
+      this.date = date;
+      this.direction = direction;
+      this.puissance = puissance;
+      this.heure = heure;
+      this.duree = duree;
+    }
+
+    public String getDate() {
+      return date;
+    }
+
+    public void setDate(String date) {
+      this.date = date;
+    }
+
+    public float getDirection() {
+      return direction;
+    }
+
+    public void setDirection(float direction) {
+      this.direction = direction;
+    }
+
+    public float getPuissance() {
+      return puissance;
+    }
+
+    public void setPuissance(float puissance) {
+      this.puissance = puissance;
+    }
+
+    public String getHeure() {
+      return heure;
+    }
+
+    public void setHeure(String heure) {
+      this.heure = heure;
+    }
+
+    public int getDuree() {
+      return duree;
+    }
+
+    public void setDuree(int duree) {
+      this.duree = duree;
+    }
+
   }
 
 }
