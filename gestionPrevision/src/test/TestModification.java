@@ -3,7 +3,6 @@ package test;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -170,7 +169,7 @@ public class TestModification {
     double ancienneValeur = vent.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    VisisteurMemoire memoire = new VisisteurMemoire(zonePrevisionTest);
+    VisisteurMemoire memoire = new VisisteurMemoire();
     listePrevisionTest.applique(memoire);
     VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
     listePrevisionTest.applique(modifier);

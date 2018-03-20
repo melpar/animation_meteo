@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javafx.beans.binding.ListExpression;
 import visiteur.ElementVisitable;
 import visiteur.Visiteur;
 

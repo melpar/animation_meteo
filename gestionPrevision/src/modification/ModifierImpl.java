@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import previsionVents.FacadePrevisionVents;
+import previsionVents.ListePrevision;
 import previsionVents.ZonePrevision;
-import visiteur.Visiteur;
 
 public class ModifierImpl {
 
@@ -13,14 +13,18 @@ public class ModifierImpl {
   private int retourN;
   private int nbRetourArriere;
   private int nbRetourAvant;
+  private int memoMax;
+  private int memoEtat;
 
-  private List<VisisteurMemoire> listRetour;
+  private List<ListePrevision> listRetour;
 
   public ModifierImpl() {
-    retourN = 0;
+    retourN = -1;
     nbRetourArriere = 0;
     nbRetourAvant = 0;
-    listRetour = new ArrayList<VisisteurMemoire>();
+    memoMax = 0;
+    memoEtat = 0;
+    listRetour = new ArrayList<ListePrevision>();
     memorise();
   }
 
@@ -45,13 +49,13 @@ public class ModifierImpl {
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(modifier);
     memorise();
   }
-  
+
   public double getMoyenneVitesseVent(ZonePrevision zonePrevision) {
     VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevision);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(moyenne);
     return moyenne.getMoyenneVitesse();
   }
-  
+
   public double getMoyenneDirectionVent(ZonePrevision zonePrevision) {
     VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevision);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(moyenne);
@@ -59,18 +63,19 @@ public class ModifierImpl {
   }
 
   private void memorise() {
-    ZonePrevision zonePrevision = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().getZonePrevision();
-    VisisteurMemoire memoire = new VisisteurMemoire(zonePrevision);
+    VisisteurMemoire memoire = new VisisteurMemoire();
+    FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(memoire);
     if (listRetour.size() < RETOUR_MAX) {
-      listRetour.add(memoire);
+      listRetour.add(memoire.getSauvegarde());
     } else {
-      listRetour.set(retourN, memoire);
+      listRetour.set(retourN, memoire.getSauvegarde());
     }
     retourN = (retourN + 1) % RETOUR_MAX;
-    nbRetourArriere = addAction(nbRetourArriere);
-    nbRetourAvant=0;
+    memoMax = addAction(memoMax);
+    // nbRetourArriere = addAction(nbRetourArriere);
+    // nbRetourAvant = 0;
   }
-  
+
   private int addAction(int action) {
     if (action < RETOUR_MAX) {
       return action + 1;
@@ -78,7 +83,7 @@ public class ModifierImpl {
       return action;
     }
   }
-  
+
   private int delAction(int action) {
     if (action > 0) {
       return action - 1;
@@ -87,15 +92,19 @@ public class ModifierImpl {
     }
   }
 
-  public boolean restaureArriere() {
-    int index = (retourN - nbRetourArriere + nbRetourAvant) % RETOUR_MAX;
-    if (nbRetourArriere > 0 | index < listRetour.size()) {
-      VisiteurRestauration restauration = new VisiteurRestauration(listRetour.get(index));
-      FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(restauration);
-      System.out.println(index);
-      nbRetourArriere=delAction(nbRetourArriere);
-      nbRetourAvant=addAction(nbRetourAvant);
+  // private int inverse(int action) {
+  // return listRetour.size() - action;
+  // }
 
+  public boolean restaureArriere() {
+    int index = (retourN - memoEtat - 1) % RETOUR_MAX;
+    // if (nbRetourArriere > 0 & nbRetourArriere < RETOUR_MAX) {
+    if (memoMax > 0 & memoEtat < memoMax) {
+      FacadePrevisionVents.getFacadePrevisionVents().setPrevisions(listRetour.get(index));
+      memoMax = delAction(memoMax);
+      memoEtat = addAction(memoEtat);
+      // nbRetourArriere = addAction(nbRetourArriere);
+      // nbRetourAvant = nbRetourArriere;
       return true;
     } else {
       return false;
@@ -103,12 +112,12 @@ public class ModifierImpl {
   }
 
   public boolean restaureAvant() {
-    int index = (retourN - nbRetourArriere + nbRetourAvant) % RETOUR_MAX;
-    if (nbRetourAvant > 0 | index < listRetour.size()) {
-      VisiteurRestauration restauration = new VisiteurRestauration(listRetour.get(index));
-      FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(restauration);
-      System.out.println(index);
-      nbRetourAvant=delAction(nbRetourAvant);
+    int index = (retourN - memoEtat + 1) % RETOUR_MAX;
+    if (memoEtat > 0) {
+      FacadePrevisionVents.getFacadePrevisionVents().setPrevisions(listRetour.get(index));
+      memoEtat = delAction(memoEtat);
+      // nbRetourAvant = addAction(nbRetourAvant);
+      // nbRetourArriere = delAction(nbRetourArriere);
       return true;
     } else {
       return false;
