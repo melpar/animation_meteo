@@ -48,21 +48,19 @@ public class RecuperationDonneesGrib {
     System.out.println("parse");
     InformationsGrille informations = parser.getInformationsGrille(nom);
     System.out.println("parsé");
-    Map<Date, List<Vent>> liste = informations.getVents();
+    Map<Calendar, List<Vent>> liste = informations.getVents();
 
     ListePrevision listePrevision = new ListePrevision(informations.getLattidude(),
         informations.getLongitude(), informations.getPasX(), informations.getPasY(),
         informations.getNombreX(), informations.getNombreY());
 
-    Set<Date> cles = liste.keySet();
-    Iterator<Date> it = cles.iterator();
+    Set<Calendar> cles = liste.keySet();
+    Iterator<Calendar> it = cles.iterator();
     while (it.hasNext()) {
-      Date date = it.next();
-      List<Vent> vents = liste.get(date);
+      Calendar calendar = it.next();
+      List<Vent> vents = liste.get(calendar);
       for(Vent vent : vents){
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        listePrevision.ajouterDonneeVent(c, vent.getVecteurU(),
+        listePrevision.ajouterDonneeVent(calendar, vent.getVecteurU(),
             vent.getVecteurV(), vent.getLatitude(), vent.getLongitude());
       }
     }
