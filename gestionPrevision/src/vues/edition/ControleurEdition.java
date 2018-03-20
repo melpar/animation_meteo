@@ -15,7 +15,7 @@ public class ControleurEdition {
   TextField directionVal;
 
   @FXML
-  TextField durree;
+  TextField dureeVal;
 
   @FXML
   DatePicker datePrevision;
@@ -35,16 +35,23 @@ public class ControleurEdition {
       minutesVal.getItems().add(i + "");
     }
 
+    directionVal.setPromptText("° rad");
+    puissanceVal.setPromptText("km/h");
+    dureeVal.setPromptText("heures");
   }
 
   @FXML
   public void actionBoutonAjouter() {
-
+    String chaine;
     try {
-      String chaine = directionVal.getText();
+      chaine = puissanceVal.getText();
+      System.out.println("ok :" + chaine);
       if (!chaine.equals("")) {
         puissanceVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
-        Float.parseFloat(puissanceVal.getText());
+        float p = Float.parseFloat(chaine);
+        puissanceVal.setText("" + p);
+      } else {
+        puissanceVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
       }
 
     } catch (NumberFormatException e) {
@@ -52,14 +59,28 @@ public class ControleurEdition {
     }
 
     try {
-      String chaine = directionVal.getText();
+      chaine = directionVal.getText();
       if (!chaine.equals("")) {
         directionVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
-        float p = (Float.parseFloat(directionVal.getText()) % 360);
+        float p = (Float.parseFloat(chaine) % 360);
         directionVal.setText("" + p);
+      } else {
+        directionVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
       }
     } catch (NumberFormatException e) {
       directionVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
+    }
+
+    try {
+      chaine = dureeVal.getText();
+      System.out.println("duree:" + chaine);
+      if (!chaine.equals("")) {
+        dureeVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
+        float p = (Integer.parseInt(chaine));
+        dureeVal.setText("" + p);
+      }
+    } catch (NumberFormatException e) {
+      dureeVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
     }
 
     System.out.println("ok");
