@@ -2,7 +2,6 @@ package analysefichiergrib;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,8 @@ public class InformationsGrille {
 
   public void addVent(Calendar d, Vent v) {
     if (this.listeVents.get(d) == null) {
-      this.listeVents.put(d, new ArrayList<>());
+      List<Vent> liste = new ArrayList<Vent>();
+      this.listeVents.put(d, liste);
     }
     this.listeVents.get(d).add(v);
   }

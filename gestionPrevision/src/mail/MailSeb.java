@@ -1,4 +1,4 @@
-package Mail;
+package mail;
 
 import java.io.File;
 import java.io.FileNotFoundException;

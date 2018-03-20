@@ -33,6 +33,7 @@ public class AffichagePrincipal {
   private SetFrame modifFrame;
   private static String format = "   dd/MM/yyyy hh   ";
   private AfficherFleches afficherFleches;
+  private SimpleFeatureSource featureSource;
 
   /**
    * GeoTools Quickstart demo application. Prompts the user for a shapefile and
@@ -45,7 +46,7 @@ public class AffichagePrincipal {
     file = new File("shape/simplified_land_polygons.shp");
 
     FileDataStore store = FileDataStoreFinder.getDataStore(file);
-    SimpleFeatureSource featureSource = store.getFeatureSource();
+    featureSource = store.getFeatureSource();
 
     // Create a map context and add our shapefile to it
     MapContext map = new DefaultMapContext();
@@ -91,7 +92,10 @@ public class AffichagePrincipal {
               .getListePrevision(choix.getSelectedFile().getAbsolutePath());
           afficherFleches.setPas(5);
           afficherFleches.action(null);
-          System.out.println(featureSource.getBounds().getMaxX()+" "featureSource.getBounds().getMaxY());
+          System.out.println("Min : " + featureSource.getBounds().getMinX() + " "
+              + featureSource.getBounds().getMinY());
+          System.out.println("Max : " + featureSource.getBounds().getMaxX() + " "
+              + featureSource.getBounds().getMaxY());
         } else {
           System.out.println("pas de fichier");
         }
