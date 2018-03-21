@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import facade.Facade;
+import carteFX.facade.FacadeFx;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class ControleurConfiguration implements Initializable {
 
-  private Facade fasade;
+  private FacadeFx fasade;
 
   @FXML
   Label labelPath;
@@ -91,7 +91,7 @@ public class ControleurConfiguration implements Initializable {
     this.comboBoxConserver.getItems().add("Conserver");
     this.comboBoxConserver.getItems().add("Supprimer");
 
-    this.fasade = Facade.getInstance();
+    this.fasade = FacadeFx.getInstance();
 
     /*
      * Initialisation de l'uniter

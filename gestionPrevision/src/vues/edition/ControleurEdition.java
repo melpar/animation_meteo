@@ -1,5 +1,12 @@
 package vues.edition;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +25,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import previsionVents.ListePrevision;
 
 public class ControleurEdition {
 
@@ -201,7 +209,7 @@ public class ControleurEdition {
     }
 
     try {
-      chaine = dateVal.getValue().toString();
+      chaine = dateVal.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
       if (!chaine.equals("")) {
         dateVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
         date = chaine;
@@ -219,7 +227,7 @@ public class ControleurEdition {
     }
 
     if (!(heuresVal.getValue().equals("")) && !(minutesVal.getValue().equals(""))) {
-      heure = heuresVal.getValue() + " : " + minutesVal.getValue();
+      heure = heuresVal.getValue() + ":" + minutesVal.getValue();
     } else {
       validation = false;
 
@@ -273,7 +281,40 @@ public class ControleurEdition {
 
   @FXML
   public void actionBoutonValider() {
+    double la = 50.0;
+    double li = 10.1;
+    double px = 1.0;
+    double py = 1.0;
+    int nx = 20;
+    int ny = 20;
+    ListePrevision lp = new ListePrevision(la, li, px, py, nx, ny);
+    for (int i = 0; i < this.listeObservable.size(); i++) {
+      for (int h = 0; h < this.listeObservable.get(i).getDuree(); i++) {
+        for (int x = 0; x < nx; x++) {
+          for (int y = 0; y < ny; y++) {
+            NouvelleAjout n = this.listeObservable.get(i);
+            Calendar c = this.conversionCalendar(n.getDate(), n.getHeure());
+            lp.ajouterDonneeVent(c, n.getDirection(), n.getPuissance(), x, y);
+          }
+        }
+      }
 
+    }
+
+  }
+
+  private Calendar conversionCalendar(String date, String heure) {
+    Calendar c = Calendar.getInstance();
+
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    Date d = new Date();
+    try {
+      c.setTime(df.parse(date + " " + heure));
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return c;
   }
 
   @FXML

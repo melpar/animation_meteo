@@ -23,8 +23,13 @@ import previsionVents.ZonePrevision;
 
 public class Json {
 
+  /**
+   * 
+   * @param previsions
+   * @param path
+   */
   @SuppressWarnings("unchecked")
-  public void JsonWrite(ListePrevision previsions, String path) {
+  public void jsonWrite(ListePrevision previsions, String path) {
 
     JSONObject obj = new JSONObject();
 

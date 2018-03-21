@@ -1,18 +1,18 @@
-package facade;
+package carteFX.facade;
 
 import configuration.Configuration;
 import edition.implementation.Edition;
 import modification.ModifierImpl;
 
-public class Facade {
+public class FacadeFx {
 
   /*
    * Singleton ---------------------------
    */
 
-  static private Facade facade;
+  static private FacadeFx facade;
 
-  private Facade() {
+  private FacadeFx() {
     super();
     /*
      * Initialisation de l'objet Configuration
@@ -20,13 +20,13 @@ public class Facade {
     this.configuration = new Configuration();
   }
 
-  static public Facade getInstance() {
+  static public FacadeFx getInstance() {
 
-    if (Facade.facade == null) {
-      Facade.facade = new Facade();
+    if (FacadeFx.facade == null) {
+      FacadeFx.facade = new FacadeFx();
     }
 
-    return Facade.facade;
+    return FacadeFx.facade;
   }
 
   /*
