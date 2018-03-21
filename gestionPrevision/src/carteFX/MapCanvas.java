@@ -178,6 +178,11 @@ public class MapCanvas {
     repaint = true;
   }
 
+  public void rafraichir() {
+    ReferencedEnvelope env = new ReferencedEnvelope(map.getViewport().getBounds());
+    doSetDisplayArea(env);
+  }
+
   public MapContext getMap() {
     return map;
   }
