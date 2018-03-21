@@ -136,15 +136,19 @@ public class MapCanvas {
           double difX = e.getSceneX() - baseDrageX;
           double difY = e.getSceneY() - baseDrageY;
           if (difX < 0) {
-            baseX -= difX;
+            zone.setDebutX(baseX + difX);
+            zone.setFinX(baseX);
+          } else {
+            zone.setDebutX(baseX);
+            zone.setFinX(baseX + difX);
           }
           if (difY < 0) {
-            baseY -= difY;
+            zone.setDebutY(baseY + difY);
+            zone.setFinY(baseY);
+          } else {
+            zone.setDebutY(baseY);
+            zone.setFinY(baseY + difY);
           }
-          zone.setDebutX(baseX);
-          zone.setDebutY(baseY);
-          zone.setFinX(baseX + difX);
-          zone.setFinY(baseY + difY);
           repaint = true;
           // gc.setFill(Color.BLUE);
           // gc.fillRect(baseX, baseY, difX, difY);
@@ -216,6 +220,10 @@ public class MapCanvas {
 
   public MapContext getMap() {
     return map;
+  }
+
+  public ZoneSelectionne getzone() {
+    return zone;
   }
 
   private void drawZone(GraphicsContext gc) {
