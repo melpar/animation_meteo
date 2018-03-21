@@ -27,6 +27,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class MapCanvas {
@@ -121,6 +122,16 @@ public class MapCanvas {
           env.translate(env.getMinimum(0) - result.x, env.getMaximum(1) - result.y);
           doSetDisplayArea(env);
           e.consume();
+        } else {
+          double baseX = baseDrageX;
+          double baseY = baseDrageY;
+
+          double difX = e.getSceneX() - baseDrageX;
+          double difY = e.getSceneY() - baseDrageY;
+          gc.setFill(Color.BLUE);
+          gc.fillRect(baseX, baseY, difX, difY);
+          ReferencedEnvelope env = new ReferencedEnvelope(map.getViewport().getBounds());
+          doSetDisplayArea(env);
         }
       }
     });
