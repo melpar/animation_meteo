@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@dark_theme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -33,11 +33,11 @@
    <center>
       <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="38.0" prefWidth="600.0">
                <children>
                   <Button layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonDeplacer" text="Deplacer" />
-                  <Button layoutX="63.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonZoom" text="+" />
-                  <Button layoutX="88.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonDeZoom" text="-" />
+                  <Button layoutX="106.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonZoom" text="+" />
+                  <Button layoutX="165.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonDeZoom" text="-" />
                </children>
             </AnchorPane>
         </items>

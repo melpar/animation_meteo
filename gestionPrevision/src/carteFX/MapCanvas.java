@@ -1,6 +1,7 @@
 package carteFX;
 
 import java.awt.Rectangle;
+import java.io.File;
 import java.io.IOException;
 
 import org.geotools.data.FileDataStore;
@@ -31,7 +32,7 @@ public class MapCanvas {
   public Canvas canvas;
   private MapContext map;
   private GraphicsContext gc;
-
+  private SimpleFeatureSource featureSource;
   public boolean deplacer = false;
 
   public MapCanvas(int width, int height) {
@@ -49,8 +50,12 @@ public class MapCanvas {
 
   private void initMap() {
     try {
-      FileDataStore store = FileDataStoreFinder
-          .getDataStore(this.getClass().getClassLoader().getResource("carteFX/maps/countries.shp"));
+      // FileDataStore store = FileDataStoreFinder
+      // .getDataStore(this.getClass().getClassLoader().getResource("carteFX/maps/countries.shp"));
+      File file;
+      file = new File("shape/simplified_land_polygons.shp");
+
+      FileDataStore store = FileDataStoreFinder.getDataStore(file);
       SimpleFeatureSource featureSource = store.getFeatureSource();
       map = new DefaultMapContext();
       map.setTitle("Quickstart");
@@ -63,6 +68,26 @@ public class MapCanvas {
       e.printStackTrace();
     }
   }
+
+  // private void initMap() {
+  // try {
+  // File file;
+  // file = new File("shape/simplified_land_polygons.shp");
+  //
+  // FileDataStore store = FileDataStoreFinder.getDataStore(file);
+  // featureSource = store.getFeatureSource();
+  //
+  // // Create a map context and add our shapefile to it
+  // MapContext map = new DefaultMapContext();
+  // map.setTitle("Animation météo");
+  // map.addLayer(featureSource, null);
+  // map.getViewport()
+  // .setScreenArea(new Rectangle((int) canvas.getWidth(), (int)
+  // canvas.getHeight()));
+  // } catch (IOException e) {
+  // e.printStackTrace();
+  // }
+  // }
 
   private boolean repaint = true;
 

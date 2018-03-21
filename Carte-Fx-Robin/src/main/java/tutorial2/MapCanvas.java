@@ -54,7 +54,7 @@ public class MapCanvas {
 			Style style = SLD.createSimpleStyle(featureSource.getSchema());
 			FeatureLayer layer = new FeatureLayer(featureSource, style);
 			map.addLayer(layer);
-			map.getViewport().setScreenArea(new Rectangle((int) canvas.getWidth(), (int) canvas.getHeight()));
+			//map.getViewport().setScreenArea(new Rectangle((int) canvas.getWidth(), (int) canvas.getHeight()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
