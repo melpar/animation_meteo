@@ -3,6 +3,7 @@ package carteFX;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import carteFX.densite.Zoom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
@@ -21,7 +22,7 @@ public class Controleur implements Initializable {
   @FXML
   public void actionBouttonDeplacer() {
     System.out.println("Action Boutton Deplacer");
-    gestion.getCanvas().deplacer = !gestion.getCanvas().deplacer;
+    // gestion.getCanvas().deplacer = !gestion.getCanvas().deplacer;
   }
 
   @FXML
@@ -43,6 +44,26 @@ public class Controleur implements Initializable {
     gestion.ouvrirGrib();
   }
 
+  @FXML
+  public void ouvrirFichierJson() {
+    gestion.ouvrirGrib();
+  }
+
+  @FXML
+  public void editer() {
+    gestion.ouvrirGrib();
+  }
+
+  @FXML
+  public void modifier() {
+    gestion.ouvrirGrib();
+  }
+
+  @FXML
+  public void parametre() {
+    gestion.ouvrirGrib();
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // this.canvas = new MapCanvas(1024, 768);
@@ -51,6 +72,7 @@ public class Controleur implements Initializable {
     // // splitPane.getItems().set(1, pane);
     // splitPane.getItems().add(pane);
     gestion = new GestionAffichagePrincipal(splitPane);
+    gestion.getCanvas().deplacer = true;
   }
 
 }
