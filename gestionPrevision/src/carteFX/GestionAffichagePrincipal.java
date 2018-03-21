@@ -60,6 +60,22 @@ public class GestionAffichagePrincipal {
     ;// pas de fichier choisi
   }
 
+  public void ouvrirJson() {
+    // TODO a faire
+  }
+
+  public void editer() {
+    // TODO a faire
+  }
+
+  public void modifier() {
+    // TODO a faire
+  }
+
+  public void parametre() {
+    // TODO a faire
+  }
+
   public MapCanvas getCanvas() {
     return canvas;
   }

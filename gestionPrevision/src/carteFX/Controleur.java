@@ -66,11 +66,6 @@ public class Controleur implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // this.canvas = new MapCanvas(1024, 768);
-    // Pane pane = new Pane(canvas.getCanvas());
-    // // borderPane.setCenter(pane);
-    // // splitPane.getItems().set(1, pane);
-    // splitPane.getItems().add(pane);
     gestion = new GestionAffichagePrincipal(splitPane);
     gestion.getCanvas().deplacer = true;
   }
