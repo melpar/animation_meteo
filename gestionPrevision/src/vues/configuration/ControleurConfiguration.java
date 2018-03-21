@@ -10,20 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class ControleurConfiguration implements Initializable {
 
-  private FacadeFx fasade;
+  private FacadeFx facade;
 
   @FXML
   Label labelPath;
-
-  @FXML
-  TextField textFieldPoints;
 
   @FXML
   ComboBox<String> comboBoxUnite;
@@ -60,10 +56,10 @@ public class ControleurConfiguration implements Initializable {
 
   @FXML
   public void actionAppliquer() {
-    this.fasade.getConfiguration().setDossierSauvegarde(this.labelPath.getText());
-    this.fasade.getConfiguration().setUnite(this.comboBoxUnite.getValue());
-    this.fasade.getConfiguration().setRepresentation(this.comboBoxRepresentation.getValue());
-    this.fasade.getConfiguration().setUnite(this.comboBoxUnite.getValue());
+    this.facade.getConfiguration().setDossierSauvegarde(this.labelPath.getText());
+    this.facade.getConfiguration().setUnite(this.comboBoxUnite.getValue());
+    this.facade.getConfiguration().setRepresentation(this.comboBoxRepresentation.getValue());
+    this.facade.getConfiguration().setUnite(this.comboBoxUnite.getValue());
 
     Stage stage = (Stage) this.buttonAppliquer.getScene().getWindow();
     stage.close();
@@ -91,39 +87,32 @@ public class ControleurConfiguration implements Initializable {
     this.comboBoxConserver.getItems().add("Conserver");
     this.comboBoxConserver.getItems().add("Supprimer");
 
-    this.fasade = FacadeFx.getInstance();
+    this.facade = FacadeFx.getInstance();
 
     /*
      * Initialisation de l'uniter
      */
-    this.comboBoxUnite.setValue(this.fasade.getConfiguration().getUnite());
+    this.comboBoxUnite.setValue(this.facade.getConfiguration().getUnite());
 
     /*
      * Initialisation du type de fleche
      */
-    this.comboBoxRepresentation.setValue(this.fasade.getConfiguration().getRepresentation());
+    this.comboBoxRepresentation.setValue(this.facade.getConfiguration().getRepresentation());
 
     /*
      * Initialisation du dossier de sauvegarde
      */
-    this.labelPath.setText(this.fasade.getConfiguration().getDossierSauvegarde());
-
-    /*
-     * Initialisation du nombre de point
-     */
-    String points = this.fasade.getConfiguration().getPoints().toString();
-    this.textFieldPoints.setText(points);
+    this.labelPath.setText(this.facade.getConfiguration().getDossierSauvegarde());
 
     /*
      * Initialisation Conserver
      */
-    if (this.fasade.getConfiguration().isConserver()) {
+    if (this.facade.getConfiguration().isConserver()) {
       this.comboBoxConserver.setValue("Conserver");
 
     } else {
       this.comboBoxConserver.setValue("Supprimer");
     }
-
   }
 
 }
