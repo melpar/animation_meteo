@@ -29,13 +29,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import previsionVents.ZoneSelectionne;
 
 public class MapCanvas {
   public Canvas canvas;
   private MapContext map;
   private GraphicsContext gc;
-  private SimpleFeatureSource featureSource;
   public boolean deplacer = false;
+  private ZoneSelectionne zone;
 
   public MapCanvas(int width, int height) {
     canvas = new Canvas(width, height);
@@ -82,7 +83,9 @@ public class MapCanvas {
     graphics.setBackground(java.awt.Color.WHITE);
     graphics.clearRect(0, 0, (int) canvas.getWidth(), (int) canvas.getHeight());
     Rectangle rectangle = new Rectangle((int) canvas.getWidth(), (int) canvas.getHeight());
+    drawZone(gc);
     draw.paint(graphics, rectangle, map.getViewport().getBounds());
+
   }
 
   private double baseDrageX;
@@ -102,6 +105,9 @@ public class MapCanvas {
         baseDrageX = e.getSceneX();
         baseDrageY = e.getSceneY();
         e.consume();
+        if (!deplacer) {
+          zone = new ZoneSelectionne(baseDrageX, baseDrageY, baseDrageX, baseDrageY);
+        }
       }
     });
     /*
@@ -120,18 +126,31 @@ public class MapCanvas {
           map.getViewport().getScreenToWorld().transform(newPos, result);
           ReferencedEnvelope env = new ReferencedEnvelope(map.getViewport().getBounds());
           env.translate(env.getMinimum(0) - result.x, env.getMaximum(1) - result.y);
+          zone = null;
           doSetDisplayArea(env);
           e.consume();
         } else {
           double baseX = baseDrageX;
-          double baseY = baseDrageY;
+          double baseY = baseDrageY - 100;
 
           double difX = e.getSceneX() - baseDrageX;
           double difY = e.getSceneY() - baseDrageY;
-          gc.setFill(Color.BLUE);
-          gc.fillRect(baseX, baseY, difX, difY);
-          ReferencedEnvelope env = new ReferencedEnvelope(map.getViewport().getBounds());
-          doSetDisplayArea(env);
+          if (difX < 0) {
+            baseX -= difX;
+          }
+          if (difY < 0) {
+            baseY -= difY;
+          }
+          zone.setDebutX(baseX);
+          zone.setDebutY(baseY);
+          zone.setFinX(baseX + difX);
+          zone.setFinY(baseY + difY);
+          repaint = true;
+          // gc.setFill(Color.BLUE);
+          // gc.fillRect(baseX, baseY, difX, difY);
+          // ReferencedEnvelope env = new
+          // ReferencedEnvelope(map.getViewport().getBounds());
+          // doSetDisplayArea(env);
         }
       }
     });
@@ -156,7 +175,8 @@ public class MapCanvas {
       @Override
       public void handle(ScrollEvent e) {
         Zoom z = new Zoom(MapCanvas.this);
-        z.zoom(e.getDeltaY());
+        zone = null;
+        z.zoom(e.getDeltaY() * -1);
         e.consume();
       }
     });
@@ -196,6 +216,14 @@ public class MapCanvas {
 
   public MapContext getMap() {
     return map;
+  }
+
+  private void drawZone(GraphicsContext gc) {
+    if (zone != null) {
+      gc.setFill(Color.BLUE);
+      gc.fillRect(zone.getDebutX(), zone.getDebutY(), zone.getFinX() - zone.getDebutX(),
+          zone.getFinY() - zone.getDebutY());
+    }
   }
 
 }

@@ -10,9 +10,11 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
+import previsionVents.ZoneSelectionne;
 
 public class GestionAffichagePrincipal {
 
+  ZoneSelectionne zone;
   MapCanvas canvas;
 
   public GestionAffichagePrincipal(SplitPane splitPane) {
@@ -83,5 +85,9 @@ public class GestionAffichagePrincipal {
 
   public MapCanvas getCanvas() {
     return canvas;
+  }
+
+  public ZoneSelectionne getZone() {
+    return zone;
   }
 }
