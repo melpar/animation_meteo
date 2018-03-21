@@ -61,7 +61,7 @@ public class Dessiner {
    * 
    * @return
    */
-  MapContext ajouterCalque(Prevision prev, double t, int pas) {
+  MapContext ajouterCalque(Prevision prev, double t, int pasX, int pasY) {
     if (map.getLayerCount() == 2) {
       map.removeLayer(1);
     }
@@ -74,8 +74,8 @@ public class Dessiner {
     ((DefaultFeatureCollection) collectionLines).add(featureLine);
 
     ListePrevision previsions = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions();
-    for (int i = 0; i < prev.getListeDonneVent().length; i += pas) {
-      for (int j = 0; j < prev.getListeDonneVent()[i].length; j += pas) {
+    for (int i = 0; i < prev.getListeDonneVent().length; i += pasX) {
+      for (int j = 0; j < prev.getListeDonneVent()[i].length; j += pasY) {
         ZonePrevision zone = new ZonePrevision(previsions.getZonePrevision().getLatitudePosition(i),
             previsions.getZonePrevision().getLongitudePosition(j),
             previsions.getZonePrevision().getPasX(), previsions.getZonePrevision().getPasY(), 1, 1);

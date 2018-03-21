@@ -1,5 +1,8 @@
 package previsionVents;
 
+import com.vividsolutions.jts.geom.Coordinate;
+
+import carte.CalculPosition;
 import visiteur.ElementVisitable;
 import visiteur.Visiteur;
 
@@ -16,7 +19,7 @@ public class ZonePrevision implements ElementVisitable {
     super();
   }
 
-  public ZonePrevision( double latitude,double longitude, double pasX, double pasY, int nombreX,
+  public ZonePrevision(double latitude, double longitude, double pasX, double pasY, int nombreX,
       int nombreY) {
     this.longitudeHautGauche = longitude;
     this.latitudeHautGauche = latitude;
@@ -95,4 +98,14 @@ public class ZonePrevision implements ElementVisitable {
     this.nombreY = nombreY;
   }
 
+  public Coordinate getMinimum() {
+    Coordinate coord = new Coordinate(this.latitudeHautGauche + 1, this.longitudeHautGauche + 1);
+    return CalculPosition.convertEpsg4326to3857(coord);
+  }
+
+  public Coordinate getMaximum() {
+    Coordinate coord = new Coordinate(this.latitudeHautGauche - this.nombreX * pasX - 1,
+        this.longitudeHautGauche + this.nombreY * pasY + 1);
+    return CalculPosition.convertEpsg4326to3857(coord);
+  }
 }

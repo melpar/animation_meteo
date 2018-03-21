@@ -34,6 +34,7 @@ public class AffichagePrincipal {
   private static String format = "   dd/MM/yyyy hh   ";
   private AfficherFleches afficherFleches;
   private SimpleFeatureSource featureSource;
+  static JMapFrame frame;
 
   /**
    * GeoTools Quickstart demo application. Prompts the user for a shapefile and
@@ -54,14 +55,14 @@ public class AffichagePrincipal {
     map.addLayer(featureSource, null);
 
     // Create a JMapFrame with a menu to choose the display style for the
-    JMapFrame frame = new JMapFrame(map);
+    frame = new JMapFrame(map);
     frame.setSize(1500, 1000);
     frame.enableStatusBar(true);
     // frame.enableTool(JMapFrame.Tool.PAN, JMapFrame.Tool.RESET);
     frame.enableToolBar(true);
     frame.getToolBar().remove(1);
     Dessiner dessiner = new Dessiner(map);
-    this.afficherFleches = new AfficherFleches(map);
+    this.afficherFleches = AfficherFleches.getInstance(map);
     JButton boutonZoom = new JButton("+");
     boutonZoom.addMouseListener(new ListenerBoutonZoom(frame.getMapPane(), dessiner));
     frame.getToolBar().add(boutonZoom);
@@ -90,12 +91,20 @@ public class AffichagePrincipal {
           RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
           ListePrevision prevision = recupGrib
               .getListePrevision(choix.getSelectedFile().getAbsolutePath());
-          afficherFleches.setPas(5);
+
+          String lesPas = Zoom.realiserZoom(frame.getMapPane(),
+              prevision.getZonePrevision().getMaximum().x,
+              prevision.getZonePrevision().getMinimum().x,
+              prevision.getZonePrevision().getMaximum().y,
+              prevision.getZonePrevision().getMinimum().y, prevision.getZonePrevision().getPasX(),
+              prevision.getZonePrevision().getPasY());
+
+          double pasXDouble = Double.parseDouble(lesPas.split("/")[0]);
+          double pasYDouble = Double.parseDouble(lesPas.split("/")[1]);
+          double taille = prevision.getZonePrevision().getPasX() * (pasXDouble - 5);
+          afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
+          afficherFleches.setTaille(taille);
           afficherFleches.action(null);
-          System.out.println("Min : " + featureSource.getBounds().getMinX() + " "
-              + featureSource.getBounds().getMinY());
-          System.out.println("Max : " + featureSource.getBounds().getMaxX() + " "
-              + featureSource.getBounds().getMaxY());
         } else {
           System.out.println("pas de fichier");
         }
@@ -115,7 +124,7 @@ public class AffichagePrincipal {
           // chemin absolu du fichier choisi
           choix.getSelectedFile().getAbsolutePath();
           ListePrevision listePrevision = new Json().JsonRead("test2.json");
-          afficherFleches.setPas(5);
+          afficherFleches.setPas(5, 5);
           afficherFleches.action(null);
         } else {
           System.out.println("pas de fichier");

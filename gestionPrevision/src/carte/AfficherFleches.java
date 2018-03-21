@@ -10,13 +10,28 @@ import previsionVents.ListePrevision;
 import previsionVents.Prevision;
 
 public class AfficherFleches extends SafeAction {
+  private static AfficherFleches instance;
   MapContext map;
-  private int pas;
+  private int pasX;
+  private int pasY;
+  private double taille;
 
-  public AfficherFleches(MapContext m) {
+  private AfficherFleches(MapContext m) {
     super("Afficher");
     this.map = m;
-    pas = 1;
+    pasX = 1;
+    pasY = 1;
+  }
+
+  public static AfficherFleches getInstance(MapContext m) {
+    if (instance == null) {
+      instance = new AfficherFleches(m);
+    }
+    return instance;
+  }
+
+  public static AfficherFleches getInstance() {
+    return instance;
   }
 
   public void action(ActionEvent e) throws Throwable {
@@ -24,18 +39,18 @@ public class AfficherFleches extends SafeAction {
     if (previsions != null) {
       Dessiner dessiner = new Dessiner(map);
       Prevision prev = previsions.getListePrevision().get(0);
-      Double taille = 0.5;
 
-      dessiner.ajouterCalque(prev, taille, pas);
+      MapContext cont = dessiner.ajouterCalque(prev, taille, pasX, pasY);
     }
 
   }
 
-  public int getPas() {
-    return pas;
+  public void setPas(int pasX, int pasY) {
+    this.pasX = pasX;
+    this.pasY = pasY;
   }
 
-  public void setPas(int pas) {
-    this.pas = pas;
+  public void setTaille(double t) {
+    this.taille = t;
   }
 }

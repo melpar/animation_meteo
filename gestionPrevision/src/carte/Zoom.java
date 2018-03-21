@@ -11,9 +11,12 @@ import javax.swing.JComponent;
 
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.geometry.Envelope2D;
+import org.geotools.swing.MapPane;
 import org.geotools.swing.event.MapMouseEvent;
 import org.geotools.swing.locale.LocaleUtils;
 import org.geotools.swing.tool.ZoomInTool;
+
+import previsionVents.FacadePrevisionVents;
 
 public class Zoom extends ZoomInTool {
   /** Tool name. */
@@ -116,19 +119,58 @@ public class Zoom extends ZoomInTool {
       System.out.println("x = " + ev.getWorldPos().getX() + " | y = " + ev.getWorldPos().getY());
       dragged = false;
       getMapPane().setDisplayArea(env);
+
+      FacadePrevisionVents facade = FacadePrevisionVents.getFacadePrevisionVents();
+      AfficherFleches afficherFleches = AfficherFleches.getInstance();
+      double pasX = facade.getPrevisions().getZonePrevision().getPasX();
+      double pasXDouble = (startPosDevice.getX() - ev.getWorldPos().getX()) / pasX;
+      if (pasXDouble < 0) {
+        pasXDouble = pasXDouble * -1;
+      }
+      while (pasXDouble > 100) {
+        pasXDouble /= 10;
+      }
+      double pasY = facade.getPrevisions().getZonePrevision().getPasY();
+      double pasYDouble = (startPosDevice.getY() - ev.getWorldPos().getY()) / pasY;
+      if (pasYDouble < 0) {
+        pasYDouble = pasYDouble * -1;
+      }
+      while (pasYDouble > 100) {
+        pasYDouble /= 10;
+      }
+      afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
+      double taille = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
+      afficherFleches.setTaille(taille);
+      try {
+        afficherFleches.action(null);
+      } catch (Throwable e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
-    // List<InformationsVents> vents = new ArrayList<>();
-    //
-    // for (int i = 0; i < 10000000; i += 100000) {
-    // InformationsVents v = new InformationsVents();
-    // v.setPositionX(i);
-    // v.setPositionY(i);
-    // v.setDirection(7 * Math.PI / 4);
-    // vents.add(v);
-    // }
-    //
-    // dessiner.ajouterCalque(vents);
     System.out.println("released");
+  }
+
+  public static String realiserZoom(MapPane pan, double x1, double x2, double y1, double y2,
+      double pasX, double pasY) {
+    Envelope2D env = new Envelope2D();
+    Point2D startPosWorld = new Point2D.Double(x1, y1);
+    Point2D stopPosWorld = new Point2D.Double(x2, y2);
+    env.setFrameFromDiagonal(startPosWorld, stopPosWorld);
+    pan.setDisplayArea(env);
+    System.out.println("Zoom : " + x1 + " " + x2 + " " + (x1 - x2));
+    System.out.println("Zoom : " + y1 + " " + y2 + " " + (y2 - y1));
+    double nouveauPasX = (x1 - x2) / pasX;
+    while (nouveauPasX > 100) {
+      nouveauPasX /= 100;
+    }
+    System.out.println("nouveau : " + nouveauPasX);
+    double nouveauPasY = (y2 - y1) / pasY;
+    while (nouveauPasY > 100) {
+      nouveauPasY /= 100;
+    }
+    System.out.println("nouveau : " + nouveauPasY);
+    return nouveauPasX + "/" + nouveauPasY;
   }
 
   /**

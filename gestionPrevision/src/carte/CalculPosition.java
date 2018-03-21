@@ -11,10 +11,17 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.PrecisionModel;
 
 public class CalculPosition {
+  public static CoordinateReferenceSystem sourceCRS;
+  public static CoordinateReferenceSystem targetCRS;
+
   public static Coordinate convertEpsg4326to3857(Coordinate coordinate) {
     try {
-      CoordinateReferenceSystem sourceCRS = CRS.decode("EPSG:4326");
-      CoordinateReferenceSystem targetCRS = CRS.decode("EPSG:3857");
+      if (sourceCRS == null) {
+        sourceCRS = CRS.decode("EPSG:4326");
+      }
+      if (targetCRS == null) {
+        targetCRS = CRS.decode("EPSG:3857");
+      }
       MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, false);
       GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
       Point point = geometryFactory.createPoint(coordinate);
