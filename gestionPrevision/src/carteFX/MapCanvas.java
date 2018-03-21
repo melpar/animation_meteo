@@ -17,6 +17,7 @@ import org.geotools.styling.SLD;
 import org.geotools.styling.Style;
 
 import carteFX.classFX.FXGraphics2D;
+import carteFX.densite.Zoom;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
@@ -50,8 +51,6 @@ public class MapCanvas {
 
   private void initMap() {
     try {
-      // FileDataStore store = FileDataStoreFinder
-      // .getDataStore(this.getClass().getClassLoader().getResource("carteFX/maps/countries.shp"));
       File file;
       file = new File("shape/simplified_land_polygons.shp");
 
@@ -68,26 +67,6 @@ public class MapCanvas {
       e.printStackTrace();
     }
   }
-
-  // private void initMap() {
-  // try {
-  // File file;
-  // file = new File("shape/simplified_land_polygons.shp");
-  //
-  // FileDataStore store = FileDataStoreFinder.getDataStore(file);
-  // featureSource = store.getFeatureSource();
-  //
-  // // Create a map context and add our shapefile to it
-  // MapContext map = new DefaultMapContext();
-  // map.setTitle("Animation météo");
-  // map.addLayer(featureSource, null);
-  // map.getViewport()
-  // .setScreenArea(new Rectangle((int) canvas.getWidth(), (int)
-  // canvas.getHeight()));
-  // } catch (IOException e) {
-  // e.printStackTrace();
-  // }
-  // }
 
   private boolean repaint = true;
 
@@ -194,7 +173,7 @@ public class MapCanvas {
     svc.start();
   }
 
-  protected void doSetDisplayArea(ReferencedEnvelope envelope) {
+  public void doSetDisplayArea(ReferencedEnvelope envelope) {
     map.getViewport().setBounds(envelope);
     repaint = true;
   }
