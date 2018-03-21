@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane fx:id="fenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="705.0" stylesheets="@../../carteFX/css/toolbar-demo.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.edition.ControleurEdition">
+<BorderPane fx:id="fenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="705.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.edition.ControleurEdition">
    <top>
-      <HBox prefHeight="137.0" prefWidth="577.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="137.0" prefWidth="577.0" styleClass="HBox" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                <children>
-                  <Label text="Puissance" />
-                  <TextField id="puisanceVal" fx:id="puissanceVal" onKeyTyped="#keyTyped" />
+                  <Label text="Vitesse" />
+                  <TextField id="puisanceVal" fx:id="vitesseVal" onKeyTyped="#keyTyped" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -92,7 +92,7 @@
    <center>
       <ScrollPane fx:id="consoleZone" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <TextFlow fx:id="console" prefHeight="200.0" prefWidth="596.0" />
+            <TextFlow fx:id="console" prefHeight="118.0" prefWidth="694.0" />
          </content>
       </ScrollPane>
    </center>

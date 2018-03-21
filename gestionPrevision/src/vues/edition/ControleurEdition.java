@@ -22,6 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -31,7 +33,7 @@ import previsionVents.ListePrevision;
 public class ControleurEdition {
 
   @FXML
-  TextField puissanceVal;
+  TextField vitesseVal;
 
   @FXML
   TextField directionVal;
@@ -52,7 +54,7 @@ public class ControleurEdition {
   TableColumn<NouvelleAjout, String> datePrevision;
 
   @FXML
-  TableColumn<NouvelleAjout, Float> puissancePrevision;
+  TableColumn<NouvelleAjout, Float> vitessePrevision;
 
   @FXML
   TableColumn<NouvelleAjout, String> heurePrevision;
@@ -86,7 +88,7 @@ public class ControleurEdition {
 
     this.datePrevision = new TableColumn<NouvelleAjout, String>("Date");
     this.heurePrevision = new TableColumn<NouvelleAjout, String>("Heure");
-    this.puissancePrevision = new TableColumn<NouvelleAjout, Float>("Puissance (Km\\h)");
+    this.vitessePrevision = new TableColumn<NouvelleAjout, Float>("Vitesse (Km\\h)");
     this.directionPrevision = new TableColumn<NouvelleAjout, Float>("Direction (°)");
     this.dureePrevision = new TableColumn<NouvelleAjout, Integer>("Duree (heures)");
     this.supprimerPrevision = new TableColumn<NouvelleAjout, Button>("");
@@ -96,8 +98,8 @@ public class ControleurEdition {
         .setCellValueFactory(new PropertyValueFactory<NouvelleAjout, String>("heure"));
     this.dureePrevision
         .setCellValueFactory(new PropertyValueFactory<NouvelleAjout, Integer>("duree"));
-    this.puissancePrevision
-        .setCellValueFactory(new PropertyValueFactory<NouvelleAjout, Float>("puissance"));
+    this.vitessePrevision
+        .setCellValueFactory(new PropertyValueFactory<NouvelleAjout, Float>("vitesse"));
     this.directionPrevision
         .setCellValueFactory(new PropertyValueFactory<NouvelleAjout, Float>("direction"));
     this.supprimerPrevision
@@ -106,15 +108,15 @@ public class ControleurEdition {
     double taille = 105;
     this.datePrevision.setPrefWidth(taille);
     this.heurePrevision.setPrefWidth(taille);
-    this.puissancePrevision.setPrefWidth(taille + 50);
+    this.vitessePrevision.setPrefWidth(taille + 50);
     this.directionPrevision.setPrefWidth(taille + 50);
     this.dureePrevision.setPrefWidth(taille);
-    this.supprimerPrevision.setPrefWidth(taille - 10);
+    this.supprimerPrevision.setPrefWidth(taille - 15);
 
     this.listePrevision.getColumns().add(datePrevision);
     this.listePrevision.getColumns().add(heurePrevision);
     this.listePrevision.getColumns().add(dureePrevision);
-    this.listePrevision.getColumns().add(puissancePrevision);
+    this.listePrevision.getColumns().add(vitessePrevision);
     this.listePrevision.getColumns().add(directionPrevision);
     this.listePrevision.getColumns().add(supprimerPrevision);
 
@@ -128,7 +130,7 @@ public class ControleurEdition {
     minutesVal.getSelectionModel().selectFirst();
 
     directionVal.setPromptText("°");
-    puissanceVal.setPromptText("km/h");
+    vitesseVal.setPromptText("km/h");
     dureeVal.setPromptText("heures");
 
   }
@@ -145,9 +147,9 @@ public class ControleurEdition {
 
     String chaine;
     try {
-      chaine = puissanceVal.getText();
+      chaine = vitesseVal.getText();
       if (!chaine.equals("")) {
-        puissanceVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
+        vitesseVal.setStyle("-fx-background-color: rgb(153, 255, 153);");
         p = Float.parseFloat(chaine);
         if (p < 0 || p > 410) {
           throw new NumberFormatException();
@@ -158,11 +160,10 @@ public class ControleurEdition {
 
     } catch (NumberFormatException e) {
       validation = false;
-      puissanceVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
+      vitesseVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
 
       Text t = new Text(
-          "Erreur: Champ Puissance (format incorrect: nécessite un nombre -1<puissance<410)"
-              + "\n");
+          "Erreur: Champ Vitesse (format incorrect: nécessite un nombre -1<vitesse<410)" + "\n");
       t.setFill(Color.rgb(204, 0, 0));
       this.console.getChildren().add(t);
       this.scrollbas();
@@ -268,7 +269,7 @@ public class ControleurEdition {
 
   private void actualiserListePrevision() {
     this.listePrevision.setItems(this.listeObservable);
-    this.puissanceVal.setText("");
+    this.vitesseVal.setText("");
     this.dureeVal.setText("");
     this.directionVal.setText("");
     heuresVal.getSelectionModel().selectFirst();
@@ -295,8 +296,8 @@ public class ControleurEdition {
           for (int y = 0; y < ny; y++) {
             NouvelleAjout n = this.listeObservable.get(i);
             Calendar c = this.conversionCalendar(n.getDate(), n.getHeure());
-            double u = this.getU(n.getPuissance(), n.getDirection());
-            double v = this.getV(n.getPuissance(), n.getDirection());
+            double u = this.getU(n.getVitesse(), n.getDirection());
+            double v = this.getV(n.getVitesse(), n.getDirection());
             lp.ajouterDonneeVent(c, u, v, x, y);
           }
         }
@@ -350,21 +351,25 @@ public class ControleurEdition {
   public class NouvelleAjout {
     public String date;
     public float direction;
-    public float puissance;
+    public float vitesse;
     public String heure;
     public int duree;
     public Button bouton;
     public int id;
 
-    public NouvelleAjout(String date, float direction, float puissance, String heure, int duree,
+    public NouvelleAjout(String date, float direction, float vitesse, String heure, int duree,
         int id) {
       this.date = date;
       this.direction = direction;
-      this.puissance = puissance;
+      this.vitesse = vitesse;
       this.heure = heure;
       this.duree = duree;
       this.id = id;
-      this.bouton = new Button("Supprimer");
+      this.bouton = new Button();
+      ImageView i = new ImageView(new Image(getClass().getResourceAsStream("croix.png")));
+      i.setFitWidth(20);
+      i.setFitHeight(20);
+      this.bouton.setGraphic(i);
       this.bouton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent e) {
@@ -389,12 +394,12 @@ public class ControleurEdition {
       this.direction = direction;
     }
 
-    public float getPuissance() {
-      return puissance;
+    public float getVitesse() {
+      return vitesse;
     }
 
-    public void setPuissance(float puissance) {
-      this.puissance = puissance;
+    public void setVitesse(float vitesse) {
+      this.vitesse = vitesse;
     }
 
     public String getHeure() {
