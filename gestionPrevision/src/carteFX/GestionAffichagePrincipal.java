@@ -4,12 +4,17 @@ import javax.swing.JFileChooser;
 
 import org.geotools.geometry.jts.ReferencedEnvelope;
 
+import com.vividsolutions.jts.geom.Coordinate;
+
 import carte.AfficherFleches;
+import carte.CalculPosition;
 import carteFX.densite.Zoom;
+import carteFX.facade.FacadeFx;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
+import previsionVents.ZonePrevision;
 import previsionVents.ZoneSelectionne;
 
 public class GestionAffichagePrincipal {
@@ -88,7 +93,14 @@ public class GestionAffichagePrincipal {
     return canvas;
   }
 
-  public ZoneSelectionne getZone() {
-    return zone;
+  private ZonePrevision getZone() {
+
+    Coordinate coorDeb = CalculPosition.convertEpsg4326to3857(
+        new Coordinate(canvas.getzone().getDebutX(), canvas.getzone().getDebutY()));
+    Coordinate coorFin = CalculPosition.convertEpsg4326to3857(
+        new Coordinate(canvas.getzone().getFinX(), canvas.getzone().getFinY()));
+    int pas = FacadeFx.getFacade().getConfiguration().getPat();
+
+    return null;
   }
 }

@@ -49,12 +49,12 @@ public class Configuration {
     this.representation = representation;
   }
 
-  public Integer getPoints() {
+  public Integer getPat() {
     return pas;
   }
 
-  public void setPoints(Integer points) {
-    this.pas = points;
+  public void setPat(Integer pas) {
+    this.pas = pas;
   }
 
   public boolean isConserver() {
