@@ -37,7 +37,7 @@ public class MainEcritureJson {
 
     // creation json
     Json json = new Json();
-    json.JsonWrite(previsions, "test3.json");
+    json.jsonWrite(previsions, "test3.json");
 
   }
 }

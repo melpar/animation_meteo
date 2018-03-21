@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+import edition.implementation.Json;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,7 +87,7 @@ public class ControleurEdition {
     this.datePrevision = new TableColumn<NouvelleAjout, String>("Date");
     this.heurePrevision = new TableColumn<NouvelleAjout, String>("Heure");
     this.puissancePrevision = new TableColumn<NouvelleAjout, Float>("Puissance (Km\\h)");
-    this.directionPrevision = new TableColumn<NouvelleAjout, Float>("Direction (° rad)");
+    this.directionPrevision = new TableColumn<NouvelleAjout, Float>("Direction (°)");
     this.dureePrevision = new TableColumn<NouvelleAjout, Integer>("Duree (heures)");
     this.supprimerPrevision = new TableColumn<NouvelleAjout, Button>("");
 
@@ -126,7 +127,7 @@ public class ControleurEdition {
     heuresVal.getSelectionModel().selectFirst();
     minutesVal.getSelectionModel().selectFirst();
 
-    directionVal.setPromptText("° rad");
+    directionVal.setPromptText("°");
     puissanceVal.setPromptText("km/h");
     dureeVal.setPromptText("heures");
 
@@ -285,22 +286,25 @@ public class ControleurEdition {
     double li = 10.1;
     double px = 1.0;
     double py = 1.0;
-    int nx = 20;
-    int ny = 20;
+    int nx = 2;
+    int ny = 2;
     ListePrevision lp = new ListePrevision(la, li, px, py, nx, ny);
     for (int i = 0; i < this.listeObservable.size(); i++) {
-      for (int h = 0; h < this.listeObservable.get(i).getDuree(); i++) {
+      for (int h = 0; h < this.listeObservable.get(i).getDuree(); h++) {
         for (int x = 0; x < nx; x++) {
           for (int y = 0; y < ny; y++) {
             NouvelleAjout n = this.listeObservable.get(i);
             Calendar c = this.conversionCalendar(n.getDate(), n.getHeure());
-            lp.ajouterDonneeVent(c, n.getDirection(), n.getPuissance(), x, y);
+            double u = this.getU(n.getPuissance(), n.getDirection());
+            double v = this.getV(n.getPuissance(), n.getDirection());
+            lp.ajouterDonneeVent(c, u, v, x, y);
           }
         }
       }
 
     }
-
+    Json fichier = new Json();
+    fichier.jsonWrite(lp, "jsontest2.json");
   }
 
   private Calendar conversionCalendar(String date, String heure) {
@@ -315,6 +319,14 @@ public class ControleurEdition {
       e.printStackTrace();
     }
     return c;
+  }
+
+  private double getV(double v, double a) {
+    return (Math.cos(a * Math.PI / 180) * v) / 3.6;
+  }
+
+  private double getU(double v, double a) {
+    return (Math.sin(a * Math.PI / 180) * v) / 3.6;
   }
 
   @FXML

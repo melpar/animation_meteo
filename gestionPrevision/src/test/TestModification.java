@@ -135,7 +135,7 @@ public class TestModification {
   @Test
   public void testSauvegardeVent() {
     Json json = new Json();
-    json.JsonWrite(listePrevisionTest, "test2.json");
+    json.jsonWrite(listePrevisionTest, "test2.json");
     ListePrevision listePrevisionLecture = json.JsonRead("test2.json");
 
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
@@ -150,7 +150,7 @@ public class TestModification {
   @Test
   public void testMemoire() {
     Json json = new Json();
-    json.JsonWrite(listePrevisionTest, "test2.json");
+    json.jsonWrite(listePrevisionTest, "test2.json");
     ListePrevision listePrevisionLecture = json.JsonRead("test2.json");
 
     DonneeVent[][] donnee = listePrevisionTest.getListePrevision().get(0).getListeDonneVent();
