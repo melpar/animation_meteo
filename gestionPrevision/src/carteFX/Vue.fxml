@@ -12,19 +12,21 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Fichier">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#ouvrirFichierGrib" text="Ajouter grib" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvrirFichierGrib" text="Ajouter json" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Edition">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Editer" />
+                  <MenuItem mnemonicParsing="false" text="Modifier" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Configurer">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Parametre" />
             </items>
           </Menu>
         </menus>
@@ -33,11 +35,11 @@
    <center>
       <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="38.0" prefWidth="600.0">
+          <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="77.0" prefWidth="598.0">
                <children>
                   <Button layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonDeplacer" text="Deplacer" />
-                  <Button layoutX="106.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonZoom" text="+" />
-                  <Button layoutX="165.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonDeZoom" text="-" />
+                  <Button layoutX="154.0" layoutY="3.0" mnemonicParsing="false" onAction="#actionBouttonZoom" text="+" />
+                  <Button layoutX="208.0" layoutY="3.0" mnemonicParsing="false" onAction="#actionBouttonDeZoom" text="-" />
                </children>
             </AnchorPane>
         </items>
