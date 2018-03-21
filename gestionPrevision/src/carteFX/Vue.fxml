@@ -9,16 +9,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1145.0" stylesheets="@css/toolbar-demo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1145.0" stylesheets="@css/toolbar-demo.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
    <center>
       <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="500.0" prefWidth="1083.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <ToolBar prefHeight="84.0" prefWidth="1145.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false">
+          <Button mnemonicParsing="false" onAction="#ouvrirFichierGrib">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +37,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#editer">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -48,7 +47,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#modifier">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +57,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false" prefHeight="82.0" prefWidth="123.0">
+            <Button mnemonicParsing="false" onAction="#actionBouttonDeplacer" prefHeight="82.0" prefWidth="123.0">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -68,7 +67,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#actionBouttonDeplacer">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +77,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#actionBouttonZoom">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -88,7 +87,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#actionBouttonDeZoom">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -98,7 +97,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="94.0" prefWidth="102.0">
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#parametre" prefHeight="94.0" prefWidth="102.0">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -126,14 +125,4 @@
          </styleClass>
       </ToolBar>
    </top>
-   <left>
-      <VBox prefHeight="534.0" prefWidth="175.0" styleClass="sidebar-section" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-         </children>
-      </VBox>
-   </left>
 </BorderPane>
