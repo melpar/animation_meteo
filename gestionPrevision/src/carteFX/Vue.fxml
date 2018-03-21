@@ -1,48 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@dark_theme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Fichier">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#ouvrirFichierGrib" text="Ajouter grib" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvrirFichierGrib" text="Ajouter json" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edition">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Editer" />
-                  <MenuItem mnemonicParsing="false" text="Modifier" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Configurer">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Parametre" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1145.0" stylesheets="@css/toolbar-demo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
    <center>
-      <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="77.0" prefWidth="598.0">
-               <children>
-                  <Button layoutY="2.0" mnemonicParsing="false" onAction="#actionBouttonDeplacer" text="Deplacer" />
-                  <Button layoutX="154.0" layoutY="3.0" mnemonicParsing="false" onAction="#actionBouttonZoom" text="+" />
-                  <Button layoutX="208.0" layoutY="3.0" mnemonicParsing="false" onAction="#actionBouttonDeZoom" text="-" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="500.0" prefWidth="1083.0" BorderPane.alignment="CENTER" />
    </center>
+   <top>
+      <ToolBar prefHeight="84.0" prefWidth="1145.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_folder_open_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_save_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_mode_edit_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_mode_edit_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false" prefHeight="82.0" prefWidth="123.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_open_with_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_photo_size_select_small_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_zoom_in_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_zoom_out_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="94.0" prefWidth="102.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icones/ic_settings_black_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icones/ic_keyboard_arrow_left_black_24dp.png" />
+               </image>
+            </ImageView>
+            <Label text="Label" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icones/ic_keyboard_arrow_right_black_24dp.png" />
+               </image>
+            </ImageView>
+        </items>
+         <styleClass>
+            <String fx:value="toolbar" />
+            <String fx:value="header-section" />
+         </styleClass>
+      </ToolBar>
+   </top>
+   <left>
+      <VBox prefHeight="534.0" prefWidth="175.0" styleClass="sidebar-section" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Button" />
+         </children>
+      </VBox>
+   </left>
 </BorderPane>
