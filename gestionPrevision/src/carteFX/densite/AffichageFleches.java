@@ -22,7 +22,6 @@ public class AffichageFleches {
 
     // Si la zone affichée est plus petite, on adapte
     AfficherFleches afficherFleches = AfficherFleches.getInstance();
-    System.out.println("prev = " + facade.getPrevisions());
     if (facade.getPrevisions() != null) {
       System.out.println("on met à jour les fleches");
       double pasX = facade.getPrevisions().getZonePrevision().getPasX();
@@ -39,7 +38,9 @@ public class AffichageFleches {
         pasYDouble /= 10;
       }
       afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
-      double taille = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
+      double tailleX = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
+      double tailleY = facade.getPrevisions().getZonePrevision().getPasY() * (pasYDouble - 5);
+      double taille = tailleX < tailleY ? tailleX : tailleY;
       afficherFleches.setTaille(taille);
       try {
         afficherFleches.action(null);

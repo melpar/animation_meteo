@@ -146,7 +146,6 @@ public class Dessiner {
         .convertEpsg4326to3857(new Coordinate(x + w - coeff2x, y + z + coeff2y));
 
     LineString line = gFac.createLineString(coordinates);
-    System.out.println(line);
     return line;
   }
 
