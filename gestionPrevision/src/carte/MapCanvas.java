@@ -22,7 +22,8 @@ import org.geotools.renderer.lite.StreamingRenderer;
 import org.geotools.styling.SLD;
 
 import org.geotools.styling.Style;
-import org.jfree.fx.FXGraphics2D;
+
+import carteFX.classFX.FXGraphics2D;
 
 
 public class MapCanvas {
