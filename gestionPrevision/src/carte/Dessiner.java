@@ -99,7 +99,6 @@ public class Dessiner {
     SimpleFeatureSource collectionFeatureSource = new CollectionFeatureSource(collectionLines);
     MapLayer layer = new MapLayer(collectionFeatureSource, lineStyle);
     map.addLayer(layer);// ajout du calque : dessin + caracteristique
-
     return map;
   }
 

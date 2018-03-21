@@ -27,13 +27,15 @@ public class Controleur implements Initializable {
   @FXML
   public void actionBouttonZoom() {
     System.out.println("Action Boutton Zoom");
-    gestion.getCanvas().zoom(-100);
+    Zoom z = new Zoom(gestion.getCanvas());
+    z.zoom(-100);
   }
 
   @FXML
   public void actionBouttonDeZoom() {
     System.out.println("Action Boutton DeZoom");
-    gestion.getCanvas().zoom(100);
+    Zoom z = new Zoom(gestion.getCanvas());
+    z.zoom(100);
   }
 
   @FXML

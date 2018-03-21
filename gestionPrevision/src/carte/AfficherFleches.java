@@ -40,7 +40,7 @@ public class AfficherFleches extends SafeAction {
       Dessiner dessiner = new Dessiner(map);
       Prevision prev = previsions.getListePrevision().get(0);
 
-      MapContext cont = dessiner.ajouterCalque(prev, taille, pasX, pasY);
+      dessiner.ajouterCalque(prev, taille, pasX, pasY);
     }
 
   }

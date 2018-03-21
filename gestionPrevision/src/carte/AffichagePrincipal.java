@@ -61,11 +61,16 @@ public class AffichagePrincipal {
     // frame.enableTool(JMapFrame.Tool.PAN, JMapFrame.Tool.RESET);
     frame.enableToolBar(true);
     frame.getToolBar().remove(1);
+    frame.getToolBar().remove(1);
     Dessiner dessiner = new Dessiner(map);
     this.afficherFleches = AfficherFleches.getInstance(map);
     JButton boutonZoom = new JButton("+");
     boutonZoom.addMouseListener(new ListenerBoutonZoom(frame.getMapPane(), dessiner));
     frame.getToolBar().add(boutonZoom);
+
+    JButton boutonZoomOut = new JButton("-");
+    boutonZoomOut.addMouseListener(new ListenerBoutonZoomOut(frame.getMapPane(), dessiner));
+    frame.getToolBar().add(boutonZoomOut);
 
     System.out.println(frame.getMapPane());
     System.out.println(frame.getMapPane().getComponentCount());
@@ -101,7 +106,9 @@ public class AffichagePrincipal {
 
           double pasXDouble = Double.parseDouble(lesPas.split("/")[0]);
           double pasYDouble = Double.parseDouble(lesPas.split("/")[1]);
-          double taille = prevision.getZonePrevision().getPasX() * (pasXDouble - 5);
+          double tailleX = prevision.getZonePrevision().getPasX() * (pasXDouble - 5);
+          double tailleY = prevision.getZonePrevision().getPasY() * (pasYDouble - 5);
+          double taille = tailleX < tailleY ? tailleX : tailleY;
           afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
           afficherFleches.setTaille(taille);
           afficherFleches.action(null);

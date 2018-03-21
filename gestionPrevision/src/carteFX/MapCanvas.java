@@ -165,21 +165,11 @@ public class MapCanvas {
 
       @Override
       public void handle(ScrollEvent e) {
-        zoom(e.getDeltaY());
+        Zoom z = new Zoom(MapCanvas.this);
+        z.zoom(e.getDeltaY());
         e.consume();
       }
     });
-  }
-
-  public void zoom(double delta) {
-    ReferencedEnvelope envelope = map.getViewport().getBounds();
-    double percent = delta / canvas.getWidth();
-    double width = envelope.getWidth();
-    double height = envelope.getHeight();
-    double deltaW = width * percent;
-    double deltaH = height * percent;
-    envelope.expandBy(deltaW, deltaH);
-    doSetDisplayArea(envelope);
   }
 
   private static final double PAINT_HZ = 50.0;

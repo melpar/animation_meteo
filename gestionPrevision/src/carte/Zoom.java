@@ -122,30 +122,34 @@ public class Zoom extends ZoomInTool {
 
       FacadePrevisionVents facade = FacadePrevisionVents.getFacadePrevisionVents();
       AfficherFleches afficherFleches = AfficherFleches.getInstance();
-      double pasX = facade.getPrevisions().getZonePrevision().getPasX();
-      double pasXDouble = (startPosDevice.getX() - ev.getWorldPos().getX()) / pasX;
-      if (pasXDouble < 0) {
-        pasXDouble = pasXDouble * -1;
-      }
-      while (pasXDouble > 100) {
-        pasXDouble /= 10;
-      }
-      double pasY = facade.getPrevisions().getZonePrevision().getPasY();
-      double pasYDouble = (startPosDevice.getY() - ev.getWorldPos().getY()) / pasY;
-      if (pasYDouble < 0) {
-        pasYDouble = pasYDouble * -1;
-      }
-      while (pasYDouble > 100) {
-        pasYDouble /= 10;
-      }
-      afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
-      double taille = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
-      afficherFleches.setTaille(taille);
-      try {
-        afficherFleches.action(null);
-      } catch (Throwable e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+      System.out.println("prev = " + facade.getPrevisions());
+      if (facade.getPrevisions() != null) {
+        System.out.println("on met à jour les fleches");
+        double pasX = facade.getPrevisions().getZonePrevision().getPasX();
+        double pasXDouble = (startPosDevice.getX() - ev.getWorldPos().getX()) / pasX;
+        if (pasXDouble < 0) {
+          pasXDouble = pasXDouble * -1;
+        }
+        while (pasXDouble > 100) {
+          pasXDouble /= 10;
+        }
+        double pasY = facade.getPrevisions().getZonePrevision().getPasY();
+        double pasYDouble = (startPosDevice.getY() - ev.getWorldPos().getY()) / pasY;
+        if (pasYDouble < 0) {
+          pasYDouble = pasYDouble * -1;
+        }
+        while (pasYDouble > 100) {
+          pasYDouble /= 10;
+        }
+        afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
+        double taille = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
+        afficherFleches.setTaille(taille);
+        try {
+          afficherFleches.action(null);
+        } catch (Throwable e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
       }
     }
     System.out.println("released");
