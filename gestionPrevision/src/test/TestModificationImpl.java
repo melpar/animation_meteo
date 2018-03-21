@@ -49,7 +49,7 @@ public class TestModificationImpl {
     double ancienneValeur = vent.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
 
     double vitesseTest = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
         .getListePrevision().get(0).getListeDonneVent()[3][4].getVitesseVent();
@@ -68,7 +68,7 @@ public class TestModificationImpl {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(6, 3, 5, 5, 7, 7);
-    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
 
     assertTrue(ventDebut.getVitesseVent() == ancienneValeurDebut);
     assertTrue(ventMilieu.getVitesseVent() == ancienneValeurMilieux / 2);
@@ -86,7 +86,7 @@ public class TestModificationImpl {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    this.modifier.modifierContrasteProgressifVent(zonePrevisionTest, (float) 0.5, 190);
+    this.modifier.modifierContrasteProgressifVent(zonePrevisionTest, dateTest, (float) 0.5, 190);
     ;
 
     assertTrue(ventFort.getVitesseVent() - ancienneValeurFort * 2 < 0.1);
@@ -105,7 +105,7 @@ public class TestModificationImpl {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, (float) 0.5, 190);
+    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, dateTest, (float) 0.5, 190);
 
     double valeurTester = ancienneValeurFort * 2
         / (1.0 + Math.exp(-0.5 * (ancienneValeurFort - 190)));
@@ -117,9 +117,10 @@ public class TestModificationImpl {
   @Test
   public void testMoyenne() {
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    double valeurMoyenneAncienne = this.modifier.getMoyenneVitesseVent(zonePrevisionTest);
-    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, 1, 100);
-    assertTrue(valeurMoyenneAncienne != this.modifier.getMoyenneVitesseVent(zonePrevisionTest));
+    double valeurMoyenneAncienne = this.modifier.getMoyenneVitesseVent(zonePrevisionTest, dateTest);
+    this.modifier.modifierContrasteLineaireVent(zonePrevisionTest, dateTest, 1, 100);
+    assertTrue(
+        valeurMoyenneAncienne != this.modifier.getMoyenneVitesseVent(zonePrevisionTest, dateTest));
   }
 
   @Test
@@ -161,7 +162,7 @@ public class TestModificationImpl {
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
     VisisteurMemoire memoire = new VisisteurMemoire();
     listePrevisionTest.applique(memoire);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, dateTest, -0.5);
     listePrevisionTest.applique(modifier);
     assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
     VisiteurRestauration restauration = new VisiteurRestauration(memoire);
@@ -181,7 +182,7 @@ public class TestModificationImpl {
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
 
-    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
 
     double vitesseTest = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
         .getListePrevision().get(0).getListeDonneVent()[3][4].getVitesseVent();
@@ -204,7 +205,7 @@ public class TestModificationImpl {
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
 
-    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
 
     this.modifier.restaureArriere();
     this.modifier.restaureAvant();
@@ -223,7 +224,7 @@ public class TestModificationImpl {
   @Test
   public void testPileRestauration4() {
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
     assertTrue(this.modifier.restaureArriere());
     assertTrue(this.modifier.restaureAvant());
     assertTrue(!this.modifier.restaureAvant());
@@ -232,7 +233,7 @@ public class TestModificationImpl {
   @Test
   public void testPileRestauration5() {
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
     assertTrue(this.modifier.restaureArriere());
     assertTrue(!this.modifier.restaureArriere());
   }

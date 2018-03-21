@@ -46,7 +46,7 @@ public class TestModification {
     double ancienneValeur = vent.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, dateTest, -0.5);
     listePrevisionTest.applique(modifier);
 
     assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
@@ -63,7 +63,7 @@ public class TestModification {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(6, 3, 5, 5, 7, 7);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, dateTest, -0.5);
     listePrevisionTest.applique(modifier);
 
     assertTrue(ventDebut.getVitesseVent() == ancienneValeurDebut);
@@ -82,8 +82,9 @@ public class TestModification {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest, 0.5, 190);// seuil �
-                                                                                     // 190 kmH
+    Visiteur modifier = new VisiteurContrasteProgressif(zonePrevisionTest, dateTest, 0.5, 190);// seuil
+                                                                                               // �
+    // 190 kmH
     listePrevisionTest.applique(modifier);
 
     assertTrue(ventFort.getVitesseVent() - ancienneValeurFort * 2 < 0.1);
@@ -102,8 +103,10 @@ public class TestModification {
     double ancienneValeurFin = ventFin.getVitesseVent();
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest, 0.5, 190);// seuil � 190
-                                                                                   // kmH
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest, dateTest, 0.5, 190);// seuil
+                                                                                             // �
+                                                                                             // 190
+    // kmH
     listePrevisionTest.applique(modifier);
 
     double valeurTester = ancienneValeurFort * 2
@@ -118,12 +121,14 @@ public class TestModification {
 
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
 
-    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevisionTest);
+    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevisionTest, dateTest);
     listePrevisionTest.applique(moyenne);
     double valeurMoyenneAncienne = moyenne.getMoyenneVitesse();
 
-    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest, 1, 100);// seuil � 190
-                                                                                 // kmH
+    Visiteur modifier = new VisiteurContrasteLineaire(zonePrevisionTest, dateTest, 1, 100);// seuil
+                                                                                           // �
+                                                                                           // 190
+    // kmH
     listePrevisionTest.applique(modifier);
 
     moyenne.reset();
@@ -171,7 +176,7 @@ public class TestModification {
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
     VisisteurMemoire memoire = new VisisteurMemoire();
     listePrevisionTest.applique(memoire);
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, -0.5);
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevisionTest, dateTest, -0.5);
     listePrevisionTest.applique(modifier);
     assertTrue(vent.getVitesseVent() == ancienneValeur / 2);
     VisiteurRestauration restauration = new VisiteurRestauration(memoire);
