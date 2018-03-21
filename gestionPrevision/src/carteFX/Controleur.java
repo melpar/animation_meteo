@@ -46,22 +46,22 @@ public class Controleur implements Initializable {
 
   @FXML
   public void ouvrirFichierJson() {
-    gestion.ouvrirGrib();
+    gestion.ouvrirJson();
   }
 
   @FXML
   public void editer() {
-    gestion.ouvrirGrib();
+    gestion.editer();
   }
 
   @FXML
   public void modifier() {
-    gestion.ouvrirGrib();
+    gestion.modifier();
   }
 
   @FXML
   public void parametre() {
-    gestion.ouvrirGrib();
+    gestion.parametre();
   }
 
   @Override
