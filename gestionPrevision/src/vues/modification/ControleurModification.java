@@ -27,15 +27,17 @@ public class ControleurModification {
   @FXML
   Text champErreur;
 
+  // initialise les champs text
   @FXML
   public void initialize() {
     this.choix.setPromptText(" ");
     this.choix.getItems().add("Contraste lineaire");
     this.choix.getItems().add("Contraste progressif");
     this.choix.getItems().add("Coefficient");
-    // champErreur.setText(" ");
   }
 
+  // foncion lors du clique sur le bouton ajouter
+  // manque verif pour la date
   @FXML
   public void actionButton() {
     if (verif())
@@ -48,9 +50,11 @@ public class ControleurModification {
     this.champErreur.setText("");
   }
 
+  // fonction qui verifie que les champs seuil et coefficient sont correct
   public boolean verif() {
     boolean valide = true;
     champErreur.setText("");
+    // verif choix Contraste lineaire
     if (this.choix.getValue().equals("Contraste lineaire")) {
       if (champCoeff.getText().isEmpty() || champSeuil.getText().isEmpty()) {
         champErreur.setText("Un ou plusieurs champ sont vide\n");
@@ -73,7 +77,7 @@ public class ControleurModification {
       }
 
     }
-
+    // verif choix Contraste progressif
     if (this.choix.getValue().equals("Contraste progressif")) {
       if (champCoeff.getText().isEmpty() || champSeuil.getText().isEmpty()) {
         champErreur.setText("Un ou plusieurs champ sont vide\n");
@@ -94,6 +98,7 @@ public class ControleurModification {
           champErreur.setText("Saisie valider");
       }
     }
+    // verif choix coeff
     if (this.choix.getValue().equals("Coefficient")) {
       if (champCoeff.getText().isEmpty()) {
         champErreur.setText("Le champ coeff est vide\n");
@@ -104,7 +109,7 @@ public class ControleurModification {
           champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
           valide = false;
         }
-        // si valider lancer la fonction modifierCoefficientVent de la facade
+        // si tout est correct
         if (valide)
           champErreur.setText("Saisie valider");
       }
@@ -112,6 +117,7 @@ public class ControleurModification {
     return valide;
   }
 
+  // fonction qui affiche les champs de saisie.
   @FXML
   public void choix() {
     init();
