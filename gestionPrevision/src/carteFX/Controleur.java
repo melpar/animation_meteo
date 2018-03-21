@@ -7,6 +7,7 @@ import carteFX.densite.Zoom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
@@ -25,6 +26,15 @@ public class Controleur implements Initializable {
 
   @FXML
   Button selectionner;
+
+  @FXML
+  Button dateSuivante;
+
+  @FXML
+  Button datePrecedente;
+
+  @FXML
+  Label labelDate;
 
   @FXML
   public void actionBouttonDeplacer() {
@@ -56,6 +66,7 @@ public class Controleur implements Initializable {
   @FXML
   public void ouvrirFichierGrib() {
     gestion.ouvrirGrib();
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
   }
 
   @FXML
@@ -66,6 +77,7 @@ public class Controleur implements Initializable {
   @FXML
   public void editer() {
     gestion.editer();
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
   }
 
   @FXML
@@ -76,6 +88,18 @@ public class Controleur implements Initializable {
   @FXML
   public void parametre() {
     gestion.parametre();
+  }
+
+  @FXML
+  public void dateSuivante() {
+    gestion.dateSuivante();
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
+  }
+
+  @FXML
+  public void datePrecedente() {
+    gestion.datePrecedente();
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
   }
 
   @Override

@@ -79,7 +79,7 @@ public class Dessiner {
         ZonePrevision zone = new ZonePrevision(previsions.getZonePrevision().getLatitudePosition(i),
             previsions.getZonePrevision().getLongitudePosition(j),
             previsions.getZonePrevision().getPasX(), previsions.getZonePrevision().getPasY(), 1, 1);
-        VisiteurMoyenne visiteur = new VisiteurMoyenne(zone);
+        VisiteurMoyenne visiteur = new VisiteurMoyenne(zone, prev.getDatePrevision());
         previsions.applique(visiteur);
         InformationsVents v = new InformationsVents();
         v.setPositionY(previsions.getZonePrevision().getLatitudePosition(i));
