@@ -72,10 +72,11 @@ public class GestionAffichagePrincipal {
   }
 
   public void editer() {
-    // TODO a faire
+    // Facade.getInstance()
   }
 
   public void modifier() {
+
     // TODO a faire
   }
 

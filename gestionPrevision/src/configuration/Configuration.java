@@ -7,7 +7,7 @@ public class Configuration {
   private String dossierSauvegarde;
   private String unite;
   private String representation;
-  private Integer points;
+  private Integer pas;
   private boolean conserver;
 
   /*
@@ -17,8 +17,8 @@ public class Configuration {
     super();
     this.dossierSauvegarde = "Gribs";
     this.unite = "km/h";
-    this.representation = "Flèches";
-    this.points = 10;
+    this.representation = "Fleches";
+    this.pas = 10;
     this.conserver = true;
   }
 
@@ -50,11 +50,11 @@ public class Configuration {
   }
 
   public Integer getPoints() {
-    return points;
+    return pas;
   }
 
   public void setPoints(Integer points) {
-    this.points = points;
+    this.pas = points;
   }
 
   public boolean isConserver() {

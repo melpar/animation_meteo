@@ -17,6 +17,7 @@ public class FacadeFx {
     /*
      * Initialisation de l'objet Configuration
      */
+    this.modifier = new ModifierImpl();
     this.configuration = new Configuration();
   }
 
@@ -34,21 +35,26 @@ public class FacadeFx {
    */
 
   /*
-   * Attribue ---------------------------
+   * Attribut ---------------------------
    */
   private ModifierImpl modifier;
   private Edition edition;
   private Configuration configuration;
 
   /*
-   * Méthodes ---------------------------
+   * Methodes ---------------------------
    */
 
   /*
-   * Getters et Setteurs ----------------
+   * Getters et Setters ----------------
    */
+
   public Configuration getConfiguration() {
     return configuration;
+  }
+
+  public static FacadeFx getFacade() {
+    return facade;
   }
 
   public void setConfiguration(Configuration configuration) {

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.configuration.ControleurConfiguration">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.configuration.ControleurConfiguration">
    <center>
       <VBox prefHeight="200.0" prefWidth="307.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -24,7 +24,7 @@
             <Label fx:id="labelPath" text="/home/louarn/app" />
             <Button mnemonicParsing="false" onAction="#modifierDossierStockage" text="Choisir" />
             <Separator prefWidth="200.0" />
-            <Label text="Choisir le nombre de points desiré : " />
+            <Label text="Choisir la valeur du pas : " />
             <TextField fx:id="textFieldPoints" onKeyTyped="#keyTyped" />
             <Separator prefWidth="200.0" />
             <Label text="Sélectionner la representation du vent : " />
