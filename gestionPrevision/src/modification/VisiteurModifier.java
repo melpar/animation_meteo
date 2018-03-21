@@ -1,5 +1,7 @@
 package modification;
 
+import java.util.Calendar;
+
 import previsionVents.DonneeVent;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
@@ -13,9 +15,11 @@ public abstract class VisiteurModifier implements Visiteur {
 
   ZonePrevision zoneModifier;
   ZonePrevision zonePrevision;
+  Calendar date;
 
-  public VisiteurModifier(ZonePrevision zone) {
+  public VisiteurModifier(ZonePrevision zone, Calendar date) {
     this.zoneModifier = zone;
+    this.date = date;
   }
 
   /**
@@ -68,7 +72,9 @@ public abstract class VisiteurModifier implements Visiteur {
 
   @Override
   public void agitSur(Prevision element) {
-    zoneModifier(element);
+    if (element.getDatePrevision().equals(date)) {
+      zoneModifier(element);
+    }
   }
 
   @Override

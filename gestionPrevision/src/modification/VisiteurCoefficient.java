@@ -1,5 +1,7 @@
 package modification;
 
+import java.util.Calendar;
+
 import previsionVents.DonneeVent;
 import previsionVents.ZonePrevision;
 
@@ -14,8 +16,8 @@ public class VisiteurCoefficient extends VisiteurModifier {
    * @param coefficient.
    */
 
-  public VisiteurCoefficient(ZonePrevision zone, double coefficient) {
-    super(zone);
+  public VisiteurCoefficient(ZonePrevision zone, Calendar date, double coefficient) {
+    super(zone, date);
 
     // Le coefficient ne peux pas etre superieur a 1 ou inferieur a -1
     if (Math.abs(coefficient) > 1) {

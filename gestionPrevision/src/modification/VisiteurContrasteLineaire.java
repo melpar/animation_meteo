@@ -1,5 +1,7 @@
 package modification;
 
+import java.util.Calendar;
+
 import previsionVents.DonneeVent;
 import previsionVents.ZonePrevision;
 
@@ -20,8 +22,9 @@ public class VisiteurContrasteLineaire extends VisiteurModifier {
    *          du contraste
    */
 
-  public VisiteurContrasteLineaire(ZonePrevision zone, double coefficient, double seuil) {
-    super(zone);
+  public VisiteurContrasteLineaire(ZonePrevision zone, Calendar date, double coefficient,
+      double seuil) {
+    super(zone, date);
 
     // Le coefficient ne peux pas etre superieur a 1 ou inferieur a -1
     if (Math.abs(coefficient) > 10) {

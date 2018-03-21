@@ -1,5 +1,7 @@
 package modification;
 
+import java.util.Calendar;
+
 import previsionVents.DonneeVent;
 import previsionVents.ZonePrevision;
 
@@ -10,8 +12,8 @@ public class VisiteurMoyenne extends VisiteurModifier {
   double totalDonneesVitesse;
   double totalDonneesDirection;
 
-  public VisiteurMoyenne(ZonePrevision zone) {
-    super(zone);
+  public VisiteurMoyenne(ZonePrevision zone, Calendar date) {
+    super(zone, date);
     reset();
   }
 

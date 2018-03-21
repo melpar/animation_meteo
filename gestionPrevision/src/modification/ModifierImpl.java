@@ -2,6 +2,7 @@ package modification;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import previsionVents.FacadePrevisionVents;
@@ -29,53 +30,40 @@ public class ModifierImpl {
     memorise();
   }
 
-  public void modifierCoefficientVent(ZonePrevision zonePrevision, float coefficient) {
-    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevision, coefficient);
+  public void modifierCoefficientVent(ZonePrevision zonePrevision, Calendar date,
+      float coefficient) {
+    VisiteurCoefficient modifier = new VisiteurCoefficient(zonePrevision, date, coefficient);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(modifier);
     memorise();
   }
 
-  public void modifierContrasteProgressifVent(ZonePrevision zonePrevision, float coefficient,
-      float seuil) {
-    VisiteurContrasteProgressif modifier = new VisiteurContrasteProgressif(zonePrevision,
+  public void modifierContrasteProgressifVent(ZonePrevision zonePrevision, Calendar date,
+      float coefficient, float seuil) {
+    VisiteurContrasteProgressif modifier = new VisiteurContrasteProgressif(zonePrevision, date,
         coefficient, seuil);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(modifier);
     memorise();
   }
 
-  public void modifierContrasteLineaireVent(ZonePrevision zonePrevision, float coefficient,
-      float seuil) {
-    VisiteurContrasteLineaire modifier = new VisiteurContrasteLineaire(zonePrevision, coefficient,
-        seuil);
+  public void modifierContrasteLineaireVent(ZonePrevision zonePrevision, Calendar date,
+      float coefficient, float seuil) {
+    VisiteurContrasteLineaire modifier = new VisiteurContrasteLineaire(zonePrevision, date,
+        coefficient, seuil);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(modifier);
     memorise();
   }
 
-  public double getMoyenneVitesseVent(ZonePrevision zonePrevision) {
-    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevision);
+  public double getMoyenneVitesseVent(ZonePrevision zonePrevision, Calendar date) {
+    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevision, date);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(moyenne);
     return moyenne.getMoyenneVitesse();
   }
 
-  public double getMoyenneDirectionVent(ZonePrevision zonePrevision) {
-    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevision);
+  public double getMoyenneDirectionVent(ZonePrevision zonePrevision, Calendar date) {
+    VisiteurMoyenne moyenne = new VisiteurMoyenne(zonePrevision, date);
     FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(moyenne);
     return moyenne.getMoyenneDirection();
   }
-
-  // private void memorise() {
-  // VisisteurMemoire memoire = new VisisteurMemoire();
-  // FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(memoire);
-  // if (listRetour.size() < RETOUR_MAX) {
-  // listRetour.add(memoire.getSauvegarde());
-  // } else {
-  // listRetour.set(retourN, memoire.getSauvegarde());
-  // }
-  // retourN = (retourN + 1) % RETOUR_MAX;
-  // memoMax = addAction(memoMax);
-  // // nbRetourArriere = addAction(nbRetourArriere);
-  // // nbRetourAvant = 0;
-  // }
 
   private void memorise() {
     VisisteurMemoire memoire = new VisisteurMemoire();
