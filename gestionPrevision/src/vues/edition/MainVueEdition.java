@@ -18,6 +18,7 @@ public class MainVueEdition extends Application {
     Scene scene = new Scene(root);
     primaryStage.setTitle("Popup Edition");
     primaryStage.setScene(scene);
+    primaryStage.resizableProperty().setValue(false);
     primaryStage.show();
   }
 

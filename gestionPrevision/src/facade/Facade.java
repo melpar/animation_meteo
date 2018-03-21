@@ -1,18 +1,18 @@
-package fasade;
+package facade;
 
 import configuration.Configuration;
 import edition.implementation.Edition;
 import modification.ModifierImpl;
 
-public class Fasade {
+public class Facade {
 
   /*
    * Singleton ---------------------------
    */
 
-  static private Fasade fasade;
+  static private Facade facade;
 
-  private Fasade() {
+  private Facade() {
     super();
     /*
      * Initialisation de l'objet Configuration
@@ -20,13 +20,13 @@ public class Fasade {
     this.configuration = new Configuration();
   }
 
-  static public Fasade getInstance() {
+  static public Facade getInstance() {
 
-    if (Fasade.fasade == null) {
-      Fasade.fasade = new Fasade();
+    if (Facade.facade == null) {
+      Facade.facade = new Facade();
     }
 
-    return Fasade.fasade;
+    return Facade.facade;
   }
 
   /*
