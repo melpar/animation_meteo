@@ -5,13 +5,15 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
 
-<BorderPane fx:id="fenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.edition.ControleurEdition">
+<BorderPane fx:id="fenetre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.edition.ControleurEdition">
    <top>
       <HBox prefHeight="137.0" prefWidth="577.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,7 +58,7 @@
             <VBox prefHeight="84.0" prefWidth="139.0" spacing="10.0">
                <children>
                   <Label text="Date " />
-                  <DatePicker />
+                  <DatePicker fx:id="dateVal" />
                   <Label prefHeight="17.0" prefWidth="70.0" text="Minutes :" />
                   <ComboBox fx:id="minutesVal" prefWidth="150.0" />
                </children>
@@ -83,7 +85,14 @@
          </children>
       </HBox>
    </top>
+   <bottom>
+      <TableView fx:id="listePrevision" prefHeight="257.0" prefWidth="705.0" BorderPane.alignment="CENTER" />
+   </bottom>
    <center>
-      <TableView fx:id="listePrevision" prefHeight="234.0" prefWidth="494.0" BorderPane.alignment="CENTER" />
+      <ScrollPane fx:id="consoleZone" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <TextFlow fx:id="console" prefHeight="200.0" prefWidth="596.0" />
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

@@ -16,7 +16,7 @@ public class MainVueEdition extends Application {
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("../../vues/edition/VueEdition.fxml"));
     Scene scene = new Scene(root);
-    primaryStage.setTitle("Popu Edition");
+    primaryStage.setTitle("Popup Edition");
     primaryStage.setScene(scene);
     primaryStage.show();
   }
