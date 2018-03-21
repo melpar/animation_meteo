@@ -22,7 +22,7 @@ public class Controleur implements Initializable {
   @FXML
   public void actionBouttonDeplacer() {
     System.out.println("Action Boutton Deplacer");
-    // gestion.getCanvas().deplacer = !gestion.getCanvas().deplacer;
+    gestion.getCanvas().deplacer = !gestion.getCanvas().deplacer;
   }
 
   @FXML
