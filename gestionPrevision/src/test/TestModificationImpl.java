@@ -225,6 +225,15 @@ public class TestModificationImpl {
     ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
     this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
     assertTrue(this.modifier.restaureArriere());
+    assertTrue(this.modifier.restaureAvant());
     assertTrue(!this.modifier.restaureAvant());
+  }
+
+  @Test
+  public void testPileRestauration5() {
+    ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 10, 10);
+    this.modifier.modifierCoefficientVent(zonePrevisionTest, (float) -0.5);
+    assertTrue(this.modifier.restaureArriere());
+    assertTrue(!this.modifier.restaureArriere());
   }
 }
