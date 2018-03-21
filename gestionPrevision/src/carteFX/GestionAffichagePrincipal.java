@@ -49,6 +49,7 @@ public class GestionAffichagePrincipal {
 
       try {
         afficherFleches.action(null);
+        canvas.rafraichir();
       } catch (Throwable e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
