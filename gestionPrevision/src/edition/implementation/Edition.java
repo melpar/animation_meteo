@@ -64,7 +64,7 @@ public class Edition {
    * @param direction
    *          direction du vent
    */
-  public void ajouterPrevision(Calendar date, int duree, double vitesse, double direction) {    
+  public void ajouterPrevision(Calendar date, int duree, double vitesse, double direction) {
     for (int i = 1; i <= duree; i++) {
       TimeZone.setDefault(TimeZone.getTimeZone("GTM+1:00"));
       Calendar datePrevision = Calendar.getInstance();
@@ -78,7 +78,7 @@ public class Edition {
           donnees[j][k].setVitesseVent(vitesse);
         }
       }
-      prevision.setMatrice(donnees);     
+      prevision.setMatrice(donnees);
       prevision.setDate(datePrevision);
       datePrevision.setTimeInMillis((3600000 * (i)) + date.getTimeInMillis());
       this.previsions.add(prevision);
