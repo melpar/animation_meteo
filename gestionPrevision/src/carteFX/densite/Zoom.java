@@ -20,11 +20,11 @@ public class Zoom {
       double height = envelope.getHeight();
       double deltaW = width * percent;
       double deltaH = height * percent;
+      canvas.delzone();
       envelope.expandBy(deltaW, deltaH);
       AffichageFleches.miseAJour(envelope);
       canvas.doSetDisplayArea(envelope);
       deltaZoom += delta;
-      System.out.println(deltaZoom);
     }
   }
 }

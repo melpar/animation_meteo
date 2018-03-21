@@ -76,8 +76,13 @@ public class GestionAffichagePrincipal {
     // TODO a faire
   }
 
+  public void sauvegarder() {
+    // TODO Auto-generated method stub
+
+  }
+
   public void editer() {
-    // Facade.getInstance()
+    // FacadeFx.getInstance().
   }
 
   public void modifier() {
@@ -106,4 +111,5 @@ public class GestionAffichagePrincipal {
         nombreY);
     return zonePrevision;
   }
+
 }

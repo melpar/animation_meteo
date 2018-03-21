@@ -16,7 +16,7 @@ public class MainVue extends Application {
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("Vue.fxml"));
     Scene scene = new Scene(root);
-    primaryStage.setTitle("Popu Configuration");
+    primaryStage.setTitle("Gestion meteo");
     primaryStage.setScene(scene);
     primaryStage.show();
   }

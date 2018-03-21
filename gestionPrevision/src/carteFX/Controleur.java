@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import carteFX.densite.Zoom;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
@@ -20,14 +21,27 @@ public class Controleur implements Initializable {
   SplitPane splitPane;
 
   @FXML
+  Button deplacer;
+
+  @FXML
+  Button selectionner;
+
+  @FXML
   public void actionBouttonDeplacer() {
-    System.out.println("Action Boutton Deplacer");
-    gestion.getCanvas().deplacer = !gestion.getCanvas().deplacer;
+    gestion.getCanvas().deplacer = true;
+    deplacer.setDisable(true);
+    selectionner.setDisable(false);
+  }
+
+  @FXML
+  public void actionBouttonSelectionner() {
+    gestion.getCanvas().deplacer = false;
+    deplacer.setDisable(false);
+    selectionner.setDisable(true);
   }
 
   @FXML
   public void actionBouttonZoom() {
-    System.out.println("Action Boutton Zoom");
     Zoom z = new Zoom(gestion.getCanvas());
     z.zoom(-100);
   }
@@ -45,8 +59,8 @@ public class Controleur implements Initializable {
   }
 
   @FXML
-  public void ouvrirFichierJson() {
-    gestion.ouvrirJson();
+  public void sauvegarder() {
+    gestion.sauvegarder();
   }
 
   @FXML
