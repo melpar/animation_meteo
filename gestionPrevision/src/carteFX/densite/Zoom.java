@@ -19,11 +19,7 @@ public class Zoom {
     double deltaW = width * percent;
     double deltaH = height * percent;
     envelope.expandBy(deltaW, deltaH);
-    System.out
-        .println("Nouvelles coordonnees : (min) " + envelope.getMinX() + " " + envelope.getMinX());
-    System.out
-        .println("Nouvelles coordonnees : (max) " + envelope.getMaxX() + " " + envelope.getMaxX());
-
+    AffichageFleches.miseAJour(envelope);
     canvas.doSetDisplayArea(envelope);
   }
 }

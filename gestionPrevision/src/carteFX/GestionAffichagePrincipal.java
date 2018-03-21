@@ -2,7 +2,10 @@ package carteFX;
 
 import javax.swing.JFileChooser;
 
+import org.geotools.geometry.jts.ReferencedEnvelope;
+
 import carte.AfficherFleches;
+import carteFX.densite.Zoom;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
 import previsionVents.ListePrevision;
@@ -33,13 +36,6 @@ public class GestionAffichagePrincipal {
       ListePrevision prevision = recupGrib
           .getListePrevision(choix.getSelectedFile().getAbsolutePath());
 
-      // String lesPas = Zoom.realiserZoom(frame.getMapPane(),
-      // prevision.getZonePrevision().getMaximum().x,
-      // prevision.getZonePrevision().getMinimum().x,
-      // prevision.getZonePrevision().getMaximum().y,
-      // prevision.getZonePrevision().getMinimum().y,
-      // prevision.getZonePrevision().getPasX(),
-      // prevision.getZonePrevision().getPasY());
       AfficherFleches afficherFleches = AfficherFleches.getInstance(canvas.getMap());
       double pasXDouble = 20;
       double pasYDouble = 20;
@@ -49,6 +45,15 @@ public class GestionAffichagePrincipal {
 
       try {
         afficherFleches.action(null);
+        Zoom z = new Zoom(canvas);
+        z.zoom(-500);
+        double maxX = prevision.getZonePrevision().getMaximum().x;
+        double minX = prevision.getZonePrevision().getMinimum().x;
+        double maxY = prevision.getZonePrevision().getMaximum().y;
+        double minY = prevision.getZonePrevision().getMinimum().y;
+        ReferencedEnvelope env = new ReferencedEnvelope(canvas.getMap().getViewport().getBounds());
+        env.translate(minX + (minX + maxX) / 2, minY - (minY + maxY) / 2);
+        canvas.doSetDisplayArea(env);
         canvas.rafraichir();
       } catch (Throwable e) {
         // TODO Auto-generated catch block
