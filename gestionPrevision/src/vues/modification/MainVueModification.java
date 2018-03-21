@@ -14,9 +14,10 @@ public class MainVueModification extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("../../vues/modification/VueModification.fxml"));
+    Parent root = FXMLLoader
+        .load(getClass().getResource("../../vues/modification/VueModification.fxml"));
     Scene scene = new Scene(root);
-    primaryStage.setTitle("Popu Modificationsdf");
+    primaryStage.setTitle("Popup Modifications");
     primaryStage.setScene(scene);
     primaryStage.show();
   }

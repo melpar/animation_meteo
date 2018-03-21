@@ -1,11 +1,13 @@
 package vues.modification;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class ControleurModification {
 
@@ -27,6 +29,9 @@ public class ControleurModification {
   @FXML
   Text champErreur;
 
+  @FXML
+  Button closeButton;
+
   // initialise les champs text
   @FXML
   public void initialize() {
@@ -40,8 +45,11 @@ public class ControleurModification {
   // manque verif pour la date
   @FXML
   public void actionButton() {
+    // si valider lancer la fonction modifierCoefficientVent de la facade
     if (verif())
-      ; // si valider lancer la fonction modifierCoefficientVent de la facade
+      closeButtonAction();
+    ;
+
   }
 
   public void init() {
@@ -133,6 +141,14 @@ public class ControleurModification {
       coeff.setVisible(true);
       seuil.setVisible(false);
     }
+  }
+
+  @FXML
+  private void closeButtonAction() {
+    // get a handle to the stage
+    Stage stage = (Stage) closeButton.getScene().getWindow();
+    // do what you have to do
+    stage.close();
   }
 
   @FXML

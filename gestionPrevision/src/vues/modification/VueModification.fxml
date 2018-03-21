@@ -70,7 +70,7 @@
                </VBox.margin></DatePicker>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="61.0" text="Annuler" />
+                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="0.0" prefWidth="61.0" text="Annuler" />
                   <Button mnemonicParsing="false" onAction="#actionButton" text="Appliquer" />
                </children>
                <VBox.margin>
