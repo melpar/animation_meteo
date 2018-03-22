@@ -137,7 +137,7 @@ public class Controleur implements Initializable {
     try {
       Mail mail = new Mail();
 
-      String file = FacadeFx.getInstance().getConfiguration().getDossierSauvegarde();
+      String file = FacadeFx.getInstance().getConfiguration().getDossierSauvegardeGrib();
       String res = mail.getGribFile(file, 0.0, 0.0, 10.0, 3353.0);
 
       System.out.println(res);
