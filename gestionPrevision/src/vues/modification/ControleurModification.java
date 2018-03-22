@@ -60,7 +60,9 @@ public class ControleurModification {
         Calendar date = Calendar.getInstance();
         date.set(this.date.getValue().getYear(), this.date.getValue().getMonthValue(),
             this.date.getValue().getDayOfMonth());
-        FacadeFx.getInstance().closeButtonAction();
+        Float coefficient = Float.parseFloat(this.champCoeff.getText());
+        FacadeFx.getInstance().getModifier().modifierCoefficientVent(zone, date, coefficient);
+        closeButtonAction();
       }
     }
   }
