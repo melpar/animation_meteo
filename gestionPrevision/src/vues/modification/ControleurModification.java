@@ -49,6 +49,17 @@ public class ControleurModification {
     this.choix.getItems().add("Coefficient");
   }
 
+  public void functionTest() {
+    if (verif()) {
+
+      Calendar date = Calendar.getInstance();
+      date.set(this.date.getValue().getYear(), this.date.getValue().getMonthValue() - 1,
+          this.date.getValue().getDayOfMonth());
+      System.out.println(date.getTime());
+
+    }
+  }
+
   // foncion lors du clique sur le bouton ajouter
   // manque verif pour la date
   @FXML
@@ -97,6 +108,16 @@ public class ControleurModification {
           champErreur.setText(erreur + "Le seuil doit etre compris entre 0 et 400\n");
           valide = false;
         }
+        try {
+          if (date.getValue().equals("")) {
+
+          }
+        } catch (Exception e) {
+          String erreur = champErreur.getText();
+          champErreur.setText(erreur + "Le champs date doit etre complete");
+          valide = false;
+        }
+
         // si valider lancer la fonction modifierCoefficientVent de la facade
         if (valide)
           champErreur.setText("Saisie valider");
@@ -120,6 +141,15 @@ public class ControleurModification {
           champErreur.setText(erreur + "Le seuil doit etre compris entre 0 et 400\n");
           valide = false;
         }
+        try {
+          if (date.getValue().equals("")) {
+
+          }
+        } catch (Exception e) {
+          String erreur = champErreur.getText();
+          champErreur.setText(erreur + "Le champs date doit etre complete");
+          valide = false;
+        }
         if (valide)
           champErreur.setText("Saisie valider");
       }
@@ -135,12 +165,22 @@ public class ControleurModification {
           champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
           valide = false;
         }
-        // si tout est correct
-        if (valide)
-          champErreur.setText("Saisie valider");
+        try {
+          if (date.getValue().equals("")) {
+
+          }
+        } catch (Exception e) {
+          String erreur = champErreur.getText();
+          champErreur.setText(erreur + "Le champs date doit etre complete");
+          valide = false;
+        }
       }
+      // si tout est correct
+      if (valide)
+        champErreur.setText("Saisie valider");
     }
     return valide;
+
   }
 
   // fonction qui affiche les champs de saisie.
