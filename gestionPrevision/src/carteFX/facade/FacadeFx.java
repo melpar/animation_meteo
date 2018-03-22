@@ -1,5 +1,7 @@
 package carteFX.facade;
 
+import java.util.Calendar;
+
 import configuration.Configuration;
 import edition.implementation.Edition;
 import modification.ModifierImpl;
@@ -42,6 +44,7 @@ public class FacadeFx {
   private Edition edition;
   private Configuration configuration;
   private ZonePrevision zone;
+  private Calendar date;
 
   /*
    * Methodes ---------------------------
@@ -55,10 +58,6 @@ public class FacadeFx {
     return configuration;
   }
 
-  public static FacadeFx getFacade() {
-    return facade;
-  }
-
   public void setConfiguration(Configuration configuration) {
     this.configuration = configuration;
   }
@@ -69,6 +68,14 @@ public class FacadeFx {
 
   public void setZone(ZonePrevision zone) {
     this.zone = zone;
+  }
+
+  public Calendar getDate() {
+    return date;
+  }
+
+  public void setDate(Calendar date) {
+    this.date = date;
   }
 
 }
