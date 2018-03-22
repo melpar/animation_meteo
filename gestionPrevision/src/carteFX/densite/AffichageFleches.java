@@ -14,9 +14,6 @@ public class AffichageFleches {
     double newMinY = envelope.getMinY();
     double newMaxY = envelope.getMaxY();
 
-    System.out.println("Nouvelles coordonnees : (min) " + newMinX + " " + newMaxX);
-    System.out.println("Nouvelles coordonnees : (max) " + newMinY + " " + newMaxY);
-
     FacadePrevisionVents facade = FacadePrevisionVents.getFacadePrevisionVents();
     ListePrevision prev = facade.getPrevisions();
 
@@ -29,6 +26,9 @@ public class AffichageFleches {
       while (pasXDouble > 100) {
         pasXDouble /= 10;
       }
+      while (pasXDouble > 30) {
+        pasXDouble /= 2;
+      }
       double pasY = facade.getPrevisions().getZonePrevision().getPasY();
       double pasYDouble = (newMaxY - newMinY) / 10;
       if (pasYDouble < 0) {
@@ -37,6 +37,10 @@ public class AffichageFleches {
       while (pasYDouble > 100) {
         pasYDouble /= 10;
       }
+      while (pasYDouble > 30) {
+        pasYDouble /= 2;
+      }
+      System.out.println("Pas : " + pasXDouble + " " + pasYDouble);
       afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
       double tailleX = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
       double tailleY = facade.getPrevisions().getZonePrevision().getPasY() * (pasYDouble - 5);

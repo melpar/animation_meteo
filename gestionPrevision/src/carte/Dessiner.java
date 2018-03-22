@@ -153,7 +153,6 @@ public class Dessiner {
       coeff1y = Math.cos(infos.getDirection() - Math.PI / 4) * taille * 0.5;
       coeff2x = Math.sin(infos.getDirection() + Math.PI / 4) * taille * 0.5;
       coeff2y = Math.cos(infos.getDirection() + Math.PI / 4) * taille * 0.5;
-      x -= w;
     }
     coordinates[0] = CalculPosition.convertEpsg4326to3857(new Coordinate(x, y));
     coordinates[1] = CalculPosition.convertEpsg4326to3857(new Coordinate(x + w, y + z));
