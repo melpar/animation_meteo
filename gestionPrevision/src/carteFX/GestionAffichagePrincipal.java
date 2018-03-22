@@ -173,13 +173,11 @@ public class GestionAffichagePrincipal {
   }
 
   public void actionPrecedente() {
-    // TODO a faire
     FacadeFx.getInstance().getModifier().restaureArriere();
     canvas.rafraichir();
   }
 
   public void actionSuivante() {
-    // TODO a faire
     FacadeFx.getInstance().getModifier().restaureAvant();
     canvas.rafraichir();
   }
@@ -195,7 +193,7 @@ public class GestionAffichagePrincipal {
     try {
       root = FXMLLoader.load(getClass().getResource("../vues/configuration/VueConfiguration.fxml"));
       Scene scene = new Scene(root);
-      primaryStage.setTitle("Popup Modifications");
+      primaryStage.setTitle("Configuration");
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {

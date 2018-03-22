@@ -133,7 +133,8 @@ public class Controleur implements Initializable {
   public void actionButtonTelecgarger() {
     this.buttonTelecgarger.setDisable(true);
     System.out.println("actionButtonTelecgarger");
-
+    // ==========================En attente d'une Zone selectionner et renommer
+    // actionButtonTelecgarger =========================================
     try {
       Mail mail = new Mail();
 
