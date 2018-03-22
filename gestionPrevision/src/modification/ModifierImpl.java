@@ -133,4 +133,11 @@ public class ModifierImpl {
     }
   }
 
+  public boolean isArriere() {
+    return retourN > 0;
+  }
+
+  public boolean isAvant() {
+    return retourN < listRetour.size() - 1;
+  }
 }

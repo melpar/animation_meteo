@@ -127,12 +127,19 @@ public class GestionAffichagePrincipal {
 
   public void actionSuivante() {
     // TODO a faire
-
+    FacadeFx.getInstance().getModifier().restaureArriere();
+    canvas.rafraichir();
   }
 
   public void actionPrecedente() {
     // TODO a faire
+    FacadeFx.getInstance().getModifier().restaureAvant();
+    canvas.rafraichir();
+  }
 
+  public void updateAction(Button precedent, Button suivant) {
+    precedent.setDisable(FacadeFx.getInstance().getModifier().isArriere());
+    suivant.setDisable(FacadeFx.getInstance().getModifier().isAvant());
   }
 
   public void parametre() {
