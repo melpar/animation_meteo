@@ -1,15 +1,20 @@
 package carteFX;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.mail.MessagingException;
+
 import carteFX.densite.Zoom;
+import carteFX.facade.FacadeFx;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
+import mail.Mail;
 
 public class Controleur implements Initializable {
 
@@ -35,6 +40,9 @@ public class Controleur implements Initializable {
 
   @FXML
   Label labelDate;
+
+  @FXML
+  Button buttonTelecgarger;
 
   @FXML
   public void actionBouttonDeplacer() {
@@ -100,6 +108,25 @@ public class Controleur implements Initializable {
   public void datePrecedente() {
     gestion.datePrecedente();
     gestion.updateDate(datePrecedente, labelDate, dateSuivante);
+  }
+
+  @FXML
+  public void actionButtonTelecgarger() {
+    this.buttonTelecgarger.setDisable(true);
+    System.out.println("actionButtonTelecgarger");
+
+    try {
+      Mail mail = new Mail();
+
+      String file = FacadeFx.getInstance().getConfiguration().getDossierSauvegarde();
+      String res = mail.getGribFile(file, 0.0, 0.0, 10.0, 3353.0);
+
+      System.out.println(res);
+    } catch (MessagingException | IOException | InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    this.buttonTelecgarger.setDisable(false);
   }
 
   @Override

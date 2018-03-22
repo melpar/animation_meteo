@@ -27,7 +27,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button mnemonicParsing="false" onAction="#ouvrirFichierGrib">
+            <Button fx:id="buttonTelecgarger" mnemonicParsing="false" onAction="#actionButtonTelecgarger">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
