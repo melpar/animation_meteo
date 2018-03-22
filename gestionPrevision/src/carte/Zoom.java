@@ -26,7 +26,7 @@ public class Zoom extends ZoomInTool {
   public static final String TOOL_TIP = LocaleUtils.getValue("CursorTool", "ZoomInTooltip");
 
   /** Cursor. */
-  public static final String CURSOR_IMAGE = "/org/geotools/swing/icons/mActionZoomIn.png";
+  public static final String CURSOR_IMAGE = "/org/geotools/swing/icons/mActionZoomOut.png";
 
   /** Cursor hotspot coordinates. */
   public static final Point CURSOR_HOTSPOT = new Point(14, 9);

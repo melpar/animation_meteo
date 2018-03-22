@@ -2,6 +2,7 @@ package previsionVents;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import visiteur.ElementVisitable;
@@ -69,7 +70,8 @@ public class ListePrevision implements ElementVisitable {
     this.zonePrevision = zone;
   }
 
-  public void setListePrevision(ArrayList<Prevision> arrayList) {
+  public void setListePrevision(List<Prevision> arrayList) {
+    Collections.sort(arrayList);
     this.listePrevision = arrayList;
   }
 

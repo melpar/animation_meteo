@@ -227,10 +227,16 @@ public class MapCanvas {
 
   private void drawZone(GraphicsContext gc) {
     if (zone != null) {
-      gc.setFill(Color.BLUE);
-
-      gc.fillRect(zone.getDebutX(), zone.getDebutY(), zone.getFinX() - zone.getDebutX(),
+      // gc.setFill(Color.BLUE);
+      //
+      // gc.fillRect(zone.getDebutX(), zone.getDebutY(), zone.getFinX() -
+      // zone.getDebutX(),
+      // zone.getFinY() - zone.getDebutY());
+      gc.setStroke(Color.BLUE);
+      gc.setLineWidth(2);
+      gc.strokeRect(zone.getDebutX(), zone.getDebutY(), zone.getFinX() - zone.getDebutX(),
           zone.getFinY() - zone.getDebutY());
+      gc.setStroke(Color.BLACK);
     }
   }
 

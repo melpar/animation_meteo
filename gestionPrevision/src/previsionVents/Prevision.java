@@ -5,7 +5,7 @@ import java.util.Calendar;
 import visiteur.ElementVisitable;
 import visiteur.Visiteur;
 
-public class Prevision implements ElementVisitable {
+public class Prevision implements ElementVisitable, Comparable<Prevision> {
 
   private Calendar datePrevision;
   private DonneeVent[][] listeDonneVent;
@@ -63,6 +63,16 @@ public class Prevision implements ElementVisitable {
 
   public void setMatrice(DonneeVent[][] donnees) {
     this.listeDonneVent = donnees;
+  }
+
+  @Override
+  public int compareTo(Prevision arg0) {
+    System.out.println("compareTo");
+    if (this.datePrevision.before(arg0.datePrevision)) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
 
 }

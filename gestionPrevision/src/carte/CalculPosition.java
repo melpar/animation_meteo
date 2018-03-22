@@ -33,6 +33,25 @@ public class CalculPosition {
     }
   }
 
+  public static Coordinate convertEpsg3857to4326(Coordinate coordinate) {
+    try {
+      if (sourceCRS == null) {
+        sourceCRS = CRS.decode("EPSG:3857");
+      }
+      if (targetCRS == null) {
+        targetCRS = CRS.decode("EPSG:4326");
+      }
+      MathTransform transform = CRS.findMathTransform(sourceCRS, targetCRS, false);
+      GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
+      Point point = geometryFactory.createPoint(coordinate);
+      Point targetPoint = (Point) JTS.transform(point, transform);
+
+      return new Coordinate(targetPoint.getX(), targetPoint.getY());
+    } catch (Exception e) {
+      return new Coordinate(0, 0);
+    }
+  }
+
   public static Coordinate convertEpsg4326to3857(double lon, double lat) {
     double longitude = lon * 20037508.34 / 180;
     double latitude = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);

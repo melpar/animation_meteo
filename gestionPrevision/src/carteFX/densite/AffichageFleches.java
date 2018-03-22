@@ -24,13 +24,13 @@ public class AffichageFleches {
     AfficherFleches afficherFleches = AfficherFleches.getInstance();
     if (facade.getPrevisions() != null) {
       System.out.println("on met à jour les fleches");
-      double pasX = facade.getPrevisions().getZonePrevision().getPasX();
-      double pasXDouble = (newMaxX - newMinX) / pasX;
+
+      double pasXDouble = (newMaxX - newMinX) / 10;
       while (pasXDouble > 100) {
         pasXDouble /= 10;
       }
       double pasY = facade.getPrevisions().getZonePrevision().getPasY();
-      double pasYDouble = (newMaxY - newMinY) / pasY;
+      double pasYDouble = (newMaxY - newMinY) / 10;
       if (pasYDouble < 0) {
         pasYDouble = pasYDouble * -1;
       }
