@@ -246,7 +246,7 @@ public class MapCanvas {
         .convertEpsg4326to3857(new Coordinate(zone.getDebutX(), zone.getDebutY()));
     Coordinate coorFin = CalculPosition
         .convertEpsg4326to3857(new Coordinate(zone.getFinX(), zone.getFinY()));
-    double pas = FacadeFx.getFacade().getConfiguration().getPat();
+    double pas = FacadeFx.getInstance().getConfiguration().getPat();
     int nombreX = (int) ((coorFin.x - coorDeb.x) / pas);
     int nombreY = (int) ((coorFin.y - coorDeb.y) / pas);
     ZonePrevision zonePrevision = new ZonePrevision(coorDeb.x, coorDeb.y, pas, pas, nombreX,
