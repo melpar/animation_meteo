@@ -69,7 +69,6 @@ public class Prevision implements ElementVisitable, Comparable<Prevision> {
 
   @Override
   public int compareTo(Prevision arg0) {
-    System.out.println("compareTo");
     if (this.datePrevision.before(arg0.datePrevision)) {
       return -1;
     } else {

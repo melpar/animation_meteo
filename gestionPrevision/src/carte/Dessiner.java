@@ -86,6 +86,10 @@ public class Dessiner {
     ListePrevision previsions = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions();
     for (int i = 0; i < prev.getListeDonneVent().length; i += pasX) {
       for (int j = 0; j < prev.getListeDonneVent()[i].length; j += pasY) {
+        System.out.println("i : " + i);
+        System.out.println("Pas x : " + pasX);
+        System.out.println("j : " + j);
+        System.out.println("Pas y : " + pasY);
         InformationsVents v = new InformationsVents();
         v.setPositionY(FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
             .getZonePrevision().getLatitudePosition(j));
@@ -155,7 +159,7 @@ public class Dessiner {
 
     double y = infos.getPositionX();
     double x = infos.getPositionY();
-    System.out.println("x : " + x + " y : " + y);
+    System.out.println("x : " + x + " y : " + y + " taille : " + taille);
     double z = Math.sin(infos.getDirection()) * taille;
     double w = Math.cos(infos.getDirection()) * taille;
     double coeff1x = 0.0;

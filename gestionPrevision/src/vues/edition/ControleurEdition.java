@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+import carte.AfficherFleches;
+import carteFX.Controleur;
 import carteFX.facade.FacadeFx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import previsionVents.FacadePrevisionVents;
 import previsionVents.ListePrevision;
 
 public class ControleurEdition {
@@ -334,8 +337,27 @@ public class ControleurEdition {
             double u = this.getU(n.getVitesse(), n.getDirection());
             double v = this.getV(n.getVitesse(), n.getDirection());
             lp.ajouterDonneeVent(c, u, v, x, y);
+
           }
         }
+      }
+      AfficherFleches afficherFleches = AfficherFleches
+          .getInstance(Controleur.getInstance().getGestion().getCanvas().getMap());
+      double pasXDouble = 20;
+      double pasYDouble = 20;
+      double taille = lp.getZonePrevision().getPasX() * (pasXDouble - 5);
+      afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
+      afficherFleches.setTaille(taille);
+
+      try {
+        afficherFleches.action(null);
+        Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+            .getListePrevision().get(0).getDatePrevision();
+        FacadeFx.getInstance().setDate(valeurDate);
+        Controleur.getInstance().getGestion().getCanvas().rafraichir();
+      } catch (Throwable e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
       }
 
     }

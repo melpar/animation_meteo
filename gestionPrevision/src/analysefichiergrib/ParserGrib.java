@@ -76,6 +76,8 @@ public class ParserGrib {
 
       informations.setLattidude(r2.getGridLat1());
       informations.setLongitude(r2.getGridLon1());
+      System.out.println("Longitude : " + informations.getLongitude());
+      System.out.println("Latitude : " + informations.getLattidude());
       informations.setNombreX(r2.getGridNX());
       informations.setNombreY(r2.getGridNY());
       informations.setPasX(r2.getGridDX());

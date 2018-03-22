@@ -20,6 +20,14 @@ public class Controleur implements Initializable {
 
   GestionAffichagePrincipal gestion;
 
+  public GestionAffichagePrincipal getGestion() {
+    return gestion;
+  }
+
+  public void setGestion(GestionAffichagePrincipal gestion) {
+    this.gestion = gestion;
+  }
+
   @FXML
   BorderPane borderPane;
 
