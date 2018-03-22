@@ -76,9 +76,6 @@ public class FacadeFx {
 
   public void setZone(ZonePrevision zone) {
     this.zone = zone;
-    if (zone != null) {
-      // Controleur.getEditer().setDisable(false);
-    }
   }
 
   public Calendar getDate() {

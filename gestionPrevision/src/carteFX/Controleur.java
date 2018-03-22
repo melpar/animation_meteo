@@ -53,6 +53,12 @@ public class Controleur implements Initializable {
   @FXML
   Button editer;
 
+  private static Controleur instance;
+
+  public static Controleur getInstance() {
+    return instance;
+  }
+
   public Button getEditer() {
     return editer;
   }
@@ -165,6 +171,7 @@ public class Controleur implements Initializable {
     gestion = new GestionAffichagePrincipal(splitPane);
     gestion.getCanvas().deplacer = true;
     editer.setDisable(true);
+    instance = this;
   }
 
 }

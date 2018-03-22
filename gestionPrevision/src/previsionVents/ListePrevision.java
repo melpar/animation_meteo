@@ -42,7 +42,6 @@ public class ListePrevision implements ElementVisitable {
   public int getPrevision(Calendar datePrevision) {
     for (int indice = 0; indice < this.listePrevision.size(); indice++) {
       if (this.listePrevision.get(indice).getDatePrevision().equals(datePrevision)) {
-        System.out.println("la date existe");
         return indice;
       }
     }
