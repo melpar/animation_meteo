@@ -177,7 +177,7 @@ public class GestionAffichagePrincipal {
         .size() > 0) {
       Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
           .getListePrevision().get(indexDatePrevision).getDatePrevision();
-      SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd : kk");
+      SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : kk");
       String formatted = format1.format(valeurDate.getTime());
       date.setText(formatted);
     }

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-import edition.implementation.Json;
+import carteFX.facade.FacadeFx;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,12 +77,41 @@ public class ControleurEdition {
   @FXML
   TextFlow console;
 
+  private double la;
+  private double li;
+  private double px;
+  private double py;
+  private int nx;
+  private int ny;
+
   int idPrevision;
 
   ObservableList<NouvelleAjout> listeObservable;
 
   @FXML
   public void initialize() {
+
+    FacadeFx facade = FacadeFx.getInstance();
+    if (facade.getZone() == null) {
+
+      this.la = 10;
+      this.li = 10;
+      this.px = 1;
+      this.py = 1;
+      this.nx = 4;
+      this.ny = 4;
+
+    } else {
+
+      this.la = facade.getZone().getLatitudeHautGauche();
+      this.li = facade.getZone().getLongitudeHautGauche();
+      this.px = facade.getZone().getPasX();
+      this.py = facade.getZone().getPasY();
+      this.nx = facade.getZone().getNombreX();
+      this.ny = facade.getZone().getNombreY();
+
+    }
+
     this.idPrevision = 0;
     this.listeObservable = FXCollections.observableArrayList();
 
@@ -283,13 +312,8 @@ public class ControleurEdition {
 
   @FXML
   public void actionBoutonValider() {
-    double la = 50.0;
-    double li = 10.1;
-    double px = 1.0;
-    double py = 1.0;
-    int nx = 2;
-    int ny = 2;
-    ListePrevision lp = new ListePrevision(la, li, px, py, nx, ny);
+
+    ListePrevision lp = new ListePrevision(this.la, this.li, this.px, this.py, this.nx, this.ny);
     for (int i = 0; i < this.listeObservable.size(); i++) {
       for (int h = 0; h < this.listeObservable.get(i).getDuree(); h++) {
         for (int x = 0; x < nx; x++) {
@@ -304,8 +328,14 @@ public class ControleurEdition {
       }
 
     }
-    Json fichier = new Json();
-    fichier.jsonWrite(lp, "jsontest2.json");
+    if (this.listeObservable.size() == 0) {
+      Text t = new Text("Erreur: Aucune previsions saisie \n");
+      t.setFill(Color.rgb(204, 0, 0));
+      this.console.getChildren().add(t);
+      this.scrollbas();
+    } else {
+      this.actionBoutonFermer();
+    }
   }
 
   private Calendar conversionCalendar(String date, String heure) {
@@ -366,10 +396,10 @@ public class ControleurEdition {
       this.duree = duree;
       this.id = id;
       this.bouton = new Button();
-      ImageView i = new ImageView(new Image(getClass().getResourceAsStream("croix.png")));
-      i.setFitWidth(20);
-      i.setFitHeight(20);
-      this.bouton.setGraphic(i);
+      ImageView img = new ImageView(new Image(getClass().getResourceAsStream("croix.png")));
+      img.setFitWidth(20);
+      img.setFitHeight(20);
+      this.bouton.setGraphic(img);
       this.bouton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent e) {

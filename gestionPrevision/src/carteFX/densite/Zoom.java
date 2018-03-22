@@ -25,6 +25,7 @@ public class Zoom {
       AffichageFleches.miseAJour(envelope);
       canvas.doSetDisplayArea(envelope);
       deltaZoom += delta;
+      System.out.println("Delta : " + delta);
     }
   }
 }

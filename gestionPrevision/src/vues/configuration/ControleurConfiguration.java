@@ -19,7 +19,10 @@ public class ControleurConfiguration implements Initializable {
   private FacadeFx facade;
 
   @FXML
-  Label labelPath;
+  Label labelPathGrib;
+
+  @FXML
+  Label labelPathJson;
 
   @FXML
   ComboBox<String> comboBoxUnite;
@@ -37,12 +40,22 @@ public class ControleurConfiguration implements Initializable {
   Button buttonAnnuler;
 
   @FXML
-  public void modifierDossierStockage() {
+  public void modifierDossierStockageGrib() {
     DirectoryChooser chooser = new DirectoryChooser();
     File selectedDirectory = chooser.showDialog(new Stage());
     if (selectedDirectory != null) {
       String path = selectedDirectory.getAbsolutePath();
-      this.labelPath.setText(path);
+      this.labelPathGrib.setText(path);
+    }
+  }
+
+  @FXML
+  public void modifierDossierStockageJson() {
+    DirectoryChooser chooser = new DirectoryChooser();
+    File selectedDirectory = chooser.showDialog(new Stage());
+    if (selectedDirectory != null) {
+      String path = selectedDirectory.getAbsolutePath();
+      this.labelPathJson.setText(path);
     }
   }
 
@@ -56,7 +69,8 @@ public class ControleurConfiguration implements Initializable {
 
   @FXML
   public void actionAppliquer() {
-    this.facade.getConfiguration().setDossierSauvegarde(this.labelPath.getText());
+    this.facade.getConfiguration().setDossierSauvegardeGrib(this.labelPathGrib.getText());
+    this.facade.getConfiguration().setDossierSauvegardeJson(this.labelPathJson.getText());
     this.facade.getConfiguration().setUnite(this.comboBoxUnite.getValue());
     this.facade.getConfiguration().setRepresentation(this.comboBoxRepresentation.getValue());
     this.facade.getConfiguration().setUnite(this.comboBoxUnite.getValue());
@@ -102,7 +116,8 @@ public class ControleurConfiguration implements Initializable {
     /*
      * Initialisation du dossier de sauvegarde
      */
-    this.labelPath.setText(this.facade.getConfiguration().getDossierSauvegarde());
+    this.labelPathGrib.setText(this.facade.getConfiguration().getDossierSauvegardeGrib());
+    this.labelPathJson.setText(this.facade.getConfiguration().getDossierSauvegardeJson());
 
     /*
      * Initialisation Conserver
@@ -113,6 +128,10 @@ public class ControleurConfiguration implements Initializable {
     } else {
       this.comboBoxConserver.setValue("Supprimer");
     }
+
+    this.comboBoxConserver.setDisable(true);
+    this.comboBoxRepresentation.setDisable(true);
+    this.comboBoxUnite.setDisable(true);
   }
 
 }

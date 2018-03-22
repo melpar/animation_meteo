@@ -4,7 +4,8 @@ public class Configuration {
   /*
    * Attribue ---------------------------
    */
-  private String dossierSauvegarde;
+  private String dossierSauvegardeGrib;
+  private String dossierSauvegardeJson;
   private String unite;
   private String representation;
   private Integer pas;
@@ -15,7 +16,8 @@ public class Configuration {
    */
   public Configuration() {
     super();
-    this.dossierSauvegarde = "Gribs";
+    this.dossierSauvegardeGrib = "Gribs";
+    this.dossierSauvegardeJson = "Gribs";
     this.unite = "km/h";
     this.representation = "Fleches";
     this.pas = 10;
@@ -25,16 +27,25 @@ public class Configuration {
   /*
    * Getters et Setteurs ----------------
    */
-  public String getDossierSauvegarde() {
-    return dossierSauvegarde;
-  }
-
-  public void setDossierSauvegarde(String dossierSauvegarde) {
-    this.dossierSauvegarde = dossierSauvegarde;
-  }
 
   public String getUnite() {
     return unite;
+  }
+
+  public String getDossierSauvegardeGrib() {
+    return dossierSauvegardeGrib;
+  }
+
+  public void setDossierSauvegardeGrib(String dossierSauvegardeGrib) {
+    this.dossierSauvegardeGrib = dossierSauvegardeGrib;
+  }
+
+  public String getDossierSauvegardeJson() {
+    return dossierSauvegardeJson;
+  }
+
+  public void setDossierSauvegardeJson(String dossierSauvegardeJson) {
+    this.dossierSauvegardeJson = dossierSauvegardeJson;
   }
 
   public void setUnite(String unite) {

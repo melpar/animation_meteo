@@ -34,6 +34,7 @@ public class VisiteurMoyenne extends VisiteurModifier {
 
   public double getMoyenneDirection() {
     if (nbDonneeDirection == 0) {
+      System.out.println("nombre de données = 0");
       return 0;
     }
     return totalDonneesDirection / nbDonneeDirection;
