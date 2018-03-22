@@ -141,6 +141,9 @@ public class GestionAffichagePrincipal {
     if (indexDatePrevision + 1 < FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
         .getListePrevision().size()) {
       indexDatePrevision++;
+      Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+          .getListePrevision().get(indexDatePrevision).getDatePrevision();
+      FacadeFx.getInstance().setDate(valeurDate);
       AfficherFleches afficherFleches = AfficherFleches.getInstance(canvas.getMap());
       afficherFleches.setPrevision(indexDatePrevision);
       try {
@@ -155,6 +158,9 @@ public class GestionAffichagePrincipal {
   public void datePrecedente() {
     if (indexDatePrevision - 1 >= 0) {
       indexDatePrevision--;
+      Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+          .getListePrevision().get(indexDatePrevision).getDatePrevision();
+      FacadeFx.getInstance().setDate(valeurDate);
       AfficherFleches afficherFleches = AfficherFleches.getInstance(canvas.getMap());
       afficherFleches.setPrevision(indexDatePrevision);
       try {
