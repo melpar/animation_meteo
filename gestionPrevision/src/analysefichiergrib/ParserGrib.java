@@ -69,7 +69,7 @@ public class ParserGrib {
     InformationsGrille informations = new InformationsGrille();
 
     try {
-      System.out.println("test");
+      System.out.println("test " + nameFile);
       GribFile grb = new GribFile(nameFile);
 
       GribRecordGDS r2 = grb.getGrids()[0];

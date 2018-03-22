@@ -42,6 +42,8 @@ public class GestionAffichagePrincipal {
     this.canvas = new MapCanvas(1500, 1000);
     Pane pane = new Pane(canvas.getCanvas());
     splitPane.getItems().add(pane);
+    AfficherFleches afficherFleches = AfficherFleches.getInstance(canvas.getMap());
+
   }
 
   public void ouvrirGrib() {
@@ -98,7 +100,8 @@ public class GestionAffichagePrincipal {
     // AfficherFleches.getInstance(canvas.getMap());
     // double pasXDouble = 20;
     // double pasYDouble = 20;
-    // double taille = prevision.getZonePrevision().getPasX() * (pasXDouble - 5);
+    // double taille = prevision.getZonePrevision().getPasX() * (pasXDouble -
+    // 5);
     // afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
     // afficherFleches.setTaille(taille);
     //

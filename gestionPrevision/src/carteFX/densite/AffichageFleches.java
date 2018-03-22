@@ -45,6 +45,7 @@ public class AffichageFleches {
       double tailleX = facade.getPrevisions().getZonePrevision().getPasX() * (pasXDouble - 5);
       double tailleY = facade.getPrevisions().getZonePrevision().getPasY() * (pasYDouble - 5);
       double taille = tailleX < tailleY ? tailleX : tailleY;
+      System.out.println("ici");
       afficherFleches.setTaille(taille);
       try {
         afficherFleches.action(null);

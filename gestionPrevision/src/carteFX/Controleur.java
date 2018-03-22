@@ -91,7 +91,7 @@ public class Controleur implements Initializable {
   @FXML
   public void editer() {
     gestion.editer();
-    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
+    // gestion.updateDate(datePrecedente, labelDate, dateSuivante);
   }
 
   @FXML

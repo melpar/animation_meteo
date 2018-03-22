@@ -93,6 +93,7 @@ public class Dessiner {
             .getZonePrevision().getLongitudePosition(i));
         if (i < prev.getListeDonneVent().length - pasX
             && j < prev.getListeDonneVent()[i].length - pasY) {
+          System.out.println("calcul de la moyenne");
           // calcul de la moyenne
           VisiteurMoyenne moyenne = new VisiteurMoyenne(null, null);
           for (int indexPasX = 0; indexPasX < pasX; indexPasX++) {
@@ -107,10 +108,13 @@ public class Dessiner {
           v.setVitesse(prev.getListeDonneVent()[i][j].getVitesseVent());
         }
         if (v.getVitesse() < 15) {
+          System.out.println("G");
           ((DefaultFeatureCollection) collectionLinesG).add(ajouterFigure(v, t));
         } else if (v.getVitesse() < 60) {
+          System.out.println("Y");
           ((DefaultFeatureCollection) collectionLinesY).add(ajouterFigure(v, t));
         } else {
+          System.out.println("R");
           ((DefaultFeatureCollection) collectionLinesR).add(ajouterFigure(v, t));
         }
       }
@@ -151,6 +155,7 @@ public class Dessiner {
 
     double y = infos.getPositionX();
     double x = infos.getPositionY();
+    System.out.println("x : " + x + " y : " + y);
     double z = Math.sin(infos.getDirection()) * taille;
     double w = Math.cos(infos.getDirection()) * taille;
     double coeff1x = 0.0;

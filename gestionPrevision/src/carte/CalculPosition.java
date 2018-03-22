@@ -2,6 +2,8 @@ package carte;
 
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
+import org.opengis.referencing.FactoryException;
+import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 
@@ -50,6 +52,32 @@ public class CalculPosition {
     } catch (Exception e) {
       return new Coordinate(0, 0);
     }
+  }
+
+  public static CoordinateReferenceSystem getTargetCRS() {
+    if (targetCRS == null) {
+      try {
+        targetCRS = CRS.decode("EPSG:3857");
+      } catch (NoSuchAuthorityCodeException e) {
+
+      } catch (FactoryException e) {
+
+      }
+    }
+    return targetCRS;
+  }
+
+  public static CoordinateReferenceSystem getSourceCRS() {
+    if (sourceCRS == null) {
+      try {
+        sourceCRS = CRS.decode("EPSG:4326");
+      } catch (NoSuchAuthorityCodeException e) {
+
+      } catch (FactoryException e) {
+
+      }
+    }
+    return sourceCRS;
   }
 
   public static Coordinate convertEpsg4326to3857(double lon, double lat) {

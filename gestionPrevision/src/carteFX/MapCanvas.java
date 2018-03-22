@@ -16,9 +16,6 @@ import org.geotools.renderer.lite.StreamingRenderer;
 import org.geotools.styling.SLD;
 import org.geotools.styling.Style;
 
-import com.vividsolutions.jts.geom.Coordinate;
-
-import carte.CalculPosition;
 import carteFX.classFX.FXGraphics2D;
 import carteFX.densite.Zoom;
 import carteFX.facade.FacadeFx;
@@ -56,6 +53,7 @@ public class MapCanvas {
     return canvas;
   }
 
+  @SuppressWarnings("deprecation")
   private void initMap() {
     try {
       File file;
@@ -68,6 +66,7 @@ public class MapCanvas {
       Style style = SLD.createSimpleStyle(featureSource.getSchema());
       FeatureLayer layer = new FeatureLayer(featureSource, style);
       map.addLayer(layer);
+
       map.getViewport()
           .setScreenArea(new Rectangle((int) canvas.getWidth(), (int) canvas.getHeight()));
     } catch (IOException e) {
@@ -168,7 +167,7 @@ public class MapCanvas {
       public void handle(MouseEvent e) {
         e.consume();
         if (!deplacer) {
-          FacadeFx.getInstance().setZone(getZone());
+          FacadeFx.getInstance().setZone(getZone(e));
         }
       }
     });
@@ -240,17 +239,52 @@ public class MapCanvas {
     return zone;
   }
 
-  private ZonePrevision getZone() {
+  private ZonePrevision getZone(MouseEvent e) {
+    // DirectPosition2D first = new DirectPosition2D(zone.getDebutX(),
+    // zone.getDebutY());
+    // DirectPosition2D second = new DirectPosition2D(zone.getFinX(),
+    // zone.getFinY());
+    // DirectPosition2D firstW = new DirectPosition2D(zone.getDebutX(),
+    // zone.getDebutY());
+    // DirectPosition2D secondW = new DirectPosition2D(zone.getFinX(),
+    // zone.getFinY());
+    // map.getViewport().getScreenToWorld().transform(first, firstW);
+    // map.getViewport().getScreenToWorld().transform(second, secondW);
+    //
+    // Coordinate coord1 = new Coordinate(firstW.getX(), firstW.getY());
+    // Coordinate coord2 = new Coordinate(secondW.getX(), secondW.getY());
+    // System.out.println("Point 1 : " + coord1.x + " " + coord1.y);
+    // System.out.println("Point 2 : " + coord2.x + " " + coord2.y);
+    //
+    // System.out.println("Bounds : " + map.getViewport().getBounds().getMinX()
+    // + " "
+    // + map.getViewport().getBounds().getMinY());
+    // System.out.println("Bounds : " + map.getViewport().getBounds().getMaxX()
+    // + " "
+    // + map.getViewport().getBounds().getMaxY());
+    //
+    // double pas = FacadeFx.getInstance().getConfiguration().getPat();
+    // int nombreX = coord1.x > coord2.x ? (int) ((coord1.x - coord2.x) / pas)
+    // : (int) ((coord2.x - coord1.x) / pas);
+    // System.out.println("Nombre x = " + nombreX);
+    // System.out.println("coord1.x = " + coord1.x + " coord2.x = " + coord2.x);
+    // int nombreY = coord1.y > coord2.y ? (int) ((coord1.y - coord2.y) / pas)
+    // : (int) ((coord2.y - coord1.y) / pas);
+    // ZonePrevision zonePrevision = new ZonePrevision(coord1.x, coord1.y, pas,
+    // pas, nombreX, nombreY);
+    // return zonePrevision;
 
-    Coordinate coorDeb = CalculPosition
-        .convertEpsg4326to3857(new Coordinate(zone.getDebutX(), zone.getDebutY()));
-    Coordinate coorFin = CalculPosition
-        .convertEpsg4326to3857(new Coordinate(zone.getFinX(), zone.getFinY()));
-    double pas = FacadeFx.getInstance().getConfiguration().getPat();
-    int nombreX = (int) ((coorFin.x - coorDeb.x) / pas);
-    int nombreY = (int) ((coorFin.y - coorDeb.y) / pas);
-    ZonePrevision zonePrevision = new ZonePrevision(coorDeb.x, coorDeb.y, pas, pas, nombreX,
-        nombreY);
+    double difX = e.getSceneX() - baseDrageX;
+    double difY = e.getSceneY() - baseDrageY;
+    baseDrageX = e.getSceneX();
+    baseDrageY = e.getSceneY();
+    DirectPosition2D newPos = new DirectPosition2D(difX, difY);
+    DirectPosition2D result = new DirectPosition2D();
+    map.getViewport().getScreenToWorld().transform(newPos, result);
+    ReferencedEnvelope env = new ReferencedEnvelope(map.getViewport().getBounds());
+    env.translate(env.getMinimum(0) - result.x, env.getMaximum(1) - result.y);
+    ZonePrevision zonePrevision = new ZonePrevision(env.getMinX(), env.getMinY(), 1000, 1000, 100,
+        100);
     return zonePrevision;
   }
 

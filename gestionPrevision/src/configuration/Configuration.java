@@ -20,7 +20,7 @@ public class Configuration {
     this.dossierSauvegardeJson = "Gribs";
     this.unite = "km/h";
     this.representation = "Fleches";
-    this.pas = 10;
+    this.pas = 1;
     this.conserver = true;
   }
 

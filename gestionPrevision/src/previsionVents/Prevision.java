@@ -30,6 +30,8 @@ public class Prevision implements ElementVisitable, Comparable<Prevision> {
 
   public Prevision(Calendar datePrevision, int nombreX, int nombreY) {
     this.datePrevision = datePrevision;
+    System.out.println("X : " + nombreX);
+    System.out.println("X : " + nombreY);
     this.listeDonneVent = new DonneeVent[nombreX][nombreY];
     for (int posX = 0; posX < this.listeDonneVent.length; posX++) {
       for (int posY = 0; posY < this.listeDonneVent[0].length; posY++) {

@@ -8,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import carteFX.facade.FacadeFx;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +27,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import previsionVents.ListePrevision;
 
 public class ControleurEdition {
@@ -76,6 +76,9 @@ public class ControleurEdition {
 
   @FXML
   TextFlow console;
+
+  @FXML
+  Button bouttonFermer;
 
   private double la;
   private double li;
@@ -314,10 +317,18 @@ public class ControleurEdition {
   public void actionBoutonValider() {
 
     ListePrevision lp = new ListePrevision(this.la, this.li, this.px, this.py, this.nx, this.ny);
+    System.out.println("Bouton valider");
+    System.out.println("Liste observable : " + listeObservable.size());
     for (int i = 0; i < this.listeObservable.size(); i++) {
+      System.out.println("Liste observable 2 : " + listeObservable.get(i).getDuree());
+      System.out.println("nx : " + nx);
+      System.out.println("ny : " + ny);
       for (int h = 0; h < this.listeObservable.get(i).getDuree(); h++) {
-        for (int x = 0; x < nx; x++) {
-          for (int y = 0; y < ny; y++) {
+        for (int x = 0; x < nx; x += px) {
+          for (int y = 0; y < ny; y += py) {
+            System.out.println("Nouvel ajout i " + i + " h " + h);
+            System.out.println("Nouvel ajout x " + x + " y " + y);
+            System.out.println("Nouvel ajout nx " + nx + " ny " + ny);
             NouvelleAjout n = this.listeObservable.get(i);
             Calendar c = this.conversionCalendar(n.getDate(), n.getHeure());
             double u = this.getU(n.getVitesse(), n.getDirection());
@@ -362,7 +373,8 @@ public class ControleurEdition {
 
   @FXML
   public void actionBoutonFermer() {
-    Platform.exit();
+    Stage stage = (Stage) this.console.getScene().getWindow();
+    stage.close();
   }
 
   @FXML
