@@ -16,8 +16,12 @@ import org.geotools.renderer.lite.StreamingRenderer;
 import org.geotools.styling.SLD;
 import org.geotools.styling.Style;
 
+import com.vividsolutions.jts.geom.Coordinate;
+
+import carte.CalculPosition;
 import carteFX.classFX.FXGraphics2D;
 import carteFX.densite.Zoom;
+import carteFX.facade.FacadeFx;
 import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
@@ -29,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import previsionVents.ZonePrevision;
 import previsionVents.ZoneSelectionne;
 
 public class MapCanvas {
@@ -153,6 +158,21 @@ public class MapCanvas {
         }
       }
     });
+
+    /*
+     * enregistrer la zone
+     */
+    canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+
+      @Override
+      public void handle(MouseEvent e) {
+        e.consume();
+        if (!deplacer) {
+          FacadeFx.getInstance().setZone(getZone());
+        }
+      }
+    });
+
     /*
      * double clicks to restore to original map
      */
@@ -220,6 +240,20 @@ public class MapCanvas {
     return zone;
   }
 
+  private ZonePrevision getZone() {
+
+    Coordinate coorDeb = CalculPosition
+        .convertEpsg4326to3857(new Coordinate(zone.getDebutX(), zone.getDebutY()));
+    Coordinate coorFin = CalculPosition
+        .convertEpsg4326to3857(new Coordinate(zone.getFinX(), zone.getFinY()));
+    double pas = FacadeFx.getFacade().getConfiguration().getPat();
+    int nombreX = (int) ((coorFin.x - coorDeb.x) / pas);
+    int nombreY = (int) ((coorFin.y - coorDeb.y) / pas);
+    ZonePrevision zonePrevision = new ZonePrevision(coorDeb.x, coorDeb.y, pas, pas, nombreX,
+        nombreY);
+    return zonePrevision;
+  }
+
   public void delzone() {
     zone = null;
     ;
@@ -227,11 +261,6 @@ public class MapCanvas {
 
   private void drawZone(GraphicsContext gc) {
     if (zone != null) {
-      // gc.setFill(Color.BLUE);
-      //
-      // gc.fillRect(zone.getDebutX(), zone.getDebutY(), zone.getFinX() -
-      // zone.getDebutX(),
-      // zone.getFinY() - zone.getDebutY());
       gc.setStroke(Color.BLUE);
       gc.setLineWidth(2);
       gc.strokeRect(zone.getDebutX(), zone.getDebutY(), zone.getFinX() - zone.getDebutX(),
