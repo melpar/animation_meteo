@@ -9,22 +9,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="290.0" stylesheets="@../../carteFX/css/toolbar-demo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.configuration.ControleurConfiguration">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="290.0" stylesheets="@../../carteFX/css/toolbar-demo.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.configuration.ControleurConfiguration">
    <center>
       <VBox prefHeight="200.0" prefWidth="307.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Selectionner l'unité :" />
-            <ComboBox fx:id="comboBoxUnite" prefWidth="150.0" />
+            <ComboBox fx:id="comboBoxUnite" disable="true" prefWidth="150.0" />
             <Separator prefWidth="200.0" />
             <Label text="Sélectionner la représentation du vent : " />
-            <ComboBox fx:id="comboBoxRepresentation" prefWidth="150.0" />
+            <ComboBox fx:id="comboBoxRepresentation" disable="true" prefWidth="150.0" />
             <Separator prefWidth="200.0" />
-            <Label text="Choisir le dossier de stockage : " />
-            <Label fx:id="labelPath" text="/home/louarn/app" />
-            <Button mnemonicParsing="false" onAction="#modifierDossierStockage" text="Choisir" />
+            <Label text="Choisir le dossier de stockage Grib : " />
+            <Label fx:id="labelPathGrib" text="/home/louarn/app" />
+            <Button mnemonicParsing="false" onAction="#modifierDossierStockageGrib" text="Choisir" />
+            <Separator prefWidth="200.0" />
+            <Label text="Choisir le dossier de stockage Json : " />
+            <Label fx:id="labelPathJson" text="/home/louarn/app" />
+            <Button mnemonicParsing="false" onAction="#modifierDossierStockageJson" text="Choisir" />
             <Separator prefWidth="200.0" />
             <Label text="Sélectionner la representation du vent : " />
-            <ComboBox fx:id="comboBoxConserver" prefWidth="150.0" />
+            <ComboBox fx:id="comboBoxConserver" disable="true" prefWidth="150.0" />
             <Separator prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
