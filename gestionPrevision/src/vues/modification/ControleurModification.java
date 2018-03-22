@@ -6,7 +6,6 @@ import carteFX.facade.FacadeFx;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -37,9 +36,6 @@ public class ControleurModification {
   @FXML
   Button closeButton;
 
-  @FXML
-  DatePicker date;
-
   // initialise les champs text
   @FXML
   public void initialize() {
@@ -47,33 +43,20 @@ public class ControleurModification {
     this.choix.getItems().add("Contraste lineaire");
     this.choix.getItems().add("Contraste progressif");
     this.choix.getItems().add("Coefficient");
+    this.choix.setValue("Contraste lineaire");
+    coeff.setVisible(true);
+    seuil.setVisible(true);
   }
 
-  public void functionTest() {
-    if (verif()) {
-
-      Calendar date = Calendar.getInstance();
-      date.set(this.date.getValue().getYear(), this.date.getValue().getMonthValue() - 1,
-          this.date.getValue().getDayOfMonth());
-      System.out.println(date.getTime());
-
-    }
-  }
-
-  // foncion lors du clique sur le bouton ajouter
-  // manque verif pour la date
+  // fonction lors du clique sur le bouton ajouter
   @FXML
   public void actionButton() {
-    // si valider lancer la fonction modifierCoefficientVent de la facade
+    // recupere les donnees de la zone selectione
     ZonePrevision zone = FacadeFx.getInstance().getZone();
     if (zone != null) {
       if (verif()) {
-        System.out.println(this.date.getValue().getYear() + " "
-            + this.date.getValue().getMonthValue() + " " + this.date.getValue().getDayOfMonth());
-        Calendar date = Calendar.getInstance();
-        date.set(this.date.getValue().getYear(), this.date.getValue().getMonthValue(),
-            this.date.getValue().getDayOfMonth());
-
+        // recupere la date courante de l'onterface
+        Calendar date = FacadeFx.getInstance().getDate();
         Float coefficient = Float.parseFloat(this.champCoeff.getText());
         FacadeFx.getInstance().getModifier().modifierCoefficientVent(zone, date, coefficient);
         closeButtonAction();
@@ -97,57 +80,50 @@ public class ControleurModification {
         champErreur.setText("Un ou plusieurs champ sont vide\n");
         valide = false;
       } else {
-        float resCoeff = Float.parseFloat(champCoeff.getText());
-        float resSeuil = Float.parseFloat(champSeuil.getText());
-        if (resCoeff > 1 || resCoeff < -1) {
-          champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
-          valide = false;
-        }
-        if (resSeuil > 400 || resSeuil < 0) {
-          String erreur = champErreur.getText();
-          champErreur.setText(erreur + "Le seuil doit etre compris entre 0 et 400\n");
-          valide = false;
-        }
         try {
-          if (date.getValue().equals("")) {
-
+          float resCoeff = Float.parseFloat(champCoeff.getText());
+          float resSeuil = Float.parseFloat(champSeuil.getText());
+          if (resCoeff > 1 || resCoeff < -1) {
+            champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
+            valide = false;
           }
-        } catch (Exception e) {
-          String erreur = champErreur.getText();
-          champErreur.setText(erreur + "Le champs date doit etre complete");
+          if (resSeuil > 400 || resSeuil < 0) {
+            String erreur = champErreur.getText();
+            champErreur.setText(erreur + "Le seuil doit etre compris entre 0 et 400\n");
+            valide = false;
+          }
+        } catch (NumberFormatException e) {
+          champErreur.setText("Saisissez des nombres valide\n");
           valide = false;
         }
-
-        // si valider lancer la fonction modifierCoefficientVent de la facade
-        if (valide)
-          champErreur.setText("Saisie valider");
       }
-
+      // si valider lancement de la fonction modifierCoefficientVent de la facade
+      if (valide)
+        champErreur.setText("Saisie valider");
     }
+
     // verif choix Contraste progressif
-    if (this.choix.getValue().equals("Contraste progressif")) {
+    if (this.choix.getValue().equals("Contraste progressif"))
+
+    {
       if (champCoeff.getText().isEmpty() || champSeuil.getText().isEmpty()) {
         champErreur.setText("Un ou plusieurs champ sont vide\n");
         valide = false;
       } else {
-        float resCoeff = Float.parseFloat(champCoeff.getText());
-        float resSeuil = Float.parseFloat(champSeuil.getText());
-        if (resCoeff > 1 || resCoeff < -1) {
-          champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
-          valide = false;
-        }
-        if (resSeuil > 400 || resSeuil < 0) {
-          String erreur = champErreur.getText();
-          champErreur.setText(erreur + "Le seuil doit etre compris entre 0 et 400\n");
-          valide = false;
-        }
         try {
-          if (date.getValue().equals("")) {
-
+          float resCoeff = Float.parseFloat(champCoeff.getText());
+          float resSeuil = Float.parseFloat(champSeuil.getText());
+          if (resCoeff > 1 || resCoeff < -1) {
+            champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
+            valide = false;
           }
-        } catch (Exception e) {
-          String erreur = champErreur.getText();
-          champErreur.setText(erreur + "Le champs date doit etre complete");
+          if (resSeuil > 400 || resSeuil < 0) {
+            String erreur = champErreur.getText();
+            champErreur.setText(erreur + "Le seuil doit etre compris entre 0 et 400\n");
+            valide = false;
+          }
+        } catch (NumberFormatException e) {
+          champErreur.setText("Saisissez des nombres valide\n");
           valide = false;
         }
         if (valide)
@@ -160,18 +136,14 @@ public class ControleurModification {
         champErreur.setText("Le champ coeff est vide\n");
         valide = false;
       } else {
-        float resCoeff = Float.parseFloat(champCoeff.getText());
-        if (resCoeff > 1 || resCoeff < -1) {
-          champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
-          valide = false;
-        }
         try {
-          if (date.getValue().equals("")) {
-
+          float resCoeff = Float.parseFloat(champCoeff.getText());
+          if (resCoeff > 1 || resCoeff < -1) {
+            champErreur.setText("Le Coefficient doit etre compris entre -1 et 1\n");
+            valide = false;
           }
-        } catch (Exception e) {
-          String erreur = champErreur.getText();
-          champErreur.setText(erreur + "Le champs date doit etre complete");
+        } catch (NumberFormatException e) {
+          champErreur.setText("Saisissez un nombre valide\n");
           valide = false;
         }
       }
