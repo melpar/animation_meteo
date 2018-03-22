@@ -1,10 +1,9 @@
 package carteFX;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import javax.swing.JFileChooser;
 
 import org.geotools.geometry.jts.ReferencedEnvelope;
 
@@ -22,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import previsionVents.FacadePrevisionVents;
@@ -45,17 +45,14 @@ public class GestionAffichagePrincipal {
   }
 
   public void ouvrirGrib() {
-    JFileChooser choix = new JFileChooser();
-    int retour = choix.showOpenDialog(null);
-    if (retour == JFileChooser.APPROVE_OPTION) {
-      // un fichier a été choisi (sortie par OK)
-      // nom du fichier choisi
-      System.out.println(choix.getSelectedFile().getName());
+    FileChooser fileChooser = new FileChooser();
+    File selecetFile = fileChooser.showOpenDialog(new Stage());
+    if (selecetFile != null) {
+      System.out.println(selecetFile.getAbsolutePath());
       // chemin absolu du fichier choisi
-      choix.getSelectedFile().getAbsolutePath();
+      // choix.getSelectedFile().getAbsolutePath();
       RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
-      ListePrevision prevision = recupGrib
-          .getListePrevision(choix.getSelectedFile().getAbsolutePath());
+      ListePrevision prevision = recupGrib.getListePrevision(selecetFile.getAbsolutePath());
 
       AfficherFleches afficherFleches = AfficherFleches.getInstance(canvas.getMap());
       double pasXDouble = 20;
@@ -83,10 +80,53 @@ public class GestionAffichagePrincipal {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-    } else {
-      System.out.println("pas de fichier");
     }
-    ;// pas de fichier choisi
+    //
+    // JFileChooser choix = new JFileChooser();
+    // int retour = choix.showOpenDialog(null);
+    // if (retour == JFileChooser.APPROVE_OPTION) {
+    // // un fichier a été choisi (sortie par OK)
+    // // nom du fichier choisi
+    // System.out.println(choix.getSelectedFile().getName());
+    // // chemin absolu du fichier choisi
+    // choix.getSelectedFile().getAbsolutePath();
+    // RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
+    // ListePrevision prevision = recupGrib
+    // .getListePrevision(choix.getSelectedFile().getAbsolutePath());
+    //
+    // AfficherFleches afficherFleches =
+    // AfficherFleches.getInstance(canvas.getMap());
+    // double pasXDouble = 20;
+    // double pasYDouble = 20;
+    // double taille = prevision.getZonePrevision().getPasX() * (pasXDouble - 5);
+    // afficherFleches.setPas((int) pasXDouble, (int) pasYDouble);
+    // afficherFleches.setTaille(taille);
+    //
+    // try {
+    // afficherFleches.action(null);
+    // Zoom z = new Zoom(canvas);
+    // z.zoom(-500);
+    // double maxX = prevision.getZonePrevision().getMaximum().x;
+    // double minX = prevision.getZonePrevision().getMinimum().x;
+    // double maxY = prevision.getZonePrevision().getMaximum().y;
+    // double minY = prevision.getZonePrevision().getMinimum().y;
+    // ReferencedEnvelope env = new
+    // ReferencedEnvelope(canvas.getMap().getViewport().getBounds());
+    // env.translate(minX + (minX + maxX) / 2, minY - (minY + maxY) / 2);
+    // canvas.doSetDisplayArea(env);
+    // Calendar valeurDate =
+    // FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+    // .getListePrevision().get(indexDatePrevision).getDatePrevision();
+    // FacadeFx.getInstance().setDate(valeurDate);
+    // canvas.rafraichir();
+    // } catch (Throwable e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    // } else {
+    // System.out.println("pas de fichier");
+    // }
+    // ;// pas de fichier choisi
   }
 
   public void ouvrirJson() {
