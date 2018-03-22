@@ -128,7 +128,7 @@ public class Mail {
       disposition = part.getDisposition();
       if ((disposition != null) && ((disposition.equalsIgnoreCase(Part.ATTACHMENT)
           || (disposition.equalsIgnoreCase(Part.INLINE))))) {
-        nomfichier = part.getFileName();
+        nomfichier = dir + "/" + part.getFileName();
         File save = new File(nomfichier);
 
         FileWriter ecriture = new FileWriter(save);
