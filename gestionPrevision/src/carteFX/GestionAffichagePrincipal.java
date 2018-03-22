@@ -14,6 +14,7 @@ import carte.AfficherFleches;
 import carte.CalculPosition;
 import carteFX.densite.Zoom;
 import carteFX.facade.FacadeFx;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import previsionVents.FacadePrevisionVents;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
@@ -119,19 +121,24 @@ public class GestionAffichagePrincipal {
       primaryStage.setTitle("Popup Modifications");
       primaryStage.setScene(scene);
       primaryStage.show();
+      primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        public void handle(WindowEvent we) {
+          canvas.rafraichir();
+        }
+      });
     } catch (IOException e) {
       e.printStackTrace();
     }
 
   }
 
-  public void actionSuivante() {
+  public void actionPrecedente() {
     // TODO a faire
     FacadeFx.getInstance().getModifier().restaureArriere();
     canvas.rafraichir();
   }
 
-  public void actionPrecedente() {
+  public void actionSuivante() {
     // TODO a faire
     FacadeFx.getInstance().getModifier().restaureAvant();
     canvas.rafraichir();
@@ -193,24 +200,26 @@ public class GestionAffichagePrincipal {
   }
 
   public void updateDate(Button precedent, Label date, Button suivant) {
-    if (FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().getListePrevision()
-        .size() > 0) {
-      Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
-          .getListePrevision().get(indexDatePrevision).getDatePrevision();
-      SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : kk");
-      String formatted = format1.format(valeurDate.getTime());
-      date.setText(formatted);
-    }
-    if (indexDatePrevision > 0) {
-      precedent.setDisable(false);
-    } else {
-      precedent.setDisable(true);
-    }
-    if (indexDatePrevision < FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
-        .getListePrevision().size() - 1) {
-      suivant.setDisable(false);
-    } else {
-      suivant.setDisable(true);
+    if (FacadePrevisionVents.getFacadePrevisionVents().getPrevisions() != null) {
+      if (FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().getListePrevision()
+          .size() > 0) {
+        Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+            .getListePrevision().get(indexDatePrevision).getDatePrevision();
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : kk");
+        String formatted = format1.format(valeurDate.getTime());
+        date.setText(formatted);
+      }
+      if (indexDatePrevision > 0) {
+        precedent.setDisable(false);
+      } else {
+        precedent.setDisable(true);
+      }
+      if (indexDatePrevision < FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+          .getListePrevision().size() - 1) {
+        suivant.setDisable(false);
+      } else {
+        suivant.setDisable(true);
+      }
     }
   }
 
