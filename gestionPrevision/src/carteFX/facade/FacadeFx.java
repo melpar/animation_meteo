@@ -3,6 +3,7 @@ package carteFX.facade;
 import configuration.Configuration;
 import edition.implementation.Edition;
 import modification.ModifierImpl;
+import previsionVents.ZonePrevision;
 
 public class FacadeFx {
 
@@ -40,6 +41,7 @@ public class FacadeFx {
   private ModifierImpl modifier;
   private Edition edition;
   private Configuration configuration;
+  private ZonePrevision zone;
 
   /*
    * Methodes ---------------------------
@@ -59,6 +61,14 @@ public class FacadeFx {
 
   public void setConfiguration(Configuration configuration) {
     this.configuration = configuration;
+  }
+
+  public ZonePrevision getZone() {
+    return zone;
+  }
+
+  public void setZone(ZonePrevision zone) {
+    this.zone = zone;
   }
 
 }
