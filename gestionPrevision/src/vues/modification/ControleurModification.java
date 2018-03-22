@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import previsionVents.FacadePrevisionVents;
 import previsionVents.ZonePrevision;
 
 public class ControleurModification {
@@ -52,7 +53,9 @@ public class ControleurModification {
   @FXML
   public void actionButton() {
     // recupere les donnees de la zone selectione
-    ZonePrevision zone = FacadeFx.getInstance().getZone();
+    // ZonePrevision zone = FacadeFx.getInstance().getZone();
+    ZonePrevision zone = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+        .getZonePrevision();
     if (zone != null) {
       if (verif()) {
         // recupere la date courante de l'onterface
