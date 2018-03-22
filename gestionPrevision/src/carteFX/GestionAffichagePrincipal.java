@@ -1,5 +1,6 @@
 package carteFX;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -13,10 +14,14 @@ import carte.AfficherFleches;
 import carte.CalculPosition;
 import carteFX.densite.Zoom;
 import carteFX.facade.FacadeFx;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import previsionVents.FacadePrevisionVents;
 import previsionVents.ListePrevision;
 import previsionVents.RecuperationDonneesGrib;
@@ -89,16 +94,46 @@ public class GestionAffichagePrincipal {
   }
 
   public void editer() {
-    // FacadeFx.getInstance().
+    Stage primaryStage = new Stage();
+    Parent root;
+    try {
+      root = FXMLLoader.load(getClass().getResource("../vues/edition/VueEdition.fxml"));
+      Scene scene = new Scene(root);
+      primaryStage.setTitle("Popup Modifications");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void modifier() {
+    Stage primaryStage = new Stage();
+    Parent root;
+    try {
+      root = FXMLLoader.load(getClass().getResource("../vues/modification/VueModification.fxml"));
+      Scene scene = new Scene(root);
+      primaryStage.setTitle("Popup Modifications");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    // TODO a faire
   }
 
   public void parametre() {
-    // TODO a faire
+    Stage primaryStage = new Stage();
+    Parent root;
+    try {
+      root = FXMLLoader.load(getClass().getResource("../vues/configuration/VueConfiguration.fxml"));
+      Scene scene = new Scene(root);
+      primaryStage.setTitle("Popup Modifications");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void dateSuivante() {
