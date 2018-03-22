@@ -22,10 +22,6 @@ public class ModifierImpl {
 
   public ModifierImpl() {
     retourN = 0;
-    // nbRetourArriere = 0;
-    // nbRetourAvant = 0;
-    // memoMax = 0;
-    // memoEtat = 0;
     listRetour = new ArrayList<ListePrevision>();
     memorise();
   }
@@ -66,13 +62,15 @@ public class ModifierImpl {
   }
 
   private void memorise() {
-    VisisteurMemoire memoire = new VisisteurMemoire();
-    FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(memoire);
-    if (retourN != 0) {
-      replaceMemorise(retourN);
-      retourN = 0;
+    if (FacadePrevisionVents.getFacadePrevisionVents().getPrevisions() != null) {
+      VisisteurMemoire memoire = new VisisteurMemoire();
+      FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(memoire);
+      if (retourN != 0) {
+        replaceMemorise(retourN);
+        retourN = 0;
+      }
+      addMemorise(memoire.getSauvegarde());
     }
-    addMemorise(memoire.getSauvegarde());
   }
 
   private void addMemorise(ListePrevision prevision) {
@@ -112,25 +110,6 @@ public class ModifierImpl {
       throw new IOException();
     }
   }
-
-  // private int inverse(int action) {
-  // return listRetour.size() - action;
-  // }
-
-  // public boolean restaureArriere() {
-  // int index = (retourN - memoEtat - 1) % RETOUR_MAX;
-  // // if (nbRetourArriere > 0 & nbRetourArriere < RETOUR_MAX) {
-  // if (memoMax > 0 & memoEtat < memoMax) {
-  // FacadePrevisionVents.getFacadePrevisionVents().setPrevisions(listRetour.get(index));
-  // memoMax = delAction(memoMax);
-  // memoEtat = addAction(memoEtat);
-  // // nbRetourArriere = addAction(nbRetourArriere);
-  // // nbRetourAvant = nbRetourArriere;
-  // return true;
-  // } else {
-  // return false;
-  // }
-  // }
 
   public boolean restaureArriere() {
 
