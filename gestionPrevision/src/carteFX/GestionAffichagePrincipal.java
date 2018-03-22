@@ -9,10 +9,6 @@ import org.geotools.geometry.jts.ReferencedEnvelope;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
-import carte.AfficherFleches;
-import carte.CalculPosition;
-import carteFX.densite.Zoom;
-import carteFX.facade.FacadeFx;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,11 +20,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import previsionVents.FacadePrevisionVents;
-import previsionVents.ListePrevision;
-import previsionVents.RecuperationDonneesGrib;
-import previsionVents.ZonePrevision;
-import previsionVents.ZoneSelectionne;
+import src.carte.AfficherFleches;
+import src.carte.CalculPosition;
+import src.carteFX.facade.FacadeFx;
+import src.previsionVents.FacadePrevisionVents;
+import src.previsionVents.ListePrevision;
+import src.previsionVents.RecuperationDonneesGrib;
+import src.previsionVents.ZonePrevision;
+import src.previsionVents.ZoneSelectionne;
 
 public class GestionAffichagePrincipal {
 
@@ -147,7 +146,7 @@ public class GestionAffichagePrincipal {
     try {
       root = FXMLLoader.load(getClass().getResource("../vues/edition/VueEdition.fxml"));
       Scene scene = new Scene(root);
-      primaryStage.setTitle("Popup Modifications");
+      primaryStage.setTitle("Edition");
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
@@ -161,7 +160,7 @@ public class GestionAffichagePrincipal {
     try {
       root = FXMLLoader.load(getClass().getResource("../vues/modification/VueModification.fxml"));
       Scene scene = new Scene(root);
-      primaryStage.setTitle("Popup Modifications");
+      primaryStage.setTitle("Modifications");
       primaryStage.setScene(scene);
       primaryStage.show();
       primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
