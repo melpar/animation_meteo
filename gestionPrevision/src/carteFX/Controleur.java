@@ -102,7 +102,7 @@ public class Controleur implements Initializable {
 
   @FXML
   public void actionPrecedente() {
-    gestion.actionSuivante();
+    gestion.actionPrecedente();
     gestion.updateAction(actionPrecedente, actionSuivante);
   }
 
