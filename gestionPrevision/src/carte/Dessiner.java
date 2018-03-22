@@ -21,6 +21,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 
+import modification.VisiteurMoyenne;
 import previsionVents.FacadePrevisionVents;
 import previsionVents.ListePrevision;
 import previsionVents.Prevision;
@@ -90,8 +91,21 @@ public class Dessiner {
             .getZonePrevision().getLatitudePosition(j));
         v.setPositionX(FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
             .getZonePrevision().getLongitudePosition(i));
-        v.setDirection(prev.getListeDonneVent()[i][j].getOrientationVent());
-        v.setVitesse(prev.getListeDonneVent()[i][j].getVitesseVent());
+        if (i < prev.getListeDonneVent().length - pasX
+            && j < prev.getListeDonneVent()[i].length - pasY) {
+          // calcul de la moyenne
+          VisiteurMoyenne moyenne = new VisiteurMoyenne(null, null);
+          for (int indexPasX = 0; indexPasX < pasX; indexPasX++) {
+            for (int indexPasY = 0; indexPasY < pasY; indexPasY++) {
+              prev.getListeDonneVent()[indexPasX + i][indexPasY + j].applique(moyenne);
+            }
+          }
+          v.setDirection(moyenne.getMoyenneDirection());
+          v.setVitesse(moyenne.getMoyenneVitesse());
+        } else {
+          v.setDirection(prev.getListeDonneVent()[i][j].getOrientationVent());
+          v.setVitesse(prev.getListeDonneVent()[i][j].getVitesseVent());
+        }
         if (v.getVitesse() < 15) {
           ((DefaultFeatureCollection) collectionLinesG).add(ajouterFigure(v, t));
         } else if (v.getVitesse() < 60) {

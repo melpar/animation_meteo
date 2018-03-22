@@ -73,6 +73,9 @@ public class GestionAffichagePrincipal {
         ReferencedEnvelope env = new ReferencedEnvelope(canvas.getMap().getViewport().getBounds());
         env.translate(minX + (minX + maxX) / 2, minY - (minY + maxY) / 2);
         canvas.doSetDisplayArea(env);
+        Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
+            .getListePrevision().get(indexDatePrevision).getDatePrevision();
+        FacadeFx.getInstance().setDate(valeurDate);
         canvas.rafraichir();
       } catch (Throwable e) {
         // TODO Auto-generated catch block
@@ -119,6 +122,16 @@ public class GestionAffichagePrincipal {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+  }
+
+  public void actionSuivante() {
+    // TODO a faire
+
+  }
+
+  public void actionPrecedente() {
+    // TODO a faire
 
   }
 

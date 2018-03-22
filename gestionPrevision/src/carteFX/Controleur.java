@@ -27,6 +27,12 @@ public class Controleur implements Initializable {
   SplitPane splitPane;
 
   @FXML
+  Button actionPrecedente;
+
+  @FXML
+  Button actionSuivante;
+
+  @FXML
   Button deplacer;
 
   @FXML
@@ -91,6 +97,18 @@ public class Controleur implements Initializable {
   @FXML
   public void modifier() {
     gestion.modifier();
+  }
+
+  @FXML
+  public void actionPrecedente() {
+    gestion.dateSuivante();
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
+  }
+
+  @FXML
+  public void actionSuivante() {
+    gestion.dateSuivante();
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
   }
 
   @FXML

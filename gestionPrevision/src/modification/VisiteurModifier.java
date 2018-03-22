@@ -37,39 +37,38 @@ public abstract class VisiteurModifier implements Visiteur {
    */
 
   void zoneModifier(Prevision prevision) {
-    // double limiteX = zoneModifier.getLatitudeHautGauche()
-    // + zoneModifier.getNombreX() * zoneModifier.getPasX();
-    // double limiteY = zoneModifier.getLongitudeHautGauche()
-    // + zoneModifier.getNombreY() * zoneModifier.getPasY();
-    // for (double positionX = zoneModifier
-    // .getLatitudeHautGauche(); positionX < limiteX; positionX +=
-    // zonePrevision.getPasX()) {
-    // for (double positionY = zoneModifier
-    // .getLongitudeHautGauche(); positionY < limiteY; positionY +=
-    // zonePrevision.getPasY()) {
-    // int matriceX = (int) ((positionX - zonePrevision.getLatitudeHautGauche())
-    // / zonePrevision.getPasX());
-    // int matriceY = (int) ((positionY -
-    // zonePrevision.getLongitudeHautGauche())
-    // / zonePrevision.getPasY());
-    // DonneeVent vent = prevision.getDonneeVent(matriceX, matriceY);
-    // System.out.println("Donnee de vent : ("+matriceX+","+matriceY+") ");
-    // if (vent != null) {
-    // vent.applique(this);
-    // }
-    // }
-    // }
-    for (int positionX = (int) zoneModifier.getLatitudeHautGauche(); positionX < zoneModifier
-        .getLatitudeHautGauche() + zoneModifier.getPasX(); positionX += zonePrevision.getPasX()) {
-      for (int positionY = (int) zoneModifier.getLongitudeHautGauche(); positionY < zoneModifier
-          .getLongitudeHautGauche()
-          + zoneModifier.getPasY(); positionY += zonePrevision.getPasY()) {
-        DonneeVent vent = prevision.getDonneeVent(positionX, positionY);
+    double limiteX = zoneModifier.getLatitudeHautGauche()
+        + zoneModifier.getNombreX() * zoneModifier.getPasX();
+    double limiteY = zoneModifier.getLongitudeHautGauche()
+        + zoneModifier.getNombreY() * zoneModifier.getPasY();
+    for (double positionX = zoneModifier
+        .getLatitudeHautGauche(); positionX < limiteX; positionX += zonePrevision.getPasX()) {
+      for (double positionY = zoneModifier
+          .getLongitudeHautGauche(); positionY < limiteY; positionY += zonePrevision.getPasY()) {
+        int matriceX = (int) ((positionX - zonePrevision.getLatitudeHautGauche())
+            / zonePrevision.getPasX());
+        int matriceY = (int) ((positionY - zonePrevision.getLongitudeHautGauche())
+            / zonePrevision.getPasY());
+        DonneeVent vent = prevision.getDonneeVent(matriceX, matriceY);
         if (vent != null) {
           vent.applique(this);
         }
       }
     }
+    // for (int positionX = (int) zoneModifier.getLatitudeHautGauche(); positionX <
+    // zoneModifier
+    // .getLatitudeHautGauche() + zoneModifier.getPasX(); positionX +=
+    // zonePrevision.getPasX()) {
+    // for (int positionY = (int) zoneModifier.getLongitudeHautGauche(); positionY <
+    // zoneModifier
+    // .getLongitudeHautGauche()
+    // + zoneModifier.getPasY(); positionY += zonePrevision.getPasY()) {
+    // DonneeVent vent = prevision.getDonneeVent(positionX, positionY);
+    // if (vent != null) {
+    // vent.applique(this);
+    // }
+    // }
+    // }
   }
 
   @Override

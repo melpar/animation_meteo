@@ -67,10 +67,10 @@ public class TestModificationImpl {
     double ancienneValeurMilieux = ventMilieu.getVitesseVent();
     double ancienneValeurFin = ventFin.getVitesseVent();
 
-    ZonePrevision zonePrevisionTest = new ZonePrevision(6, 3, 5, 5, 7, 7);
+    ZonePrevision zonePrevisionTest = new ZonePrevision(1, 1, 5, 5, 7, 7);
     this.modifier.modifierCoefficientVent(zonePrevisionTest, dateTest, (float) -0.5);
 
-    assertTrue(ventDebut.getVitesseVent() == ancienneValeurDebut);
+    assertTrue(ventDebut.getVitesseVent() == ancienneValeurDebut / 2);
     assertTrue(ventMilieu.getVitesseVent() == ancienneValeurMilieux / 2);
     assertTrue(ventFin.getVitesseVent() == ancienneValeurFin);
   }
