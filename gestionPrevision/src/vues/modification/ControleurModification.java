@@ -1,13 +1,18 @@
 package vues.modification;
 
+import java.util.Calendar;
+
+import carteFX.facade.FacadeFx;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import previsionVents.ZonePrevision;
 
 public class ControleurModification {
 
@@ -32,6 +37,9 @@ public class ControleurModification {
   @FXML
   Button closeButton;
 
+  @FXML
+  DatePicker date;
+
   // initialise les champs text
   @FXML
   public void initialize() {
@@ -46,10 +54,15 @@ public class ControleurModification {
   @FXML
   public void actionButton() {
     // si valider lancer la fonction modifierCoefficientVent de la facade
-    if (verif())
-      closeButtonAction();
-    ;
-
+    ZonePrevision zone = FacadeFx.getInstance().getZone();
+    if (zone != null) {
+      if (verif()) {
+        Calendar date = Calendar.getInstance();
+        date.set(this.date.getValue().getYear(), this.date.getValue().getMonthValue(),
+            this.date.getValue().getDayOfMonth());
+        FacadeFx.getInstance().closeButtonAction();
+      }
+    }
   }
 
   public void init() {

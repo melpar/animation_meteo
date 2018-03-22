@@ -62,6 +62,14 @@ public class FacadeFx {
     this.configuration = configuration;
   }
 
+  public ModifierImpl getModifier() {
+    return modifier;
+  }
+
+  public void setModifier(ModifierImpl modifier) {
+    this.modifier = modifier;
+  }
+
   public ZonePrevision getZone() {
     return zone;
   }
