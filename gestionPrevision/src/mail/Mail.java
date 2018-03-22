@@ -128,12 +128,13 @@ public class Mail {
       disposition = part.getDisposition();
       if ((disposition != null) && ((disposition.equalsIgnoreCase(Part.ATTACHMENT)
           || (disposition.equalsIgnoreCase(Part.INLINE))))) {
-        File save = new File(part.getFileName());
         nomfichier = part.getFileName();
-        FileWriter ecriture = new FileWriter(dir + "/" + save);
+        File save = new File(nomfichier);
+
+        FileWriter ecriture = new FileWriter(save);
         InputStreamReader lecture = new InputStreamReader(part.getInputStream());
         int flux;
-        while ((flux = lecture.read()) != 0) {
+        while ((flux = lecture.read()) != -1) {
           ecriture.write(flux);
         }
         lecture.close();
