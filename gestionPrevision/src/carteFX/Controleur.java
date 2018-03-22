@@ -51,6 +51,17 @@ public class Controleur implements Initializable {
   Button buttonTelecgarger;
 
   @FXML
+  Button editer;
+
+  public Button getEditer() {
+    return editer;
+  }
+
+  public void setEditer(Button editer) {
+    this.editer = editer;
+  }
+
+  @FXML
   public void actionBouttonDeplacer() {
     gestion.getCanvas().deplacer = true;
     deplacer.setDisable(true);
@@ -153,6 +164,7 @@ public class Controleur implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     gestion = new GestionAffichagePrincipal(splitPane);
     gestion.getCanvas().deplacer = true;
+    editer.setDisable(true);
   }
 
 }

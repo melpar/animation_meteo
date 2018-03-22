@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="241.0" stylesheets="@testF.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.modification.ControleurModification">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="241.0" stylesheets="@testF.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.modification.ControleurModification">
    <center>
       <VBox prefHeight="246.0" prefWidth="221.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -82,11 +88,14 @@
    <top>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" stylesheets="@../../carteFX/css/toolbar-demo.css" BorderPane.alignment="CENTER">
          <items>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../edition/valider.png" />
-               </image>
-            </ImageView>
+            <Button mnemonicParsing="false" onAction="#actionButton">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../edition/valider.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="7.0" />
             <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="72.0">
                <graphic>
@@ -97,7 +106,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#actionButton" />
          </items>
          <styleClass>
             <String fx:value="toolbar" />
