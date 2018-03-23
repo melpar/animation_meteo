@@ -286,14 +286,12 @@ public class MapCanvas {
     map.getViewport().getScreenToWorld().transform(newPos, result);
     ReferencedEnvelope env = new ReferencedEnvelope(map.getViewport().getBounds());
     env.translate(env.getMinimum(0) - result.x, env.getMaximum(1) - 3 * result.y);
-    System.out.println("Min x : " + e.getSceneX() + " Min y : " + e.getSceneY());
-    System.out.println("Min x : " + result.getX() + " Min y : " + result.getY());
+
     Coordinate coord = CalculPosition
         .convertEpsg3857to4326(new Coordinate(env.getMinX(), env.getMinY()));
     Coordinate coord2 = CalculPosition
         .convertEpsg3857to4326(new Coordinate(env.getMaxX(), env.getMaxY()));
-    System.out.println("Min x : " + env.getMinX() / 100 + " Min y : " + env.getMaxY() / -10);
-    System.out.println("Coord : " + coord.x + " " + coord.y);
+
     ZonePrevision zonePrevision = new ZonePrevision(49, -10, 0.05, 0.05, 280, 170);
     return zonePrevision;
   }

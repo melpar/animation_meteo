@@ -124,7 +124,7 @@ public class ControleurEdition {
     this.datePrevision = new TableColumn<NouvelleAjout, String>("Date");
     this.heurePrevision = new TableColumn<NouvelleAjout, String>("Heure");
     this.vitessePrevision = new TableColumn<NouvelleAjout, Float>("Vitesse (Km\\h)");
-    this.directionPrevision = new TableColumn<NouvelleAjout, Float>("Direction (°)");
+    this.directionPrevision = new TableColumn<NouvelleAjout, Float>("Direction (ï¿½)");
     this.dureePrevision = new TableColumn<NouvelleAjout, Integer>("Duree (heures)");
     this.supprimerPrevision = new TableColumn<NouvelleAjout, Button>("");
 
@@ -164,7 +164,7 @@ public class ControleurEdition {
     heuresVal.getSelectionModel().selectFirst();
     minutesVal.getSelectionModel().selectFirst();
 
-    directionVal.setPromptText("°");
+    directionVal.setPromptText("ï¿½");
     vitesseVal.setPromptText("km/h");
     dureeVal.setPromptText("heures");
 
@@ -198,7 +198,7 @@ public class ControleurEdition {
       vitesseVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
 
       Text t = new Text(
-          "Erreur: Champ Vitesse (format incorrect: nécessite un nombre -1<vitesse<410)" + "\n");
+          "Erreur: Champ Vitesse (format incorrect: nï¿½cessite un nombre -1<vitesse<410)" + "\n");
       t.setFill(Color.rgb(204, 0, 0));
       this.console.getChildren().add(t);
       this.scrollbas();
@@ -217,7 +217,7 @@ public class ControleurEdition {
       validation = false;
       directionVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
 
-      Text t = new Text("Erreur: Champ Direction (format incorrect : nécessite un nombre)" + "\n");
+      Text t = new Text("Erreur: Champ Direction (format incorrect : nï¿½cessite un nombre)" + "\n");
       t.setFill(Color.rgb(204, 0, 0));
       this.console.getChildren().add(t);
       this.scrollbas();
@@ -239,7 +239,7 @@ public class ControleurEdition {
       dureeVal.setStyle("-fx-background-color: rgb(255, 80, 80);");
 
       Text t = new Text(
-          "Erreur: Champ Duree (format incorrect : nécessite un nombre entier 0<duree<48)" + "\n");
+          "Erreur: Champ Duree (format incorrect : nï¿½cessite un nombre entier 0<duree<48)" + "\n");
       t.setFill(Color.rgb(204, 0, 0));
       this.console.getChildren().add(t);
       this.scrollbas();
@@ -320,18 +320,13 @@ public class ControleurEdition {
   public void actionBoutonValider() {
 
     ListePrevision lp = new ListePrevision(this.la, this.li, this.px, this.py, this.nx, this.ny);
-    System.out.println("Bouton valider");
-    System.out.println("Liste observable : " + listeObservable.size());
+
     for (int i = 0; i < this.listeObservable.size(); i++) {
-      System.out.println("Liste observable 2 : " + listeObservable.get(i).getDuree());
-      System.out.println("nx : " + nx);
-      System.out.println("ny : " + ny);
+
       for (int h = 0; h < this.listeObservable.get(i).getDuree(); h++) {
         for (int x = 0; x < nx; x++) {
           for (int y = 0; y < ny; y++) {
-            System.out.println("Nouvel ajout i " + i + " h " + h);
-            System.out.println("Nouvel ajout x " + x + " y " + y);
-            System.out.println("Nouvel ajout nx " + nx + " ny " + ny);
+
             NouvelleAjout n = this.listeObservable.get(i);
             Calendar c = this.conversionCalendar(n.getDate(), n.getHeure());
             c.setTimeInMillis(c.getTimeInMillis() + (3600000 * (h)));
@@ -402,7 +397,7 @@ public class ControleurEdition {
 
   @FXML
   public void keyTyped(KeyEvent k) {
-    System.out.println("test a");
+
     if (k.getCharacter().equals("")) {
       return;
     }

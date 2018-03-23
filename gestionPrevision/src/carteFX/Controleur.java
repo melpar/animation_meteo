@@ -97,7 +97,6 @@ public class Controleur implements Initializable {
 
   @FXML
   public void actionBouttonDeZoom() {
-    System.out.println("Action Boutton DeZoom");
     Zoom z = new Zoom(gestion.getCanvas());
     z.zoom(100);
   }
@@ -157,7 +156,7 @@ public class Controleur implements Initializable {
   @FXML
   public void actionButtonTelecgarger() {
     this.buttonTelecgarger.setDisable(true);
-    System.out.println("actionButtonTelecgarger");
+
     // ==========================En attente d'une Zone selectionner et renommer
     // actionButtonTelecgarger =========================================
     try {
@@ -166,7 +165,6 @@ public class Controleur implements Initializable {
       String file = FacadeFx.getInstance().getConfiguration().getDossierSauvegardeGrib();
       String res = mail.getGribFile(file, 42, 49, -7, 7);
 
-      System.out.println(res);
     } catch (MessagingException | IOException | InterruptedException e) {
       e.printStackTrace();
     }

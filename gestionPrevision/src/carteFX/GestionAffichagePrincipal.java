@@ -51,7 +51,7 @@ public class GestionAffichagePrincipal {
     FileChooser fileChooser = new FileChooser();
     File selecetFile = fileChooser.showOpenDialog(new Stage());
     if (selecetFile != null) {
-      System.out.println(selecetFile.getAbsolutePath());
+
       // chemin absolu du fichier choisi
       // choix.getSelectedFile().getAbsolutePath();
       RecuperationDonneesGrib recupGrib = new RecuperationDonneesGrib();
