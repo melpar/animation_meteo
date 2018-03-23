@@ -13,6 +13,7 @@ import carte.AfficherFleches;
 import carte.CalculPosition;
 import carteFX.densite.Zoom;
 import carteFX.facade.FacadeFx;
+import edition.implementation.Json;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -137,8 +138,21 @@ public class GestionAffichagePrincipal {
   }
 
   public void sauvegarder() {
-    // TODO Auto-generated method stub
+    FileChooser fileChooser = new FileChooser();
 
+    // Set extension filter
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)",
+        "*.json");
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    // Show save file dialog
+    File file = fileChooser.showSaveDialog(new Stage());
+
+    if (file != null) {
+      Json json = new Json();
+      json.jsonWrite(FacadePrevisionVents.getFacadePrevisionVents().getPrevisions(),
+          file.getAbsolutePath());
+    }
   }
 
   public void editer() {
