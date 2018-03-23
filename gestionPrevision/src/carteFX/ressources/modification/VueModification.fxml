@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="241.0" stylesheets="@../../css/toolbar-demo.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.ressources.modification.ControleurModification">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="241.0" stylesheets="@css/toolbar-demo.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.ressources.modification.ControleurModification">
    <center>
       <VBox prefHeight="246.0" prefWidth="221.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>

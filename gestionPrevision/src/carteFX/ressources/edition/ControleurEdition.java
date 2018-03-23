@@ -98,13 +98,25 @@ public class ControleurEdition {
   public void initialize() {
 
     FacadeFx facade = FacadeFx.getInstance();
+    if (facade.getZone() == null) {
 
-    this.la = facade.getZone().getLatitudeHautGauche();
-    this.li = facade.getZone().getLongitudeHautGauche();
-    this.px = facade.getZone().getPasX();
-    this.py = facade.getZone().getPasY();
-    this.nx = facade.getZone().getNombreX();
-    this.ny = facade.getZone().getNombreY();
+      this.la = 10;
+      this.li = 10;
+      this.px = 1;
+      this.py = 1;
+      this.nx = 4;
+      this.ny = 4;
+
+    } else {
+
+      this.la = facade.getZone().getLatitudeHautGauche();
+      this.li = facade.getZone().getLongitudeHautGauche();
+      this.px = facade.getZone().getPasX();
+      this.py = facade.getZone().getPasY();
+      this.nx = facade.getZone().getNombreX();
+      this.ny = facade.getZone().getNombreY();
+
+    }
 
     this.idPrevision = 0;
     this.listeObservable = FXCollections.observableArrayList();

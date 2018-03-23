@@ -173,11 +173,6 @@ public class GestionAffichagePrincipal {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      File currentDirFile = new File(".");
-      String helper = currentDirFile.getAbsolutePath();
-      String currentDir = helper.substring(0,
-          helper.length() - currentDirFile.getCanonicalPath().length());
-      System.out.println(currentDir);
       root = FXMLLoader
           .load(getClass().getResource("ressources/modification/VueModification.fxml"));
       Scene scene = new Scene(root);
