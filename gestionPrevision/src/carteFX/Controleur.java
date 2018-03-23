@@ -121,7 +121,7 @@ public class Controleur implements Initializable {
 
   @FXML
   public void modifier() {
-    gestion.modifier();
+    gestion.modifier(actionPrecedente, actionSuivante);
     gestion.updateAction(actionPrecedente, actionSuivante);
   }
 

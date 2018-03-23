@@ -13,6 +13,7 @@ import carte.AfficherFleches;
 import carte.CalculPosition;
 import carteFX.densite.Zoom;
 import carteFX.facade.FacadeFx;
+import edition.implementation.Json;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -137,15 +138,28 @@ public class GestionAffichagePrincipal {
   }
 
   public void sauvegarder() {
-    // TODO Auto-generated method stub
+    FileChooser fileChooser = new FileChooser();
 
+    // Set extension filter
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)",
+        "*.json");
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    // Show save file dialog
+    File file = fileChooser.showSaveDialog(new Stage());
+
+    if (file != null) {
+      Json json = new Json();
+      json.jsonWrite(FacadePrevisionVents.getFacadePrevisionVents().getPrevisions(),
+          file.getAbsolutePath());
+    }
   }
 
   public void editer() {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("../vues/edition/VueEdition.fxml"));
+      root = FXMLLoader.load(getClass().getResource("ressources/edition/VueEdition.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setTitle("Edition");
       primaryStage.setScene(scene);
@@ -155,11 +169,17 @@ public class GestionAffichagePrincipal {
     }
   }
 
-  public void modifier() {
+  public void modifier(Button actionPrecedente, Button actionSuivante) {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("../vues/modification/VueModification.fxml"));
+      File currentDirFile = new File(".");
+      String helper = currentDirFile.getAbsolutePath();
+      String currentDir = helper.substring(0,
+          helper.length() - currentDirFile.getCanonicalPath().length());
+      System.out.println(currentDir);
+      root = FXMLLoader
+          .load(getClass().getResource("ressources/modification/VueModification.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setTitle("Modifications");
       primaryStage.setScene(scene);
@@ -167,6 +187,7 @@ public class GestionAffichagePrincipal {
       primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         public void handle(WindowEvent we) {
           canvas.rafraichir();
+          updateAction(actionPrecedente, actionPrecedente);
         }
       });
     } catch (IOException e) {
@@ -194,7 +215,8 @@ public class GestionAffichagePrincipal {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("../vues/configuration/VueConfiguration.fxml"));
+      root = FXMLLoader
+          .load(getClass().getResource("ressources/configuration/VueConfiguration.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setTitle("Configuration");
       primaryStage.setScene(scene);
@@ -246,9 +268,12 @@ public class GestionAffichagePrincipal {
           .size() > 0) {
         Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
             .getListePrevision().get(indexDatePrevision).getDatePrevision();
-        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : kk");
+        valeurDate.set(Calendar.HOUR_OF_DAY, valeurDate.get(Calendar.HOUR_OF_DAY) - 1);
+        // valeurDate.set
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : HH");
         String formatted = format1.format(valeurDate.getTime());
         date.setText(formatted);
+        valeurDate.set(Calendar.HOUR_OF_DAY, valeurDate.get(Calendar.HOUR_OF_DAY) + 1);
       }
       if (indexDatePrevision > 0) {
         precedent.setDisable(false);
