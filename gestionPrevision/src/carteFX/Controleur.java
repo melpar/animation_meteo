@@ -121,7 +121,7 @@ public class Controleur implements Initializable {
 
   @FXML
   public void modifier() {
-    gestion.modifier();
+    gestion.modifier(actionPrecedente, actionSuivante);
     gestion.updateAction(actionPrecedente, actionSuivante);
   }
 
@@ -180,6 +180,11 @@ public class Controleur implements Initializable {
     gestion.getCanvas().deplacer = true;
     editer.setDisable(true);
     instance = this;
+  }
+
+  public void updateDate() {
+    gestion.updateDate(datePrecedente, labelDate, dateSuivante);
+
   }
 
 }

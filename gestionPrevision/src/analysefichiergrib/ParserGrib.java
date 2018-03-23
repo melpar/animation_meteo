@@ -3,10 +3,7 @@ package analysefichiergrib;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import net.sourceforge.jgrib.GribFile;
 import net.sourceforge.jgrib.GribRecord;
@@ -123,18 +120,18 @@ public class ParserGrib {
     System.out.println(infos.getNombreY());
     System.out.println(infos.getPasX());
     System.out.println(infos.getPasY());
-    Map<Calendar, List<Vent>> vents = infos.getVents();
-    Set<Calendar> cles = vents.keySet();
-    Iterator<Calendar> it = cles.iterator();
-    while (it.hasNext()) {
-      Calendar cle = it.next();
-      System.out.println(cle);
-      // for (Vent v : vents.get(cle)) {
-      // System.out.println(" " + v.getLatitude());
-      // System.out.println(" " + v.getLongitude());
-      // System.out.println(" " + v.getVecteurU());
-      // System.out.println(" " + v.getVecteurV());
-      // }
-    }
+    // Map<Calendar, List<Vent>> vents = infos.getVents();
+    // Set<Calendar> cles = vents.keySet();
+    // Iterator<Calendar> it = cles.iterator();
+    // while (it.hasNext()) {
+    // Calendar cle = it.next();
+    // System.out.println(cle);
+    // // for (Vent v : vents.get(cle)) {
+    // // System.out.println(" " + v.getLatitude());
+    // // System.out.println(" " + v.getLongitude());
+    // // System.out.println(" " + v.getVecteurU());
+    // // System.out.println(" " + v.getVecteurV());
+    // // }
+    // }
   }
 }

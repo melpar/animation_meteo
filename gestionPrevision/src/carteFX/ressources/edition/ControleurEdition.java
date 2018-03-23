@@ -98,25 +98,13 @@ public class ControleurEdition {
   public void initialize() {
 
     FacadeFx facade = FacadeFx.getInstance();
-    if (facade.getZone() == null) {
 
-      this.la = 10;
-      this.li = 10;
-      this.px = 1;
-      this.py = 1;
-      this.nx = 4;
-      this.ny = 4;
-
-    } else {
-
-      this.la = facade.getZone().getLatitudeHautGauche();
-      this.li = facade.getZone().getLongitudeHautGauche();
-      this.px = facade.getZone().getPasX();
-      this.py = facade.getZone().getPasY();
-      this.nx = facade.getZone().getNombreX();
-      this.ny = facade.getZone().getNombreY();
-
-    }
+    this.la = facade.getZone().getLatitudeHautGauche();
+    this.li = facade.getZone().getLongitudeHautGauche();
+    this.px = facade.getZone().getPasX();
+    this.py = facade.getZone().getPasY();
+    this.nx = facade.getZone().getNombreX();
+    this.ny = facade.getZone().getNombreY();
 
     this.idPrevision = 0;
     this.listeObservable = FXCollections.observableArrayList();
@@ -327,8 +315,8 @@ public class ControleurEdition {
       System.out.println("nx : " + nx);
       System.out.println("ny : " + ny);
       for (int h = 0; h < this.listeObservable.get(i).getDuree(); h++) {
-        for (int x = 0; x < nx; x += px) {
-          for (int y = 0; y < ny; y += py) {
+        for (int x = 0; x < nx; x++) {
+          for (int y = 0; y < ny; y++) {
             System.out.println("Nouvel ajout i " + i + " h " + h);
             System.out.println("Nouvel ajout x " + x + " y " + y);
             System.out.println("Nouvel ajout nx " + nx + " ny " + ny);
@@ -359,7 +347,7 @@ public class ControleurEdition {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-
+      Controleur.getInstance().getInstance().updateDate();
     }
     if (this.listeObservable.size() == 0) {
       Text t = new Text("Erreur: Aucune previsions saisie \n");
