@@ -148,7 +148,7 @@ public class Mail {
       double longitudepd)
       throws FileNotFoundException, MessagingException, IOException, InterruptedException {
     this.lattitudePointGauche = lattitudepg;
-    this.longitudepointDroit = lattitudepd;
+    this.lattitudePointDroit = lattitudepd;
     this.longitudePointGauche = longitudepg;
     this.longitudepointDroit = longitudepd;
     Message monmessage = null;

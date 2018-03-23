@@ -164,7 +164,7 @@ public class Controleur implements Initializable {
       Mail mail = new Mail();
 
       String file = FacadeFx.getInstance().getConfiguration().getDossierSauvegardeGrib();
-      String res = mail.getGribFile(file, 0.0, 0.0, 10.0, 3353.0);
+      String res = mail.getGribFile(file, 42, 49, -7, 7);
 
       System.out.println(res);
     } catch (MessagingException | IOException | InterruptedException e) {
