@@ -14,8 +14,7 @@ public class MainVueModification extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader
-        .load(getClass().getResource("ressources/modification/VueModification.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("VueModification.fxml"));
     Scene scene = new Scene(root);
     primaryStage.setTitle("Popup Modifications");
     primaryStage.setScene(scene);

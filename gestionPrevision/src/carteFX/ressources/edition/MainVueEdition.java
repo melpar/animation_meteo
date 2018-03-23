@@ -14,7 +14,7 @@ public class MainVueEdition extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("../../vues/edition/VueEdition.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("VueEdition.fxml"));
     Scene scene = new Scene(root);
     primaryStage.setTitle("Edition prévision");
     primaryStage.setScene(scene);
