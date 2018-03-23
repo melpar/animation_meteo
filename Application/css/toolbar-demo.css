@@ -5,19 +5,19 @@
 .toolbar Button {
     -fx-background-color: transparent;
     -fx-content-display: top;
-    -fx-pref-width: 50px;
+    -fx-pref-width: 25px;
 }
 
 .header-section {
-    -fx-padding: 10px;
+    -fx-padding: 0px;
     -fx-font-size: 20px;
     -fx-background-color: teal;
 }
 
 .sidebar-section {
-    -fx-min-width: 200px;
-    -fx-pref-width: 200px;
-    -fx-max-width: 200px;
+    -fx-min-width: 50px;
+    -fx-pref-width: 50px;
+    -fx-max-width: 50px;
     -fx-border-width: 1;
     -fx-border-color: transparent #E8E8E8 transparent transparent;
 }
@@ -37,9 +37,9 @@
     -fx-padding: 10 15 10 15;
     -fx-border-width: 1;
     -fx-border-color: transparent transparent #E8E8E8 transparent;
-    -fx-min-width: 200px;
-    -fx-pref-width: 200px;
-    -fx-max-width: 200px;
+    -fx-min-width: 50px;
+    -fx-pref-width: 50px;
+    -fx-max-width: 50px;
     
     -fx-background-color: transparent;
     -fx-content-display: top;
@@ -65,4 +65,30 @@
     -fx-alignment: center;
     -fx-border-width: 1;
     -fx-border-color: #E8E8E8 transparent transparent transparent;
+}
+
+.split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+.table-view{
+	-fx-border-color: white;
+}
+
+.table-row-cell{
+	-fx-border-color: white;
+	-fx-table-cell-border-color:white;
+}
+
+
+.table-view .column-header .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-color:  rgb(0,128,128);
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: rgb(0,128,128);
 }
