@@ -107,7 +107,7 @@
                      <graphic>
                         <ImageView fitHeight="74.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="toolbar">
                            <image>
-                              <Image url="@../../../../icones/ajouter.png" />
+                              <Image url="@icones/ajouter.png" />
                            </image>
                         </ImageView>
                      </graphic>
