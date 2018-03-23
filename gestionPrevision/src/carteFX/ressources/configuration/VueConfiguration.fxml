@@ -61,7 +61,7 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../edition/croix.png" />
+                        <Image url="@../../../../icones/croix.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -71,7 +71,7 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../edition/valider.png" />
+                        <Image url="@../../../../icones/valider.png" />
                      </image>
                   </ImageView>
                </graphic>

@@ -82,24 +82,24 @@
    <top>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <Button mnemonicParsing="false" onAction="#actionButton">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../edition/valider.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="7.0" />
             <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="72.0">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../edition/croix.png" />
+                        <Image url="@../../../../icones/croix.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
+            <Button mnemonicParsing="false" onAction="#actionButton">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../icones/valider.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="7.0" />
          </items>
          <styleClass>
             <String fx:value="toolbar" />
