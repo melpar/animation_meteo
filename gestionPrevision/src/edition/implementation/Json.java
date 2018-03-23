@@ -66,9 +66,9 @@ public class Json {
       // matrice
       DonneeVent[][] donneeVent = previsions.getListePrevision().get(i).getListeDonneVent();
       JSONArray listeMatriceY = new JSONArray();
-      for (int j = 0; j < donneeVent.length; j++) {
+      for (int j = 0; j < donneeVent.length; j += 10) {
         JSONArray listeMatriceX = new JSONArray();
-        for (int k = 0; k < donneeVent[j].length; k++) {
+        for (int k = 0; k < donneeVent[j].length; k += 10) {
           JSONObject listeDonneeVent = new JSONObject();
           listeDonneeVent.put("vitesse", new Double(donneeVent[j][k].getVitesseVent()));
           listeDonneeVent.put("direction", new Double(donneeVent[j][k].getOrientationVent()));
