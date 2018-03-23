@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1320.0" stylesheets="@css/toolbar-demo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1320.0" stylesheets="@css/toolbar-demo.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carteFX.Controleur">
    <center>
       <SplitPane fx:id="splitPane" orientation="VERTICAL" prefHeight="500.0" prefWidth="1083.0" BorderPane.alignment="CENTER" />
    </center>
@@ -55,7 +51,7 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icones/ic_mode_edit_black_24dp.png" />
+                        <Image url="@icones/ic_playlist_add_black_24dp.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -99,7 +95,7 @@
                </graphic>
             </Button>
             <Separator orientation="VERTICAL" prefHeight="42.0" prefWidth="25.0" />
-            <Button fx:id="selectionner" mnemonicParsing="false" onAction="#actionBouttonSelectionner">
+            <Button fx:id="selectionner" disable="true" mnemonicParsing="false" onAction="#actionBouttonSelectionner">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>

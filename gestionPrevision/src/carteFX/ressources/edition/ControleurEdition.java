@@ -322,6 +322,7 @@ public class ControleurEdition {
             System.out.println("Nouvel ajout nx " + nx + " ny " + ny);
             NouvelleAjout n = this.listeObservable.get(i);
             Calendar c = this.conversionCalendar(n.getDate(), n.getHeure());
+            c.setTimeInMillis(c.getTimeInMillis() + (3600000 * (h)));
             double u = this.getU(n.getVitesse(), n.getDirection());
             double v = this.getV(n.getVitesse(), n.getDirection());
             lp.ajouterDonneeVent(c, u, v, x, y);
