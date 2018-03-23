@@ -169,7 +169,7 @@ public class GestionAffichagePrincipal {
     }
   }
 
-  public void modifier() {
+  public void modifier(Button actionPrecedente, Button actionSuivante) {
     Stage primaryStage = new Stage();
     Parent root;
     try {
@@ -187,6 +187,7 @@ public class GestionAffichagePrincipal {
       primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         public void handle(WindowEvent we) {
           canvas.rafraichir();
+          updateAction(actionPrecedente, actionPrecedente);
         }
       });
     } catch (IOException e) {
@@ -267,9 +268,12 @@ public class GestionAffichagePrincipal {
           .size() > 0) {
         Calendar valeurDate = FacadePrevisionVents.getFacadePrevisionVents().getPrevisions()
             .getListePrevision().get(indexDatePrevision).getDatePrevision();
-        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : kk");
+        valeurDate.set(Calendar.HOUR_OF_DAY, valeurDate.get(Calendar.HOUR_OF_DAY) - 1);
+        // valeurDate.set
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-YYYY : HH");
         String formatted = format1.format(valeurDate.getTime());
         date.setText(formatted);
+        valeurDate.set(Calendar.HOUR_OF_DAY, valeurDate.get(Calendar.HOUR_OF_DAY) + 1);
       }
       if (indexDatePrevision > 0) {
         precedent.setDisable(false);

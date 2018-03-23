@@ -67,7 +67,6 @@ public class ModifierImpl {
       FacadePrevisionVents.getFacadePrevisionVents().getPrevisions().applique(memoire);
       if (retourN != 0) {
         replaceMemorise(retourN);
-        retourN = 0;
       }
       addMemorise(memoire.getSauvegarde());
     }
@@ -82,7 +81,8 @@ public class ModifierImpl {
 
   private void replaceMemorise(int index) {
     index = listRetour.size() - 1 - index;
-    while (index > listRetour.size() - 1) {
+    retourN = 0;
+    while (index < listRetour.size() - 1) {
       listRetour.remove(listRetour.size() - 1);
     }
   }
@@ -134,10 +134,12 @@ public class ModifierImpl {
   }
 
   public boolean isArriere() {
-    return retourN > 0;
+    // return retourN < listRetour.size();
+    return false;
   }
 
   public boolean isAvant() {
-    return retourN < listRetour.size() - 1;
+    // return retourN > 0;
+    return false;
   }
 }
