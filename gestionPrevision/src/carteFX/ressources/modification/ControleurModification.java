@@ -58,11 +58,32 @@ public class ControleurModification {
         .getZonePrevision();
     if (zone != null) {
       if (verif()) {
-        // recupere la date courante de l'onterface
-        Calendar date = FacadeFx.getInstance().getDate();
-        Float coefficient = Float.parseFloat(this.champCoeff.getText());
-        FacadeFx.getInstance().getModifier().modifierCoefficientVent(zone, date, coefficient);
-        closeButtonAction();
+        if (this.choix.getValue().equals("Contraste lineaire")) {
+          // recupere la date courante de l'interface
+          Calendar date = FacadeFx.getInstance().getDate();
+          Float coefficient = Float.parseFloat(this.champCoeff.getText());
+          Float seuil = Float.parseFloat(this.champSeuil.getText());
+          FacadeFx.getInstance().getModifier().modifierContrasteLineaireVent(zone, date,
+              coefficient, seuil);
+          closeButtonAction();
+        }
+        if (this.choix.getValue().equals("Contraste progressif")) {
+          // recupere la date courante de l'interface
+          Calendar date = FacadeFx.getInstance().getDate();
+          Float coefficient = Float.parseFloat(this.champCoeff.getText());
+          Float seuil = Float.parseFloat(this.champSeuil.getText());
+          FacadeFx.getInstance().getModifier().modifierContrasteProgressifVent(zone, date,
+              coefficient, seuil);
+          closeButtonAction();
+        }
+        if (this.choix.getValue().equals("Coefficient")) {
+          // recupere la date courante de l'interface
+          Calendar date = FacadeFx.getInstance().getDate();
+          Float coefficient = Float.parseFloat(this.champCoeff.getText());
+          FacadeFx.getInstance().getModifier().modifierCoefficientVent(zone, date, coefficient);
+          closeButtonAction();
+        }
+
       }
     }
   }
