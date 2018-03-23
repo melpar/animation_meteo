@@ -1,0 +1,28 @@
+.split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+.table-view{
+	-fx-border-color: white;
+}
+
+.table-row-cell{
+	-fx-border-color: white;
+	-fx-table-cell-border-color:white;
+}
+
+
+.table-view .column-header .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-color:  rgb(0,128,128);
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: rgb(0,128,128);
+}
+
+
+

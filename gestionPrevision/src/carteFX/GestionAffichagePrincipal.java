@@ -145,7 +145,7 @@ public class GestionAffichagePrincipal {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("../vues/edition/VueEdition.fxml"));
+      root = FXMLLoader.load(getClass().getResource("ressources/edition/VueEdition.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setTitle("Edition");
       primaryStage.setScene(scene);
@@ -159,7 +159,13 @@ public class GestionAffichagePrincipal {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("../vues/modification/VueModification.fxml"));
+      File currentDirFile = new File(".");
+      String helper = currentDirFile.getAbsolutePath();
+      String currentDir = helper.substring(0,
+          helper.length() - currentDirFile.getCanonicalPath().length());
+      System.out.println(currentDir);
+      root = FXMLLoader
+          .load(getClass().getResource("ressources/modification/VueModification.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setTitle("Modifications");
       primaryStage.setScene(scene);
@@ -194,7 +200,8 @@ public class GestionAffichagePrincipal {
     Stage primaryStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("../vues/configuration/VueConfiguration.fxml"));
+      root = FXMLLoader
+          .load(getClass().getResource("ressources/configuration/VueConfiguration.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setTitle("Configuration");
       primaryStage.setScene(scene);
